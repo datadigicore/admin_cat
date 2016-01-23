@@ -66,10 +66,12 @@
         </div>
         <div class="form-group" id="form-lokasi" hidden>
           <select class="form-control" name="lokasi" id="lokasi">
+            <option value="" disabled selected>-- Pilih Lokasi --</option>
           </select>
         </div>
         <div class="form-group" id="form-ruangan" hidden>
           <select class="form-control" name="ruangan" id="ruangan">
+            <option value="" disabled selected>-- Pilih Ruangan --</option>
           </select>
         </div>
       </div>
@@ -148,8 +150,6 @@
       var tr = $(this).closest('tr');
       tabrow = table.row( tr );
       $("#username").val(tabrow.data()[1]);
-      $("#lokasi").val(tabrow.data()[4]);
-      $("#ruangan").val(tabrow.data()[7]);
     });
   });
   function clear(){
@@ -168,6 +168,7 @@
         url : "<?php echo $url_rewrite;?>process/user/lokasi",
         success: function(data)
         {
+          $("#editModal").modal("show");
           $("#lokasi").html(data);
         }
       });
@@ -180,9 +181,10 @@
       $("#ruangan").attr("required", "true");
       $.ajax({
         type: "post",
-        url : "<?php echo $url_rewrite;?>process/user/lokasis",
+        url : "<?php echo $url_rewrite;?>process/user/lokasi",
         success: function(data)
         {
+          $("#editModal").modal("show");
           $("#lokasi").html(data);
         }
       });
@@ -193,6 +195,7 @@
           data : {key:$(this).val()},
           success: function(data)
           {
+            $("#editModal").modal("show");
             $("#ruangan").html(data);
           }
         });
