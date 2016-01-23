@@ -3,22 +3,14 @@
 
   class modelPengguna extends mysql_db {
     public function insertPengguna($data) {
-      $nama       = $data['name'];
-      $username   = $data['username'];
-      $password   = $data['password'];
-      $email      = $data['email'];
-      $level      = $data['level'];
-      $status     = $data['status'];
-
       $query      = "INSERT INTO pengguna SET
-        nama      = '$nama',
-        username  = '$username',
-        password  = '$password',
-        email     = '$email',
-        level     = '$level',
-        status    = '$status'
+        username  = '$data[username]',
+        password  = '$data[password]',
+        level     = '$data[level]',
+        lokasi    = '$data[lokasi]',
+        ruangan   = '$data[ruangan]',
+        status    = '$data[status]'
       ";
-
       $result = $this->query($query);
       return $result;
     }
@@ -50,14 +42,39 @@
       return $result;
     }
     public function activatePengguna($id) {
-      $query = "update pengguna set status = 1 where id='$id'";
+      $query = "update pengguna set status = 1 where id_pengguna='$id'";
       $result = $this->query($query);
       return $result;
     }
     public function deactivatePengguna($id) {
-      $query = "update pengguna set status = 0 where id='$id'";
+      $query = "update pengguna set status = 0 where id_pengguna='$id'";
       $result = $this->query($query);
       return $result;
+    }
+    public function lokasi() {
+      $query  = "SELECT * from lokasi";
+      $result = $this->query($query);
+      echo '<option value="" disabled selected>-- Pilih Lokasi --</option>';
+      while($fetch = $this->fetch_array($result)) {
+        echo '<option value="'.$fetch["nama_lokasi"].'">'.$fetch["nama_lokasi"].'</option>';
+      }
+    }
+    public function lokasis() {
+      $query  = "SELECT * from lokasi";
+      $result = $this->query($query);
+      echo '<option value="" disabled selected>-- Pilih Lokasi --</option>';
+      while($fetch = $this->fetch_array($result)) {
+        echo '<option value="'.$fetch["id_lokasi"].'">'.$fetch["nama_lokasi"].'</option>';
+      }
+    }
+    public function ruangan($data) {
+      $where  = $this->where($data);
+      $query  = "SELECT * from ruangan $where";
+      $result = $this->query($query);
+      echo '<option value="" disabled selected>-- Pilih Ruangan --</option>';
+      while($fetch = $this->fetch_array($result)) {
+        echo '<option value="'.$fetch["nama"].'">'.$fetch["nama"].'</option>';
+      }
     }
     public function readPengguna($data) {
       $where  = $this->where($data);

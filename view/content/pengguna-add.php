@@ -25,29 +25,30 @@
                 </div>
               <?php endif ?>
               <div class="form-group">
-                <input type="text" class="form-control" name="name" placeholder="Username" required>
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Email" required>
-              </div>
-              <div class="form-group">
                 <input type="text" class="form-control" name="username" placeholder="Username" required>
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" name="password" placeholder="Password" required>
               </div>
               <div class="form-group">
-                <select class="form-control" name="level" required>
+                <select class="form-control" name="level" id="level" required>
                   <option value="" disabled selected>-- Pilih Kewenangan --</option>
-                  <option value="1">Operator Bendahara Pengeluaran</option>
-                  <option value="2">Bendahara Pengeluaran Pembantu</option>
-                  <option value="3">Operator Bendahara Pengeluaran Pembantu</option>
+                  <option value="2">Admin Lokasi</option>
+                  <option value="3">Admin Ruangan</option>
+                </select>
+              </div>
+              <div class="form-group" id="form-lokasi" hidden>
+                <select class="form-control" name="lokasi" id="lokasi">
+                </select>
+              </div>
+              <div class="form-group" id="form-ruangan" hidden>
+                <select class="form-control" name="ruangan" id="ruangan">
+                  <option value="" disabled selected>-- Pilih Ruangan --</option>
                 </select>
               </div>
               <div class="form-group">
                 <select class="form-control" name="status" required>
-                  <option value="" disabled selected>-- Pilih Status Akun --</option>
-                  <option value="1">Aktif</option>
+                  <option value="1" selected>Aktif</option>
                   <option value="0">Tidak Aktif</option>
                 </select>
               </div>
@@ -61,3 +62,52 @@
     </div>
   </section>
 </div>
+<script type="text/javascript">
+  function clear(){
+    $("#form-lokasi").attr("hidden", "true");
+    $("#lokasi").removeAttr("required");
+    $("#form-ruangan").attr("hidden", "true");
+    $("#ruangan").removeAttr("required");
+  }
+  $("#kewenangan").change(function(){
+    if ($(this).val() == 2) {
+      clear();
+      $("#form-lokasi").removeAttr("hidden");
+      $("#lokasi").attr("required", "true");
+      $.ajax({
+        type: "post",
+        url : "<?php echo $url_rewrite;?>process/user/lokasi",
+        success: function(data)
+        {
+          $("#lokasi").html(data);
+        }
+      });
+    }
+    else if ($(this).val() == 3) {
+      clear();
+      $("#form-lokasi").removeAttr("hidden");
+      $("#lokasi").attr("required", "true");
+      $("#form-ruangan").removeAttr("hidden");
+      $("#ruangan").attr("required", "true");
+      $.ajax({
+        type: "post",
+        url : "<?php echo $url_rewrite;?>process/user/lokasis",
+        success: function(data)
+        {
+          $("#lokasi").html(data);
+        }
+      });
+      $("#lokasi").change(function(){
+        $.ajax({
+            type: "post",
+            url : "<?php echo $url_rewrite;?>process/user/ruangan",
+            data : {key:$(this).val()},
+            success: function(data)
+            {
+              $("#ruangan").html(data);
+            }
+          });
+      })
+    }
+  });
+</script>

@@ -2,19 +2,19 @@
 include 'config/application.php';
 
 $sess_id    = $_SESSION['user_id'];
-$name       = $purifier->purify($_POST[name]);
-$username   = $purifier->purify($_POST[username]);
-$password   = $utility->sha512($_POST[password]);
-$email      = $purifier->purify($_POST[email]);
-$level      = $purifier->purify($_POST[level]);
-$status     = $purifier->purify($_POST[status]);
+$username   = $purifier->purify($_POST['username']);
+$password   = $utility->sha512($_POST['password']);
+$level      = $purifier->purify($_POST['level']);
+$lokasi      = $purifier->purify($_POST['lokasi']);
+$ruangan      = $purifier->purify($_POST['ruangan']);
+$status     = $purifier->purify($_POST['status']);
 
 $data_pengguna = array(
-  "name"       => $name,
   "username"   => $username,
   "password"   => $password,
-  "email"      => $email,
   "level"      => $level,
+  "lokasi"     => $lokasi,
+  "ruangan"    => $ruangan,
   "status"     => $status
 );
 
@@ -49,7 +49,7 @@ switch ($process) {
       array( 'db' => 'level',   'dt' => 7 ),
       array( 'db' => 'status',  'dt' => 8 )
     );
-    // $where = "level != 1";
+    $where = "level != 1";
     $datatable->get_table($table, $key, $column, $where);
   break;
   case 'activate':
@@ -72,8 +72,15 @@ switch ($process) {
     $pengguna->deletePengguna($hapuspengguna);
     $utility->location_goto("content/setting");
   break;
-  case 'kuitansi':
-    $report->kuitansi($data_pengguna);
+  case 'lokasi':
+    $pengguna->lokasi();
+  break;
+  case 'lokasis':
+    $pengguna->lokasis();
+  break;
+  case 'ruangan':
+    $id = array('id_lokasi' => $_POST['key']);
+    $pengguna->ruangan($id);
   break;
   default:
     $utility->location_goto(".");

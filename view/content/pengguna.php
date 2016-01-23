@@ -39,7 +39,7 @@
 <div class="modal fade" id="editModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header" style="background-color:#111F3F !important; color:white;">
+      <div class="modal-header" style="background-color:#4A4545 !important; color:white;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" style="color:white">×</span></button>
         <h4 class="modal-title">Edit Pengguna</h4>

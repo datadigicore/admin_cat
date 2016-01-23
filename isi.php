@@ -16,7 +16,7 @@ else {
     include ('view/include/javascript.php');
     include ('view/include/header.php');
     include ('view/include/sidebar.php');
-    if ($_SESSION['level'] == 0) {
+    if ($_SESSION['level'] == 1) {
       switch ($data[1]) {
         case 'user':
           include ('view/content/pengguna.php');

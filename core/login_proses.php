@@ -14,12 +14,11 @@
     $result = $login->readUser($data);
     if ($result == true) {
       if ($result->status == 1) {
-        $_SESSION['id']       = $result->id;
-        $_SESSION['nama']     = $result->nama;
-        $_SESSION['username'] = $result->username;
-        $_SESSION['email']    = $result->email;
-        $_SESSION['level']    = $result->level;
-        $_SESSION['direktorat']    = $result->direktorat;
+        $_SESSION['id']         = $result->id_pengguna;
+        $_SESSION['username']   = $result->username;
+        $_SESSION['level']      = $result->level;
+        $_SESSION['lokasi']     = $result->lokasi;
+        $_SESSION['ruangan']    = $result->ruangan;
         $utility->location_goto("content/home");
       }
       else {
