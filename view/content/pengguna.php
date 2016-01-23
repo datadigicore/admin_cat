@@ -5,7 +5,7 @@
       <small>Management Control</small>
     </h1>
     <ol class="breadcrumb">
-      <li><i class="fa fa-table"></i> Data Pengguna</li>
+      <li><i class="fa fa-group"></i> Data Pengguna</li>
     </ol>
   </section>
   <section class="content">
