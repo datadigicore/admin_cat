@@ -25,9 +25,9 @@ switch ($process) {
     $column = array(
       array( 'db' => 'id_pengguna',      'dt' => 0 ),
       array( 'db' => 'username',  'dt' => 1 ),
-      array( 'db' => 'status',  'dt' => 2, 'formatter' => function($d,$row,$url_rewrite){ 
+      array( 'db' => 'status',  'dt' => 2, 'formatter' => function($d,$row){ 
         if($d==1){
-          return "<button id='aktif' class='btn btn-flat btn-success btn-xs'><i class='fa fa-check-circle'></i>$url_rewrite Aktif</button>";
+          return "<button id='aktif' class='btn btn-flat btn-success btn-xs'><i class='fa fa-check-circle'></i> Aktif</button>";
         }
         else{
           return '<button id="nonaktif" class="btn btn-flat btn-danger btn-xs"><i class="fa fa-warning"></i> Belum Aktif</button>';

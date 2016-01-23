@@ -18,7 +18,7 @@
           </div>
           <div class="box-body">
             <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
-              <thead style="background-color:#11245B;color:white;">
+              <thead style="background-color:#4A4545;color:white;">
                 <tr>
                   <th>Id</th>
                   <th>Username</th>
