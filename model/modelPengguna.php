@@ -59,17 +59,10 @@
         echo '<option value="'.$fetch["nama_lokasi"].'">'.$fetch["nama_lokasi"].'</option>';
       }
     }
-    public function lokasis() {
-      $query  = "SELECT * from lokasi";
-      $result = $this->query($query);
-      echo '<option value="" disabled selected>-- Pilih Lokasi --</option>';
-      while($fetch = $this->fetch_array($result)) {
-        echo '<option value="'.$fetch["id_lokasi"].'">'.$fetch["nama_lokasi"].'</option>';
-      }
-    }
     public function ruangan($data) {
       $where  = $this->where($data);
-      $query  = "SELECT * from ruangan $where";
+      $query  = "SELECT ruangan.nama as nama
+                 FROM lokasi INNER JOIN ruangan ON lokasi.id_lokasi = ruangan.id_lokasi $where";
       $result = $this->query($query);
       echo '<option value="" disabled selected>-- Pilih Ruangan --</option>';
       while($fetch = $this->fetch_array($result)) {

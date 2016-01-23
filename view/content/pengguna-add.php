@@ -39,6 +39,7 @@
               </div>
               <div class="form-group" id="form-lokasi" hidden>
                 <select class="form-control" name="lokasi" id="lokasi">
+                  <option value="" disabled selected>-- Pilih Lokasi --</option>
                 </select>
               </div>
               <div class="form-group" id="form-ruangan" hidden>
@@ -69,7 +70,7 @@
     $("#form-ruangan").attr("hidden", "true");
     $("#ruangan").removeAttr("required");
   }
-  $("#kewenangan").change(function(){
+  $("#level").change(function(){
     if ($(this).val() == 2) {
       clear();
       $("#form-lokasi").removeAttr("hidden");
@@ -91,7 +92,7 @@
       $("#ruangan").attr("required", "true");
       $.ajax({
         type: "post",
-        url : "<?php echo $url_rewrite;?>process/user/lokasis",
+        url : "<?php echo $url_rewrite;?>process/user/lokasi",
         success: function(data)
         {
           $("#lokasi").html(data);
@@ -99,14 +100,14 @@
       });
       $("#lokasi").change(function(){
         $.ajax({
-            type: "post",
-            url : "<?php echo $url_rewrite;?>process/user/ruangan",
-            data : {key:$(this).val()},
-            success: function(data)
-            {
-              $("#ruangan").html(data);
-            }
-          });
+          type: "post",
+          url : "<?php echo $url_rewrite;?>process/user/ruangan",
+          data : {key:$(this).val()},
+          success: function(data)
+          {
+            $("#ruangan").html(data);
+          }
+        });
       })
     }
   });

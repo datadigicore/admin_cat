@@ -39,18 +39,12 @@
 <div class="modal fade" id="editModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header" style="background-color:#4A4545 !important; color:white;">
+      <div class="modal-header" style="background-color:#f9af00 !important; color:white;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" style="color:white">×</span></button>
         <h4 class="modal-title">Edit Pengguna</h4>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-          <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap" required>
-        </div>
-        <div class="form-group">
-          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-        </div>
         <div class="form-group">
           <div class="checkbox icheck" style="position:absolute;margin:6px;right:16px;background:white;">
             <input type="checkbox" id="checkuser">  
@@ -64,18 +58,18 @@
           <input type="password" class="form-control" id="password" name="password" placeholder="Password" readonly>
         </div>
         <div class="form-group">
-          <select class="form-control" id="level" name="level" required>
+          <select class="form-control" name="level" id="level" required>
             <option value="" disabled selected>-- Pilih Kewenangan --</option>
-            <option value="1">Operator Bendahara Pengeluaran</option>
-            <option value="2">Bendahara Pengeluaran Pembantu</option>
-            <option value="3">Operator Bendahara Pengeluaran Pembantu</option>
+            <option value="2">Admin Lokasi</option>
+            <option value="3">Admin Ruangan</option>
           </select>
         </div>
-        <div class="form-group">
-          <select class="form-control" id="status" name="status" required>
-            <option value="" disabled selected>-- Pilih Status Akun --</option>
-            <option value="1">Aktif</option>
-            <option value="0">Tidak Aktif</option>
+        <div class="form-group" id="form-lokasi" hidden>
+          <select class="form-control" name="lokasi" id="lokasi">
+          </select>
+        </div>
+        <div class="form-group" id="form-ruangan" hidden>
+          <select class="form-control" name="ruangan" id="ruangan">
           </select>
         </div>
       </div>
@@ -153,11 +147,56 @@
     $(document).on("click", "#btn-edt", function (){
       var tr = $(this).closest('tr');
       tabrow = table.row( tr );
-      $("#name").val(tabrow.data()[1]);
-      $("#username").val(tabrow.data()[3]);
-      $("#email").val(tabrow.data()[4]);
-      $("#level").val(tabrow.data()[7]);
-      $("#status").val(tabrow.data()[8]);
+      $("#username").val(tabrow.data()[1]);
+      $("#lokasi").val(tabrow.data()[4]);
+      $("#ruangan").val(tabrow.data()[7]);
     });
+  });
+  function clear(){
+    $("#form-lokasi").attr("hidden", "true");
+    $("#lokasi").removeAttr("required");
+    $("#form-ruangan").attr("hidden", "true");
+    $("#ruangan").removeAttr("required");
+  }
+  $("#level").change(function(){
+    if ($(this).val() == 2) {
+      clear();
+      $("#form-lokasi").removeAttr("hidden");
+      $("#lokasi").attr("required", "true");
+      $.ajax({
+        type: "post",
+        url : "<?php echo $url_rewrite;?>process/user/lokasi",
+        success: function(data)
+        {
+          $("#lokasi").html(data);
+        }
+      });
+    }
+    else if ($(this).val() == 3) {
+      clear();
+      $("#form-lokasi").removeAttr("hidden");
+      $("#lokasi").attr("required", "true");
+      $("#form-ruangan").removeAttr("hidden");
+      $("#ruangan").attr("required", "true");
+      $.ajax({
+        type: "post",
+        url : "<?php echo $url_rewrite;?>process/user/lokasis",
+        success: function(data)
+        {
+          $("#lokasi").html(data);
+        }
+      });
+      $("#lokasi").change(function(){
+        $.ajax({
+          type: "post",
+          url : "<?php echo $url_rewrite;?>process/user/ruangan",
+          data : {key:$(this).val()},
+          success: function(data)
+          {
+            $("#ruangan").html(data);
+          }
+        });
+      })
+    }
   });
 </script>

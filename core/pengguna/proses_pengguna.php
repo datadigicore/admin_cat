@@ -75,11 +75,8 @@ switch ($process) {
   case 'lokasi':
     $pengguna->lokasi();
   break;
-  case 'lokasis':
-    $pengguna->lokasis();
-  break;
   case 'ruangan':
-    $id = array('id_lokasi' => $_POST['key']);
+    $id = array('nama_lokasi' => $_POST['key']);
     $pengguna->ruangan($id);
   break;
   default:

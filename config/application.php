@@ -37,16 +37,4 @@ $purifier = new HTMLPurifier($config_security);
 $cek  = $_SERVER['SCRIPT_NAME'];
 $temp = explode('/', $cek);
 $file = end($temp);
-// if ($_SESSION["user_name"]=="") {
-//   if( isset($_COOKIE[$cookie_name])) { 
-//     include 'autologin.php';
-//   }
-//   else {
-//     if($file!="index.php") {
-//       session_destroy();
-//       $UTILITY->popup_message("Maaf anda harus login terlebih dahulu");
-//       $UTILITY->location_goto(".");
-//     }
-//   }
-// }
 ?>
