@@ -1,0 +1,66 @@
+a:hover{text-decoration: none;color: white;}
+a{color: white;}
+
+.nomargin{
+    margin: 0;
+}
+.nopadding{
+    padding: 0;
+}
+
+.dikti-header .top-header{
+    padding: 8px 0;
+    background-color: #8A7673;
+    color: #0066AA;
+    border-bottom: 3px solid #f9af00;
+}
+.dikti-header .top-header .container img{
+    width: 36px;
+    margin-right: 10px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.dikti-header .top-header .container a{
+    display: table;
+}
+.dikti-header .top-header h3.logo, .dikti-header .top-header h4.tagline, .dikti-agenda h3{
+    font-weight: 100;
+    display: table-cell;
+    vertical-align: middle;
+}
+.login-box{
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.login-footer{
+    color: white;
+    text-align: center;
+    padding:12px;
+    font-weight: 300;
+    background-color: #4A4545;
+    /*border:1px solid RGBA(255,150,0,0.5);*/
+}
+.logo-mini img{
+    width: 36px;
+}
+.logo-lg img{
+    width: 36px;
+}
+.navbar-nav>.notifications-menu>.dropdown-menu>li .menu, .navbar-nav>.messages-menu>.dropdown-menu>li .menu, .navbar-nav>.tasks-menu>.dropdown-menu>li .menu a{
+    background-color: whitesmoke;
+}
+
+.skin-blue .sidebar-menu>form:hover{
+    cursor: pointer;
+    color: #fff;
+    background: #11245B;
+    border-color:#0066AA;
+}
+.skin-blue .sidebar-menu>form{
+    border-left:3px solid transparent;
+}
+
+.table>tbody>tr>td { 
+    vertical-align: middle;
+}
