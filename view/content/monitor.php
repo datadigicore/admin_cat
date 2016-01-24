@@ -145,11 +145,11 @@
         {"targets" : 6},
         {"targets" : 7}
       ],
-      "order": [[ 6, "desc" ]]
+      "order": [[ 7, "desc" ]]
     });
-    // function refreshTabel(){
-    //   tableLive.draw();
-    // }
-    // setInterval(refreshTabel, 3000);
+    function refreshTabel(){
+      tableLive.draw();
+    }
+    setInterval(refreshTabel, 3000);
   });
 </script>
