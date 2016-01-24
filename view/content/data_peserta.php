@@ -14,18 +14,10 @@
         <div class="box">
           <div class="box-header">
             <h3 class="box-title" style="margin-top:6px;">Table Peserta CAT POLDA</h3>
-            <a href="#importModal" data-toggle="modal" class="btn btn-flat btn-success btn-sm pull-right">Import Soal</a>
           </div>
           <div class="box-body">
-            <?php 
-            if (isset($_POST['message'])): ?>
-              <div class="alert alert-<?php echo $_POST['alert']; ?> alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <i class="icon fa fa-warning"></i><?php echo $_POST['message']; ?>
-              </div>
-            <?php endif ?>
             <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
-              <thead style="background-color:#11245B;color:white;">
+              <thead style="background-color:#4A4545;color:white;">
                 <tr>
                   <th>NO.</th>
                   <th>No. Ujian</th>

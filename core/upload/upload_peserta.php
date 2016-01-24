@@ -84,36 +84,20 @@ switch ($process) {
     $utility->load("content/upload-peserta","success","Sedang memproses soal");
   break;
   case 'table-peserta':
-    $table = array("master_peserta","lokasi","ruangan");
-    $joinKey = array("id_lokasi","id_ruangan","id_lokasi","id_ruangan");
+    $table = "master_peserta";
     $key   = "id_peserta";
     $column = array(
-      array( 'db' => 'id_peserta',      'dt' => 0 ),
-      array( 'db' => 'no_peserta',  'dt' => 1),
-      array( 'db' => 'nama_lokasi',  'dt' => 2),
-      array( 'db' => 'nama_ruangan',  'dt' => 3),
-      array( 'db' => 'nama',  'dt' => 4),
-      array( 'db' => 'pkt',  'dt' => 5),
-      array( 'db' => 'kesatuan',  'dt' => 6),
-      array( 'db' => 'nrp',  'dt' => 7),
-      
-      // array( 'db' => 'status_soal', 'dt' => 7, 'formatter' => function($d,$row){ 
-      //   if($d==0){
-      //     return  '<form method="POST" action="'.$url_rewrite.'../process/upload/import-database">'.
-      //             '<div class="text-center">'.
-      //               '<i>Siap diproses</i><br>'.
-      //               '<input type="hidden" name="id-soal" value="'.$row[0].'">'.
-      //               '<button style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses Soal</button>'.
-      //             '</div>'.
-      //             '</form>';
-      //   } else if($d==1){
-      //     return '<i>Sedang Memproses</i>';
-      //   } else if($d==2) {
-      //     return '<i>Selesai Diproses</i>';
-      //   }
-      // })
+      array( 'db' => 'id_peserta',   'dt' => 0, 'field' => 'id_peserta' ),
+      array( 'db' => 'no_peserta',   'dt' => 1, 'field' => 'no_peserta' ),
+      array( 'db' => 'nama_lokasi',  'dt' => 2, 'field' => 'nama_lokasi' ),
+      array( 'db' => 'ruangan.nama', 'dt' => 3, 'field' => 'nama' ),
+      array( 'db' => 'master_peserta.nama',         'dt' => 4, 'field' => 'nama' ),
+      array( 'db' => 'pkt',          'dt' => 5, 'field' => 'pkt' ),
+      array( 'db' => 'kesatuan',     'dt' => 6, 'field' => 'kesatuan' ),
+      array( 'db' => 'nrp',          'dt' => 7, 'field' => 'nrp' ),
     );
-    $datatable->get_peserta_view($table,$joinKey, $key, $column);
+    $join = "FROM {$table} LEFT JOIN lokasi ON lokasi.id_lokasi = master_peserta.id_lokasi LEFt JOIN ruangan ON ruangan.id_ruangan = master_peserta.id_ruangan";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
   case 'table-log-peserta':
     $table = array("log_upload_peserta","pengguna");
