@@ -8,6 +8,7 @@ if (count($data) == 0) {
   include "./index.php";
 }
 else {
+
   if (!isset($_SESSION['username'])) {
     $utility->location_goto(".");
   }
@@ -16,13 +17,16 @@ else {
     include ('view/include/javascript.php');
     include ('view/include/header.php');
     include ('view/include/sidebar.php');
-    if ($_SESSION['level'] == 1) {
+    if ($_SESSION['level'] == 1) {  
       switch ($data[1]) {
         case 'user':
           include ('view/content/pengguna.php');
         break;
         case 'adduser':
           include ('view/content/pengguna-add.php');
+        break;
+        case 'upload-soal':
+          include ('view/content/upload_soal.php');
         break;
         case 'rkakl':
           include ('view/content/rkakl.php');

@@ -2,12 +2,12 @@
 require_once __DIR__ . '/../config/config.php';
 
 class datatable extends config {
-    function get_rkakl_view($table, $primaryKey, $columns){
+    function get_soal_view($table,$table2,$joinKey, $primaryKey, $columns){ 
         $config = new config();
         $sql_details = $config->sql_details();
         require( 'ssp.class.php' );
         echo json_encode(
-            SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns)
+            SSP::simpleJoin2( $_POST, $sql_details, $table,$joinKey,$primaryKey, $columns)
         );        
     }
     function get_table($table, $primaryKey, $columns, $where){

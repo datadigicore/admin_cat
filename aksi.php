@@ -21,6 +21,10 @@
         $process = $data[2]; 
         include "./core/rkakl/proses_rkakl.php";
       break;
+      case 'upload':
+        $process = $data[2]; 
+        include "./core/upload/upload.php";
+      break;
       case 'rab':
         $process = $data[2]; 
         include "./core/rab/proses_rab.php";

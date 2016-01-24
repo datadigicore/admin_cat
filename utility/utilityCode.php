@@ -309,7 +309,67 @@ class utilityCode extends config {
           }
           return $result;
      }
+     public function upload_gambar_hash($file, $folder, $type,$filesave,$key) {
+         $today = date("Y-m-d_H:i:s");   
+          $folder_resize = $folder;
+          if (!file_exists($folder)) {
+               mkdir($folder, 0777);
+            
+          }
+          
+          if ($type == 1) {
+               $allowed = array('image/pjpeg', 'image/jpeg', 'image/jpeg',
+                   'image/JPG', 'image/X-PNG', 'image/PNG', 'image/png',
+                   'image/x-png');
+          } else if ($type == 2) {
+               $allowed = array('application/msword', 'application/pdf',
+                   'application/vnd.ms-excel' );
+          }
+          $c = $_FILES[$file]['type'];
+          //echo("Masuk $c");
+          $filename = $_FILES[$file]['name'];
+          $name = explode('.', $filename);
 
+          if (in_array($_FILES[$file]['type'], $allowed)) {
+               //echo("Masuk 112");
+               //Where the file must be uploaded to
+               if ($folder)
+                    $folder .= '/'; //Add a '/' at the end of the folder
+               $uploadfile = $folder .$today."-". $filename;
+               $result = "$uploadfile  ..";
+               //Move the file from the stored location to the new location
+               if (move_uploaded_file($_FILES[$file]['tmp_name'], $uploadfile)) {
+                    chmod("$uploadfile", 0777);
+
+                    $file1 = $_FILES[$file]['name'];
+                       //echo "masukkk 12313";
+                        $sha512= $uploadfile."-sha512";
+                        //echo "$sha512";
+                        $handle = fopen($sha512, 'w') or die('Cannot open file:  '.$my_file);
+                        $data = hash_hmac_file('sha512', $uploadfile,$key);
+                        fwrite($handle, $data);
+                   /* if ($type != 2)
+                         resize("$file1", 300, 300, $folder_resize, "");
+                    */
+                    $result .= "harusnya masuk $uploadfile ....";
+               } else {
+                    if (!$_FILES[$file_id]['size']) { //Check if the file is made
+                         unlink($uploadfile); //Delete the Empty file
+                         $file_name = '';
+                         $result .= "Empty file found - please use a valid file."; //Show the error message
+                    } else {
+                         chmod($uploadfile, 0777); //Make it universally writable.
+                     
+                    }
+               }
+          }
+
+          return array(
+               "hash" => $data,
+               "filename" => $today."-".$filename
+               );
+
+     }
      public function delete_directory($dirname) {
           if (is_dir($dirname))
                $dir_handle = opendir($dirname);
