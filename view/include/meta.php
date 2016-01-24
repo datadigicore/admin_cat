@@ -25,7 +25,7 @@
   <!-- jvectormap -->
   <link rel="stylesheet" href="<?php echo $url_rewrite;?>static/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Date Picker -->
-  <link rel="stylesheet" href="<?php echo $url_rewrite;?>static/plugins/datepicker/datepicker3.css">
+  <link rel="stylesheet" href="<?php echo $url_rewrite;?>static/dist/css/bootstrap-datetimepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="<?php echo $url_rewrite;?>static/plugins/daterangepicker/daterangepicker-bs3.css">
   <!-- bootstrap wysihtml5 - text editor -->

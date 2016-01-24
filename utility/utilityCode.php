@@ -62,6 +62,17 @@ class utilityCode extends config {
           }
      }
 
+     public function genRandom($jmlSoal){ 
+          $roll1 = 0; 
+          $arrB= array(); 
+          list($usec, $sec) = explode(' ', microtime()); 
+          $ter = (float) $sec + ((float) $usec * 100000); 
+          $arrB=range(0,($jmlSoal-1)); 
+          srand($ter); 
+          shuffle($arrB); 
+          return $arrB; 
+     }
+
      public function sha512($string) {
           return hash('sha512', $string);
      }

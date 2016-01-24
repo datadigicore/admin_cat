@@ -36,7 +36,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label class="col-md-2 control-label">Paket Soal</label>
                     <div class="col-md-9">
                       <select type="text" class="form-control" id="paket" name="paket">
@@ -47,11 +47,16 @@
                         <option value="4">Paket Soal D</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label class="col-md-2 control-label">Tanggal</label>
                     <div class="col-md-9">
-                      <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Tanggal Ujian">
+                      <div class='input-group date' id='datetime'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group">
@@ -99,7 +104,6 @@
                 <tr>
                   <th>Id</th>
                   <th>Kategori</th>
-                  <th>Paket Soal</th>
                   <th>Tanggal Ujian</th>
                   <th>Lama Ujian</th>
                   <th>Jumlah Soal</th>
@@ -116,12 +120,13 @@
   </section>
 </div>
 <script>
-  Date.prototype.toDateInputValue = (function() {
-      var local = new Date(this);
-      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-      return local.toJSON().slice(0,10);
-  });
-  $("#tanggal").val(new Date().toDateInputValue());
+
+  // Date.prototype.toDateInputValue = (function() {
+  //     var local = new Date(this);
+  //     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+  //     return local.toJSON().slice(0,10);
+  // });
+  // $("#tanggal").val(new Date().toDateInputValue());
   $.ajax({
     type: "post",
     url : "<?php echo $url_rewrite;?>process/ujian/kategori",
@@ -131,6 +136,8 @@
     }
   });
   $(function () {
+    $('#datetime').datetimepicker({
+    });
     var table = $(".table").DataTable({
       "oLanguage": {
         "sInfoFiltered": ""
@@ -151,8 +158,7 @@
         {"targets" : 4},
         {"targets" : 5},
         {"targets" : 6},
-        {"targets" : 7},
-        {"targets" : 8}
+        {"targets" : 7}
       ],
       "order": [[ 0, "desc" ]]
     });
@@ -168,6 +174,25 @@
       });
       return false;
     }
+    $(document).on("click", "#acak", function (){
+      var tr = $(this).closest('tr');
+      tabrow = table.row( tr );
+      row_data = tabrow.data()[0];
+      kategori_data = tabrow.data()[1];
+      tanggal_data = tabrow.data()[2];
+      lamaujian_data = tabrow.data()[3];
+      jmlsoal_data = tabrow.data()[4];
+      jmlpeserta_data = tabrow.data()[5];
+      var $form=$(document.createElement('form')).css({display:'none'}).attr("method","POST").attr("action","<?php echo $url_rewrite;?>process/ujian/randomize");
+      var $input=$(document.createElement('input')).css({display:'none'}).attr('name','kategori').val(kategori_data);
+      var $input2=$(document.createElement('input')).css({display:'none'}).attr('name','tanggal').val(tanggal_data);
+      var $input3=$(document.createElement('input')).css({display:'none'}).attr('name','lamaujian').val(lamaujian_data);
+      var $input4=$(document.createElement('input')).css({display:'none'}).attr('name','jmlsoal').val(jmlsoal_data);
+      var $input5=$(document.createElement('input')).css({display:'none'}).attr('name','jmlpeserta').val(jmlpeserta_data);
+      $form.append($input).append($input2).append($input3).append($input4).append($input5);
+      $("body").append($form);
+      $form.submit();
+    });
     $(document).on("click", "#aktif", function (){
       var tr = $(this).closest('tr');
       tabrow = table.row( tr );

@@ -31,6 +31,14 @@ else {
         case 'upload-soal':
           include ('view/content/upload_soal.php');
         break;
+        case 'acaksoal':
+          if ($_POST['message'] == "load") {
+            include ('view/content/randomise-soal.php');
+          }
+          else{
+            include ('view/content/home.php');
+          }
+        break;
         case 'monitor':
           include ('view/content/monitor.php');
         break;
