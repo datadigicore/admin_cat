@@ -18,6 +18,14 @@ class datatable extends config {
             SSP::simplewhere( $_POST, $sql_details, $table, $primaryKey, $columns, $where)
         );        
     }
+    function get_table_join($table, $primaryKey, $columns, $tableJoin, $joinWhere, $where){
+        $config = new config();
+        $sql_details = $config->sql_details();
+        require( 'ssp.class.php' );
+        echo json_encode(
+            SSP::simplejoin( $_POST, $sql_details, $table, $primaryKey, $columns, $tableJoin, $joinWhere, $where)
+        );        
+    }
     function get_table_group($table, $primaryKey, $columns, $where, $group){
         $config = new config();
         $sql_details = $config->sql_details();

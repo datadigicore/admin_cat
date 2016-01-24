@@ -25,6 +25,8 @@ else {
         case 'adduser':
           include ('view/content/pengguna-add.php');
         break;
+        case 'ujian':
+          include ('view/content/ujian.php');
         case 'upload-soal':
           include ('view/content/upload_soal.php');
         break;
