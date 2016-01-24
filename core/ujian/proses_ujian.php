@@ -92,6 +92,7 @@ switch ($process) {
   break;
   case 'start':
     $id = $_POST['key'];
+    $ujian->updateTime($id);
     $ujian->mulaiUjian($id);
   break;
   case 'finish':

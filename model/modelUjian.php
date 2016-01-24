@@ -60,6 +60,13 @@
       return $result;
     }
 
+    public function updateTime($id) {
+      $timenow = date("Y-m-d H:i:s", time());
+      $query  = "UPDATE ujian SET waktu_ujian = '$timenow' WHERE id_ujian='$id'";
+      $result = $this->query($query);
+      return $result;
+    }
+
     public function mulaiUjian($id) {
       $query  = "UPDATE ujian SET status_ujian = 2 WHERE id_ujian='$id'";
       $result = $this->query($query);
