@@ -13,7 +13,9 @@ switch ($process) {
       array( 'db' => 'nama',                        'dt' => 2, 'field' => 'nama' ),
       array( 'db' => 'id_lokasi',                   'dt' => 3, 'field' => 'id_lokasi' ),
       array( 'db' => 'id_ruangan',                  'dt' => 4, 'field' => 'id_ruangan' ),
-      array( 'db' => 'master_kategori.nama_master', 'dt' => 5, 'field' => 'nama_master' ),
+      array( 'db' => 'master_kategori.nama_master', 'dt' => 5, 'field' => 'nama_master', 'formatter' => function($d,$row){ 
+          return "<small><i>{$d}</i></small>";
+      })
     );
     $join = "FROM {$table} INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
@@ -27,7 +29,9 @@ switch ($process) {
       array( 'db' => 'nama',                      'dt' => 2, 'field' => 'nama' ),
       array( 'db' => 'id_lokasi',                 'dt' => 3, 'field' => 'id_lokasi' ),
       array( 'db' => 'id_ruangan',                'dt' => 4, 'field' => 'id_ruangan' ),
-      array( 'db' => 'nama_master',               'dt' => 5, 'field' => 'nama_master' ),
+      array( 'db' => 'nama_master',               'dt' => 5, 'field' => 'nama_master', 'formatter' => function($d,$row){ 
+          return "<small><i>{$d}</i></small>";
+      }),
       array( 'db' => 'generated_soal.status',     'dt' => 6, 'field' => 'status', 'formatter' => function($d,$row){ 
         if($d==1){
           return "<i>Sudah Verifikasi</i>";
@@ -45,7 +49,7 @@ switch ($process) {
           return '<i>Persiapan Ujian</i>';
         }
       }),
-      array( 'db' => 'skor_total',   'dt' => 7 ),
+      array( 'db' => 'skor_total',   'dt' => 7, 'field' => 'skor_total' ),
     );
     $join = "FROM {$table} INNER JOIN generated_soal ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
