@@ -20,10 +20,14 @@ switch ($process) {
         return date( 'd M Y', strtotime($d));
       }),
       array( 'db' => 'lama_ujian',     'dt' => 3, 'formatter' => function( $d, $row ) {
-        return date( 'd M Y', strtotime($d));
+        return "$d &nbsp;Menit";
       }),
-      array( 'db' => 'jumlah_soal',    'dt' => 4 ),
-      array( 'db' => 'jumlah_peserta', 'dt' => 5 ),
+      array( 'db' => 'jumlah_soal',    'dt' => 4, 'formatter' => function( $d, $row ) {
+        return "$d &nbsp;Soal";
+      }),
+      array( 'db' => 'jumlah_peserta', 'dt' => 5, 'formatter' => function( $d, $row ) {
+        return "$d &nbsp;Peserta";
+      }),
       array( 'db' => 'status_ujian',   'dt' => 6, 'formatter' => function($d,$row){ 
         if($d==0 && $row[status]==0){
           return "<small><i>Belum Aktif</i></small>";
