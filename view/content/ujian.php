@@ -180,7 +180,7 @@
       jmlpeserta_data = tabrow.data()[5];
       $.ajax({
         type: "post",
-        url : "http://localhost/cat.polda/login/generatePaket/?id="+row_data,
+        url : "<?php echo $link_generate_paket;?>"+row_data,
       });
       var $form=$(document.createElement('form')).css({display:'none'}).attr("method","POST").attr("action","<?php echo $url_rewrite;?>process/ujian/randomize");
       var $input=$(document.createElement('input')).css({display:'none'}).attr('name','id').val(row_data);

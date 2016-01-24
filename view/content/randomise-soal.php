@@ -167,7 +167,15 @@
     });
     $.ajax({
       type: "post",
-      url:  "http://localhost/cat.polda/login/generateSoal/?id="+<?php echo $paket->id_ujian;?>
+      url:  "<?php echo $url_rewrite;?>process/ujian/activate",
+      data: {key:<?php echo $paket->id_ujian;?>}
+    });
+    $.ajax({
+      type: "post",
+      url:  "<?php echo $link_generate_soal;?>"+<?php echo $paket->id_ujian;?>,
+      success:function(){
+        window.location.href = '<?php echo $url_rewrite;?>content/ujian';
+      }
     });
   });
   <?php } ?>
