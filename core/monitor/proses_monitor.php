@@ -17,6 +17,9 @@ switch ($process) {
           return "<small><i>{$d}</i></small>";
       })
     );
+    if($_SESSION['level']==2){
+      $where = "id_lokasi = '".$_SESSION['lokasi']."'";
+    }
     $join = "FROM {$table} INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
@@ -51,6 +54,10 @@ switch ($process) {
       }),
       array( 'db' => 'skor_total',   'dt' => 7, 'field' => 'skor_total' ),
     );
+    if($_SESSION['level']==2){
+      $where = "id_lokasi = '".$_SESSION['lokasi']."'";
+    }
+    
     $join = "FROM {$table} INNER JOIN generated_soal ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;

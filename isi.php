@@ -58,6 +58,9 @@ else {
         case 'user':
           include ('view/content/pengguna-lokasi.php');
         break;
+        case 'monitor':
+          include ('view/content/monitor-lokasi.php');
+        break;
       case 'adduser':
           include ('view/content/pengguna-add-lokasi.php');
         break;
