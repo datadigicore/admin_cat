@@ -6,7 +6,6 @@
     public function insertUjian($data) {
       $query           = "INSERT INTO ujian SET
         id_kategori    = '$data[kategori]',
-        pilihan_paket  = '$data[paket]',
         lama_ujian     = '$data[lamaujian]',
         jumlah_soal    = '$data[jmlsoal]',
         pilihan_paket  = '$data[jmlpaket]',
