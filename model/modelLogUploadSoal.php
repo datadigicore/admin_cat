@@ -78,7 +78,7 @@
       $arrayCount = count($data);
       $string = "INSERT INTO master_soal (`tipe_soal`, `penulis`, `id_kategori`, `kisi`, `waktu`, `tingkatan`, `prosedur_penilaian`, `soal`, `1`, `2`, `3`, `4`, `5`) VALUES ";
       $urut=1;
-      for ($i=2; $i < $arrayCount; $i++) { 
+      for ($i=2; $i <= $arrayCount; $i++) { 
         $tipe_soal            = '';//trim($data[$i]["A"]," \t\n\r\0\x0B\xA0");
         $penulis              = htmlentities($info['penulis'],ENT_QUOTES);// trim($info['penulis']," \t\n\r\0\x0B\xA0");//trim($data[$i]["B"]," \t\n\r\0\x0B\xA0");
         $id_kategori          = trim($info['id_kategori']," \t\n\r\0\x0B\xA0");//trim($data[$i]["C"]," \t\n\r\0\x0B\xA0");
