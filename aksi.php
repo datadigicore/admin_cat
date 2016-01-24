@@ -15,7 +15,11 @@
       break;
       case 'ujian':
         $process = $data[2]; 
-        include "./core/pengguna/proses_ujian.php";
+        include "./core/ujian/proses_ujian.php";
+      break;
+      case 'monitor':
+        $process = $data[2]; 
+        include "./core/monitor/proses_monitor.php";
       break;
       case 'rkakl':
         $process = $data[2]; 

@@ -31,6 +31,9 @@ else {
         case 'upload-soal':
           include ('view/content/upload_soal.php');
         break;
+        case 'monitor':
+          include ('view/content/monitor.php');
+        break;
         default:
           include ('view/content/home.php');
         break;

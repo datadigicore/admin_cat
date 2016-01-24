@@ -26,6 +26,14 @@ class datatable extends config {
             SSP::simplejoin3( $_POST, $sql_details, $table, $primaryKey, $columns, $tableJoin, $joinWhere, $where)
         );        
     }
+    function get_table_more_join($table, $primaryKey, $columns, $join, $where){
+        $config = new config();
+        $sql_details = $config->sql_details();
+        require( 'ssp.class.php' );
+        echo json_encode(
+            SSP::simplemorejoin( $_POST, $sql_details, $table, $primaryKey, $columns, $join, $where)
+        );        
+    }
     function get_table_group($table, $primaryKey, $columns, $where, $group){
         $config = new config();
         $sql_details = $config->sql_details();
