@@ -6,6 +6,7 @@ $data['kategori']   = $purifier->purify($_POST['kategori']);
 $data['tanggal']    = date("Y-m-d H:i:s", strtotime($_POST['tanggal']));
 $data['lamaujian']  = $purifier->purify($_POST['lamaujian']);
 $data['jmlsoal']    = $purifier->purify($_POST['jmlsoal']);
+$data['jmlpaket']   = $purifier->purify($_POST['jmlpaket']);
 $data['jmlpeserta'] = $purifier->purify($_POST['jmlpeserta']);
 
 switch ($process) {
@@ -18,7 +19,9 @@ switch ($process) {
       array( 'db' => 'waktu_ujian',    'dt' => 2, 'formatter' => function( $d, $row ) {
         return date( 'd M Y', strtotime($d));
       }),
-      array( 'db' => 'lama_ujian',     'dt' => 3 ),
+      array( 'db' => 'lama_ujian',     'dt' => 3, 'formatter' => function( $d, $row ) {
+        return date( 'd M Y', strtotime($d));
+      }),
       array( 'db' => 'jumlah_soal',    'dt' => 4 ),
       array( 'db' => 'jumlah_peserta', 'dt' => 5 ),
       array( 'db' => 'status_ujian',   'dt' => 6, 'formatter' => function($d,$row){ 

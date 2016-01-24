@@ -36,18 +36,6 @@
                       </select>
                     </div>
                   </div>
-                  <!-- <div class="form-group">
-                    <label class="col-md-2 control-label">Paket Soal</label>
-                    <div class="col-md-9">
-                      <select type="text" class="form-control" id="paket" name="paket">
-                        <option value="" disabled selected>-- Pilih Paket Soal --</option>
-                        <option value="1">Paket Soal A</option>
-                        <option value="2">Paket Soal B</option>
-                        <option value="3">Paket Soal C</option>
-                        <option value="4">Paket Soal D</option>
-                      </select>
-                    </div>
-                  </div> -->
                   <div class="form-group">
                     <label class="col-md-2 control-label">Tanggal</label>
                     <div class="col-md-9">
@@ -71,6 +59,13 @@
                     <div class="col-md-9">
                       <span style="position:absolute;margin:7px;right:50px">Soal</span>
                       <input type="number" class="form-control" name="jmlsoal" placeholder="Jumlah Soal" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label">Jumlah Paket</label>
+                    <div class="col-md-9">
+                      <span style="position:absolute;margin:7px;right:50px">Paket</span>
+                      <input type="number" class="form-control" name="jmlpaket" placeholder="Jumlah Paket" required>
                     </div>
                   </div>
                   <div class="form-group">
