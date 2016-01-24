@@ -3,7 +3,7 @@ include 'config/application.php';
 
 $sess_id    = $_SESSION['user_id'];
 $data['kategori']   = $purifier->purify($_POST['kategori']);
-$data['tanggal']    = $_POST['tanggal'];
+$data['tanggal']    = date("Y-m-d H:i:s", strtotime($_POST['tanggal']));
 $data['lamaujian']  = $purifier->purify($_POST['lamaujian']);
 $data['jmlsoal']    = $purifier->purify($_POST['jmlsoal']);
 $data['jmlpeserta'] = $purifier->purify($_POST['jmlpeserta']);
@@ -63,6 +63,8 @@ switch ($process) {
   case 'add':
     $ujian->insertUjian($data);
     $utility->load("content/ujian","success","Data berhasil ditambahkan");
+    // print_r('<pre>');
+    // print_r($data);
   break;
   case 'randomize':
     $utility->load("content/acaksoal","","load");

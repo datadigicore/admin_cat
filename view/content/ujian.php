@@ -32,7 +32,7 @@
                   <div class="form-group">
                     <label class="col-md-2 control-label">Kategori</label>
                     <div class="col-md-9">
-                      <select type="text" class="form-control" id="kategori" name="kategori">
+                      <select type="text" class="form-control" id="kategori" name="kategori" required>
                       </select>
                     </div>
                   </div>
@@ -52,7 +52,7 @@
                     <label class="col-md-2 control-label">Tanggal</label>
                     <div class="col-md-9">
                       <div class='input-group date' id='datetime'>
-                        <input type='text' class="form-control" />
+                        <input type='text' class="form-control" name="tanggal" required/>
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -63,21 +63,21 @@
                     <label class="col-md-2 control-label">Lama Ujian</label>
                     <div class="col-md-9">
                       <span style="position:absolute;margin:7px;right:50px">Menit</span>
-                      <input type="number" class="form-control" name="lamaujian" placeholder="Lama Ujian">
+                      <input type="number" class="form-control" name="lamaujian" placeholder="Lama Ujian" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-2 control-label">Jumlah Soal</label>
                     <div class="col-md-9">
                       <span style="position:absolute;margin:7px;right:50px">Soal</span>
-                      <input type="number" class="form-control" name="jmlsoal" placeholder="Jumlah Soal">
+                      <input type="number" class="form-control" name="jmlsoal" placeholder="Jumlah Soal" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-2 control-label">Jumlah Peserta</label>
                     <div class="col-md-9">
                       <span style="position:absolute;margin:7px;right:50px">Peserta</span>
-                      <input type="number" class="form-control" name="jmlpeserta" placeholder="Jumlah Peserta">
+                      <input type="number" class="form-control" name="jmlpeserta" placeholder="Jumlah Peserta" required>
                     </div>
                   </div>
                   <div class="form-group" style="margin-bottom:0">
