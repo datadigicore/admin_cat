@@ -103,35 +103,26 @@
     </div>
   </section>
 </div>
-<div class="modal fade" id="editModal">
+<div class="modal fade" id="chooseModal" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="background-color:#f9af00 !important; color:white;">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" style="color:white">×</span></button>
-        <h4 class="modal-title">Edit Pengguna</h4>
+        <h4 class="modal-title">Pilih Paket Soal</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <select class="form-control" name="level" id="level" required>
-            <option value="" disabled selected>-- Pilih Kewenangan --</option>
-            <option value="2">Admin Lokasi</option>
-            <option value="3">Admin Ruangan</option>
-          </select>
-        </div>
-        <div class="form-group" id="form-lokasi" hidden>
-          <select class="form-control" name="lokasi" id="lokasi">
-            <option value="" disabled selected>-- Pilih Lokasi --</option>
-          </select>
-        </div>
-        <div class="form-group" id="form-ruangan" hidden>
-          <select class="form-control" name="ruangan" id="ruangan">
-            <option value="" disabled selected>-- Pilih Ruangan --</option>
-          </select>
+          <div class="col-xs-4">
+            <button style="width:100%;height:120px;font-size:24px;font-weight:bold;">Paket A</button>
+          </div>
+          <div class="col-xs-4">
+            <button style="width:100%;height:120px;font-size:24px;font-weight:bold;">Paket B</button>
+          </div>
+          <div class="col-xs-4">
+            <button style="width:100%;height:120px;font-size:24px;font-weight:bold;">Paket C</button>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-flat btn-success">Simpan Perubahan</button>
+      <div class="modal-footer" style="border:none">
       </div>
     </div>
   </div>
@@ -166,9 +157,9 @@
       ],
       "order": [[ 2, "asc" ]]
     });
-    // function refreshTabel(){
-    //   tableLive.draw();
-    // }
-    // setInterval(refreshTabel, 3000);
+    function refreshTabel(){
+      $("#chooseModal").modal("show");
+    }
+    setTimeout(refreshTabel, 3000);
   });
 </script>
