@@ -3,8 +3,7 @@ include 'config/application.php';
 
 $sess_id    = $_SESSION['user_id'];
 $data['kategori']   = $purifier->purify($_POST['kategori']);
-$data['paket']      = $purifier->purify($_POST['paket']);
-$data['tanggal']    = $_POST['tanggal'];
+$data['tanggal']    = date("Y-m-d H:i:s", strtotime($_POST['tanggal']));
 $data['lamaujian']  = $purifier->purify($_POST['lamaujian']);
 $data['jmlsoal']    = $purifier->purify($_POST['jmlsoal']);
 $data['jmlpeserta'] = $purifier->purify($_POST['jmlpeserta']);
@@ -16,25 +15,13 @@ switch ($process) {
     $column = array(
       array( 'db' => 'id_ujian',       'dt' => 0 ),
       array( 'db' => 'nama_master',    'dt' => 1 ),
-      array( 'db' => 'pilihan_paket',  'dt' => 2, 'formatter' => function($d,$row){ 
-        if($d==1){
-          return "<i>Paket A</i>";
-        }
-        if($d==2){
-          return "<i>Paket B</i>";
-        }
-        if($d==3){
-          return "<i>Paket C</i>";
-        }
-        else{
-          return "<i>Paket D</i>";
-        }
+      array( 'db' => 'waktu_ujian',    'dt' => 2, 'formatter' => function( $d, $row ) {
+        return date( 'd M Y', strtotime($d));
       }),
-      array( 'db' => 'waktu_ujian',    'dt' => 3 ),
-      array( 'db' => 'lama_ujian',     'dt' => 4 ),
-      array( 'db' => 'jumlah_soal',    'dt' => 5 ),
-      array( 'db' => 'jumlah_peserta', 'dt' => 6 ),
-      array( 'db' => 'status_ujian',   'dt' => 7, 'formatter' => function($d,$row){ 
+      array( 'db' => 'lama_ujian',     'dt' => 3 ),
+      array( 'db' => 'jumlah_soal',    'dt' => 4 ),
+      array( 'db' => 'jumlah_peserta', 'dt' => 5 ),
+      array( 'db' => 'status_ujian',   'dt' => 6, 'formatter' => function($d,$row){ 
         if($d==0 && $row[status]==0){
           return "<small><i>Belum Aktif</i></small>";
         }
@@ -51,9 +38,9 @@ switch ($process) {
           return '<small><i>Telah Dilaksanakan</i></small>';
         }
       }),
-      array( 'db' => 'status',         'dt' => 8, 'formatter' => function($d,$row){ 
+      array( 'db' => 'status',         'dt' => 7, 'formatter' => function($d,$row){ 
         if($d==0 && $row[status_ujian]==0){
-          return "<button id='aktif' class='btn btn-flat btn-success btn-xs'><i class='fa fa-check-circle'></i> Aktifkan</button>";
+          return "<button id='acak' class='btn btn-flat btn-success btn-xs'><i class='fa fa-random'></i> Mulai Acak Soal</button>";
         }
         if($d==1 && $row[status_ujian]==0){
           return "<small><i>Berlangsung</i></small>";
@@ -74,18 +61,22 @@ switch ($process) {
     $datatable->get_table_join($table, $key, $column, $tableJoin, $joinWhere, $where);
   break;
   case 'add':
-    // $ujian->clearStatus();
     $ujian->insertUjian($data);
     $utility->load("content/ujian","success","Data berhasil ditambahkan");
+    // print_r('<pre>');
+    // print_r($data);
   break;
-  case 'edt':
-    $ujian->updateUjian($data);
-    $utility->location_goto("content/setting");
+  case 'randomize':
+    $utility->load("content/acaksoal","","load");
   break;
-  case 'del':
-    $ujian->deleteUjian($hapus);
-    $utility->location_goto("content/setting");
-  break;
+  // case 'edt':
+  //   $ujian->updateUjian($data);
+  //   $utility->location_goto("content/setting");
+  // break;
+  // case 'del':
+  //   $ujian->deleteUjian($hapus);
+  //   $utility->location_goto("content/setting");
+  // break;
   case 'activate':
     $id = $_POST['key'];
     $ujian->activateUjian($id);

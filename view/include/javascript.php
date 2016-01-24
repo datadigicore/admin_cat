@@ -23,6 +23,7 @@
   <script src="<?php echo $url_rewrite;?>static/plugins/knob/jquery.knob.js"></script>
   <!-- daterangepicker -->
   <script src="<?php echo $url_rewrite;?>static/dist/js/moment.min.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/dist/js/bootstrap-datetimepicker.js"></script>
   <script src="<?php echo $url_rewrite;?>static/plugins/daterangepicker/daterangepicker.js"></script>
   <!-- datepicker -->
   <script src="<?php echo $url_rewrite;?>static/plugins/datepicker/bootstrap-datepicker.js"></script>
