@@ -76,12 +76,12 @@ switch ($process) {
     $filename = $result->nama_file;
     $mdl_upSoal->updateStatusLogUploadSoal($id,1);
 
-    // echo "php -f ".$base_path."core/upload/import_excel.php '$filename' '$id' '$id_kategori' '$kisi' '$penulis'";
+    echo "php -f ".$base_path."core/upload/import_excel.php '$filename' '$id' '$id_kategori' '$kisi' '$penulis' > ".$base_path."static/uploads/logs.txt &";
     
 
-    echo exec("php -f ".$base_path."core/upload/import_excel.php '$filename' '$id' '$id_kategori' '$kisi' '$penulis'",$op,$rt);
-    // print_r($op);
-    // print_r($rt);
+    echo  exec("php -f ".$base_path."core/upload/import_excel.php '$filename' '$id' '$id_kategori' '$kisi' '$penulis' > ".$base_path."static/uploads/logs.txt &",$op,$rt);
+     // print_r($op);
+     // print_r($rt);
     $utility->load("content/upload-soal","success","Sedang memproses soal");
   break;
   case 'table-soal':

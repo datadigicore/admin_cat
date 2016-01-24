@@ -78,10 +78,10 @@ switch ($process) {
     echo "php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id'";
     
 
-    echo exec("php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id'",$op,$rt);
+    echo exec("php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id' &",$op,$rt);
     // print_r($op);
     // print_r($rt);
-    // $utility->load("content/upload-peserta","success","Sedang memproses soal");
+    $utility->load("content/upload-peserta","success","Sedang memproses soal");
   break;
   case 'table-peserta':
     $table = array("master_peserta","lokasi","ruangan");
