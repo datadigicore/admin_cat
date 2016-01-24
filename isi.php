@@ -38,6 +38,11 @@ else {
           else{
             include ('view/content/home.php');
           }
+        case 'upload-peserta':
+          include ('view/content/upload_peserta.php');
+        break;
+        case 'data-peserta':
+          include ('view/content/data_peserta.php');
         break;
         case 'monitor':
           include ('view/content/monitor.php');

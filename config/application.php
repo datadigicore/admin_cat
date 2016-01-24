@@ -17,6 +17,13 @@ require_once __DIR__ .'/../model/modelLogin.php';
 require_once __DIR__ .'/../model/modelReport.php';
 require_once __DIR__ .'/../model/modelRkakl.php';
 require_once __DIR__ .'/../model/modelRab.php';
+
+require_once __DIR__ .'/../model/modelLogUploadSoal.php';
+require_once __DIR__ .'/../model/modelLogUploadPeserta.php';
+require_once __DIR__ .'/../model/modelGeneratedSoal.php';
+require_once __DIR__ .'/../model/modelMasterKategori.php';
+require_once __DIR__ .'/../model/modelMasterPeserta.php';
+require_once __DIR__ .'/../model/modelMasterSoal.php';
 // ====================================================
 
 // ============== TAMBAHKAN CLASS DISINI ==============
@@ -30,6 +37,13 @@ $ujian    = new modelUjian();
 $report      = new modelReport();
 $rkakl 	     = new modelRkakl();
 $mdl_rab     = new modelRab();
+
+$mdl_genSoal = new modelGeneratedSoal();
+$mdl_upSoal = new modelLogUploadSoal();
+$mdl_upPeserta = new modelLogUploadPeserta();
+$mdl_masSoal = new modelMasterSoal();
+$mdl_masPeserta = new modelMasterPeserta();
+$mdl_masKategori = new modelMasterKategori();
 // ====================================================
 
 $config_security = HTMLPurifier_Config::createDefault();

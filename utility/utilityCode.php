@@ -334,15 +334,15 @@ class utilityCode extends config {
                    'image/x-png');
           } else if ($type == 2) {
                $allowed = array('application/msword', 'application/pdf',
-                   'application/vnd.ms-excel' );
+                   'application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
           }
           $c = $_FILES[$file]['type'];
           //echo("Masuk $c");
           $filename = $_FILES[$file]['name'];
           $name = explode('.', $filename);
-
+          echo in_array($_FILES[$file]['type'], $allowed);
           if (in_array($_FILES[$file]['type'], $allowed)) {
-               //echo("Masuk 112");
+               echo("Masuk 112");
                //Where the file must be uploaded to
                if ($folder)
                     $folder .= '/'; //Add a '/' at the end of the folder
@@ -376,6 +376,7 @@ class utilityCode extends config {
           }
 
           return array(
+               'result' => $result,
                "hash" => $data,
                "filename" => $today."-".$filename
                );

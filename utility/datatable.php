@@ -10,6 +10,22 @@ class datatable extends config {
             SSP::simpleJoin2( $_POST, $sql_details, $table,$joinKey,$primaryKey, $columns)
         );        
     }
+    function get_peserta_view($table,$joinKey, $primaryKey, $columns){ 
+        $config = new config();
+        $sql_details = $config->sql_details();
+        require( 'ssp.class.php' );
+        echo json_encode(
+            SSP::simpleJoin2( $_POST, $sql_details, $table,$joinKey,$primaryKey, $columns)
+        );        
+    }
+    function get_log_peserta_view($table,$joinKey, $primaryKey, $columns){ 
+        $config = new config();
+        $sql_details = $config->sql_details();
+        require( 'ssp.class.php' );
+        echo json_encode(
+            SSP::simpleJoin( $_POST, $sql_details, $table,$joinKey,$primaryKey, $columns)
+        );        
+    }
     function get_table($table, $primaryKey, $columns, $where){
         $config = new config();
         $sql_details = $config->sql_details();
