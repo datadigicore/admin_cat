@@ -12,6 +12,7 @@ require_once __DIR__ .'/../library/security/HTMLPurifier.auto.php';
 
 // ============== TAMBAHKAN MODEL DISINI ==============
 require_once __DIR__ .'/../model/modelPengguna.php';
+require_once __DIR__ .'/../model/modelUjian.php';
 require_once __DIR__ .'/../model/modelLogin.php';
 require_once __DIR__ .'/../model/modelReport.php';
 require_once __DIR__ .'/../model/modelRkakl.php';
@@ -25,6 +26,7 @@ $utility     = new utilityCode();
 $datatable   = new datatable();
 $login       = new modelLogin();
 $pengguna    = new modelPengguna();
+$ujian    = new modelUjian();
 $report      = new modelReport();
 $rkakl 	     = new modelRkakl();
 $mdl_rab     = new modelRab();

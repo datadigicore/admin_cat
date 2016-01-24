@@ -16,22 +16,15 @@
     }
 
     public function updatePengguna($data) {
-      $id         = $data['id'];
-      $nama       = $data['nama'];
-      $username   = $data['username'];
-      $password   = $data['password'];
-      $email      = $data['email'];
-      $keterangan = $data['keterangan'];
-
       $query       = "UPDATE pengguna SET
-        nama       = '$nama',
-        username   = '$username',
-        password   = '$password',
-        email      = '$email',
-        keterangan = '$keterangan'
+        username  = '$data[username]',
+        password  = '$data[password]',
+        level     = '$data[level]',
+        lokasi    = '$data[lokasi]',
+        ruangan   = '$data[ruangan]',
+        status    = '$data[status]'
         WHERE id   = '$id'
       ";
-      
       $result = $this->query($query);
       return $result;
     }

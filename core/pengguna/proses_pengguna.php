@@ -2,21 +2,12 @@
 include 'config/application.php';
 
 $sess_id    = $_SESSION['user_id'];
-$username   = $purifier->purify($_POST['username']);
-$password   = $utility->sha512($_POST['password']);
-$level      = $purifier->purify($_POST['level']);
-$lokasi      = $purifier->purify($_POST['lokasi']);
-$ruangan      = $purifier->purify($_POST['ruangan']);
-$status     = $purifier->purify($_POST['status']);
-
-$data_pengguna = array(
-  "username"   => $username,
-  "password"   => $password,
-  "level"      => $level,
-  "lokasi"     => $lokasi,
-  "ruangan"    => $ruangan,
-  "status"     => $status
-);
+$data['username']  = $purifier->purify($_POST['username']);
+$data['password']  = $utility->sha512($_POST['password']);
+$data['level']     = $purifier->purify($_POST['level']);
+$data['lokasi']    = $purifier->purify($_POST['lokasi']);
+$data['ruangan']   = $purifier->purify($_POST['ruangan']);
+$data['status']    = $purifier->purify($_POST['status']);
 
 switch ($process) {
   case 'table':
@@ -61,11 +52,11 @@ switch ($process) {
     $pengguna->deactivatePengguna($id);
   break;
   case 'add':
-    $pengguna->insertPengguna($data_pengguna);
+    $pengguna->insertPengguna($data);
     $utility->load("content/adduser","success","Data berhasil ditambahkan");
   break;
   case 'edt':
-    $pengguna->updatePengguna($data_pengguna);
+    $pengguna->updatePengguna($data);
     $utility->location_goto("content/setting");
   break;
   case 'del':

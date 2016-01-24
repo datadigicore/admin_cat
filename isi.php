@@ -24,8 +24,8 @@ else {
         case 'adduser':
           include ('view/content/pengguna-add.php');
         break;
-        case 'rkakl':
-          include ('view/content/rkakl.php');
+        case 'ujian':
+          include ('view/content/ujian.php');
         break;
         case 'insertrkakl':
           include ('view/content/rkakl-insert.php');
