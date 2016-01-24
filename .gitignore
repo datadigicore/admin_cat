@@ -1,3 +1,6 @@
 config/config.php
-static/uploads/*
+static/uploads/
+static/hasil/
 .htaccess
+log/
+
