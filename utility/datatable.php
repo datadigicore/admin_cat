@@ -23,7 +23,7 @@ class datatable extends config {
         $sql_details = $config->sql_details();
         require( 'ssp.class.php' );
         echo json_encode(
-            SSP::simplejoin( $_POST, $sql_details, $table, $primaryKey, $columns, $tableJoin, $joinWhere, $where)
+            SSP::simplejoin3( $_POST, $sql_details, $table, $primaryKey, $columns, $tableJoin, $joinWhere, $where)
         );        
     }
     function get_table_group($table, $primaryKey, $columns, $where, $group){

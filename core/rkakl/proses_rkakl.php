@@ -101,7 +101,7 @@ switch ($process) {
       }),
       array( 'db' => 'filesave',  'dt' => 7),
     );
-    $datatable->get_rkakl_view($table, $key, $column);
+    $datatable->get_soal_view($table, $key, $column);
   break;
   case 'view':
     ini_set('memory_limit', '-1');

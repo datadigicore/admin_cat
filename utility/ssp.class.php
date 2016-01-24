@@ -341,23 +341,39 @@ class SSP {
         );
         $recordsTotal = $resTotalLength[0][0];
 
-    static function simplejoin ( $request, $conn, $table, $primaryKey, $columns, $tableJoin=null, $joinWhere=null, $whereResult=null)
+        /*
+         * Output
+         */
+        return array(
+            "draw"            => intval( $request['draw'] ),
+            "recordsTotal"    => intval( $recordsTotal ),
+            "recordsFiltered" => intval( $recordsFiltered ),
+            "data"            => self::data_output( $columns, $data )
+        );
+    }
+
+    static function simplejoin3 ( $request, $conn, $table, $primaryKey, $columns, $tableJoin=null, $joinWhere=null, $whereResult=null)
     {
         $bindings = array();
         $db = self::db( $conn );
         $localWhereResult = array();
         $localWhereAll = array();
         $whereAllSql = '';
+
+        // Build the SQL query string from the request
         $limit = self::limit( $request, $columns );
         $order = self::order( $request, $columns );
         $where = self::filter( $request, $columns, $bindings );
+
         $whereResult = self::_flatten( $whereResult );
         $whereAll = self::_flatten( $whereAll );
+
         if ( $whereResult ) {
             $where = $where ?
                 $where .' AND '.$whereResult :
                 'WHERE '.$whereResult;
         }
+
         if ( $whereAll ) {
             $where = $where ?
                 $where .' AND '.$whereAll :
@@ -365,6 +381,8 @@ class SSP {
 
             $whereAllSql = 'WHERE '.$whereAll;
         }
+
+        // Main query to actually get the data
         $data = self::sql_exec( $db, $bindings,
             "SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`
              FROM `$table`
@@ -374,16 +392,24 @@ class SSP {
              $order
              $limit"
         );
+
+        // Data set length after filtering
         $resFilterLength = self::sql_exec( $db,
             "SELECT FOUND_ROWS()"
         );
         $recordsFiltered = $resFilterLength[0][0];
+
+        // Total data set length
         $resTotalLength = self::sql_exec( $db, $bindings,
             "SELECT COUNT(`{$primaryKey}`)
              FROM   `$table` ".
             $whereAllSql
         );
         $recordsTotal = $resTotalLength[0][0];
+
+        /*
+         * Output
+         */
         return array(
             "draw"            => intval( $request['draw'] ),
             "recordsTotal"    => intval( $recordsTotal ),
