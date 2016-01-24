@@ -39,6 +39,7 @@ else {
           else{
             include ('view/content/home.php');
           }
+        break;
         case 'upload-peserta':
           include ('view/content/upload_peserta.php');
         break;

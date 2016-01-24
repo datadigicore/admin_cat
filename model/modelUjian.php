@@ -9,6 +9,7 @@
         pilihan_paket  = '$data[paket]',
         lama_ujian     = '$data[lamaujian]',
         jumlah_soal    = '$data[jmlsoal]',
+        pilihan_paket  = '$data[jmlpaket]',
         waktu_ujian    = '$data[tanggal]',
         jumlah_peserta = '$data[jmlpeserta]'
       ";

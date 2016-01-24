@@ -66,30 +66,26 @@
       <div class="modal-header" style="background-color:#f9af00 !important; color:white;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" style="color:white">×</span></button>
-        <h4 class="modal-title">Edit Pengguna</h4>
+        <h4 class="modal-title">Revisi Pengguna</h4>
       </div>
+      <form method="post" action="<?php echo $url_rewrite;?>process/monitor/revisi">
       <div class="modal-body">
         <div class="form-group">
-          <select class="form-control" name="level" id="level" required>
-            <option value="" disabled selected>-- Pilih Kewenangan --</option>
-            <option value="2">Admin Lokasi</option>
-            <option value="3">Admin Ruangan</option>
-          </select>
+          <input type="hidden" class="form-control" id="idpeserta" name="key" placeholder="Id Peserta" readonly>
+          <input type="text" class="form-control" id="nopeserta" name="nopeserta" placeholder="Nomor Peserta" readonly>
         </div>
-        <div class="form-group" id="form-lokasi" hidden>
-          <select class="form-control" name="lokasi" id="lokasi">
-            <option value="" disabled selected>-- Pilih Lokasi --</option>
-          </select>
+        <div class="form-group">
+          <input type="text" class="form-control" id="namapeserta" name="namapeserta" placeholder="Nama Peserta" readonly>
         </div>
-        <div class="form-group" id="form-ruangan" hidden>
-          <select class="form-control" name="ruangan" id="ruangan">
-            <option value="" disabled selected>-- Pilih Ruangan --</option>
-          </select>
+        <div class="form-group">
+          <span style="position:absolute;margin:7px;right:50px">Menit</span>
+          <input type="number" class="form-control" name="tambahwaktu" placeholder="Tambahan Waktu Ujian" required>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-flat btn-success">Simpan Perubahan</button>
+        <button type="submit" class="btn btn-flat btn-success">Submit</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -114,14 +110,9 @@
         {"targets" : 3},
         {"targets" : 4},
         {"targets" : 5},
-        {"orderable": false,
-         "data": null,
-         "defaultContent":  '<div class="text-center">'+
-                              '<a style="margin:0 2px;" id="btn-edt" href="#editModal" class="btn btn-xs btn-flat btn-success btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Revisi</a>'+
-                            '</div>',
-         "targets": 6 },
+        {"targets" : 6},
       ],
-      "order": [[ 2, "asc" ]]
+      "order": [[ 1, "asc" ]]
     });
     var tableLive = $("#tableLive").DataTable({
       "oLanguage": {
@@ -151,5 +142,31 @@
       tableLive.draw();
     }
     setInterval(refreshTabel, 3000);
+    $(document).on("click", "#suspend", function (){
+      var tr = $(this).closest('tr');
+      tabrow = table.row( tr );
+      row_id = tabrow.data()[0];
+      $.ajax({
+        type: "post",
+        url : "<?php echo $url_rewrite;?>process/monitor/suspend",
+        data: {key:row_id},
+        success: function(data)
+        {
+          table.draw();
+        }
+      });
+      return false;
+    });
+    $(document).on("click", "#revisi", function (){
+      var tr = $(this).closest('tr');
+      tabrow = table.row( tr );
+      row_id = tabrow.data()[0];
+      nopeserta_data = tabrow.data()[1];
+      namapeserta_data = tabrow.data()[2];
+      $("#editModal").modal("show");
+      $("#idpeserta").val(row_id);
+      $("#nopeserta").val(nopeserta_data);
+      $("#namapeserta").val(namapeserta_data);
+    });
   });
 </script>

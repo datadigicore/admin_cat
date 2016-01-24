@@ -39,6 +39,22 @@
       $result = $this->query($query);
       return $result;
     }
+    public function suspendPengguna($data) {
+      $query = "UPDATE generated_soal SET
+                status            = 4,
+                durasi_pengerjaan = '$data[newdurasi]'
+                WHERE id_peserta  = '$data[id]'";
+      $result = $this->query($query);
+      return $result;
+    }
+    public function revisiPengguna($data) {
+      $query = "UPDATE generated_soal SET
+                status            = 5,
+                tambahan_waktu = '$data[newtambahwaktu]'
+                WHERE id_peserta  = '$data[id]'";
+      $result = $this->query($query);
+      return $result;
+    }
     public function deactivatePengguna($id) {
       $query = "update pengguna set status = 0 where id_pengguna='$id'";
       $result = $this->query($query);
@@ -63,18 +79,18 @@
     }
     public function ruangan($data) {
       $where  = $this->where($data);
-      $query  = "SELECT nama_ruangan
+      $query  = "SELECT nama
                  FROM lokasi INNER JOIN ruangan ON lokasi.id_lokasi = ruangan.id_lokasi $where";
       $result = $this->query($query);
       echo '<option value="" disabled selected>-- Pilih Ruangan --</option>';
       print_r($query);
       while($fetch = $this->fetch_array($result)) {
-        echo '<option value="'.$fetch["nama_ruangan"].'">'.$fetch["nama_ruangan"].'</option>';
+        echo '<option value="'.$fetch["nama"].'">'.$fetch["nama"].'</option>';
       }
     }
-    public function readPengguna($data) {
-      $where  = $this->where($data);
-      $query  = "SELECT * from pengguna $where";
+    public function readTimePeserta($data) {
+      $where  = "where id_peserta = $data";
+      $query  = "SELECT * from generated_soal $where";
       $result = $this->query($query);
       $fetch  = $this->fetch_object($result);
       return $fetch;
