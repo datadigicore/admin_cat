@@ -1,30 +1,44 @@
 <?php
 require_once __DIR__ . '/../../utility/PHPExcel/IOFactory.php';
 require_once __DIR__ . '/../../utility/ExcelReader.php';
+require_once __DIR__ . '/../../utility/simple_html_dom.php';
 require_once __DIR__ . '/../../config/application.php';
-
+define('MAX_FILE_SIZE', 999999999999999);
 $filename = $argv[1];
 $id = $argv[2];
 $id_kategori = $argv[3];
 $kisi = $argv[4];
 $penulis = $argv[5];
 $target_file = $path_upload.$filename;
-  echo $target_file;
-  try {
-    $objPHPExcel = PHPExcel_IOFactory::load($target_file);
-  }
-  catch(Exception $e) {
-    die('Kesalahan! Gagal dalam mengupload file : "'.pathinfo($filename,PATHINFO_BASENAME).'": '.$e->getMessage());
-  }
+  
+//import data soal dari word
+echo "wvHtml {$path_upload}$filename {$base_doc}$id_kategori.html ";
 
-  $allDataInSheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
-  echo "style harris";
-  print_r($objPHPExcel->getActiveSheet()->getStyle('B4'));
-  echo "style harris";
+$hasil=  shell_exec("wvHtml {$path_upload}$filename {$base_doc}$id_kategori.html "); //proses conversi
+sleep(20);
+//proses pengambilan data menggunakan dom html
+echo "running migrasi soal $id_kategori.html<br/>";
+$html= file_get_html("{$base_doc}$id_kategori.html");
+$row=1;
+$data=array();
+foreach($html->find('tr') as $element) {
+    $kolom=0;
+    
+    foreach ($element->find('td') as $hasil){
+        $strip_tags = "p|div|td";
+        $hasil=preg_replace("#<\s*\/?(".$strip_tags.")\s*[^>]*?>#im", '', $hasil);
+    $data[$row][$kolom]=$hasil;
+        $kolom++;
+        
+    }
+    $row++;
+}
+//akhir proses import data menjadi array $data
+
   $infoData['kisi'] = $kisi; 
   $infoData['id_kategori'] = $id_kategori; 
   $infoData['penulis'] = $penulis; 
-  print_r($allDataInSheet);
+  print_r($data);
   // $data_insert = array(
   //   "tanggal"    => date("Y-m-d H:i:s",$time),
   //   "filename"   => $path,
@@ -40,7 +54,7 @@ $target_file = $path_upload.$filename;
   }
   // $rkakl->clearRkakl($thang);
   // $rkakl->insertRkakl($data_insert);
-  $rs=$mdl_upSoal->importSoal($allDataInSheet,$infoData);
+  $rs=$mdl_upSoal->importSoal($data,$infoData);
   echo "rs : ".$rs."; id : ".$id;
   if ($rs==1){
     $mdl_upSoal->updateStatusLogUploadSoal($id,2);

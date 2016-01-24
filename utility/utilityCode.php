@@ -15,7 +15,24 @@ require_once __DIR__ . '/../config/config.php';
 class utilityCode extends config {
 
      //put your code here
-
+function background($Command, $Priority = 0){
+       if($Priority)
+           $PID = shell_exec("nohup nice -n $Priority $Command > /dev/null & echo $!");
+       else
+           $PID = shell_exec("nohup $Command > /dev/null & echo $!");
+       return($PID);
+   }
+   /**
+    * Check if the Application running !
+    *
+    * @param     unknown_type $PID
+    * @return     boolen
+    */
+   function is_running($PID){
+       exec("ps $PID", $ProcessState);
+       return(count($ProcessState) >= 2);
+   }
+   
      public function popup_message($pesan) {
           echo "<script>alert('$pesan');</script>";
      }
@@ -60,17 +77,6 @@ class utilityCode extends config {
           else{
                $this->location_goto($lokasi);
           }
-     }
-
-     public function genRandom($jmlSoal){ 
-          $roll1 = 0; 
-          $arrB= array(); 
-          list($usec, $sec) = explode(' ', microtime()); 
-          $ter = (float) $sec + ((float) $usec * 100000); 
-          $arrB=range(0,($jmlSoal-1)); 
-          srand($ter); 
-          shuffle($arrB); 
-          return $arrB; 
      }
 
      public function sha512($string) {
