@@ -25,49 +25,20 @@ else {
         case 'adduser':
           include ('view/content/pengguna-add.php');
         break;
+        case 'ujian':
+          include ('view/content/ujian.php');
+        break;
         case 'upload-soal':
           include ('view/content/upload_soal.php');
         break;
-        case 'upload-peserta':
+                case 'upload-peserta':
           include ('view/content/upload_peserta.php');
         break;
         case 'data-peserta':
           include ('view/content/data_peserta.php');
         break;
-        case 'rkakl':
-          include ('view/content/rkakl.php');
-        break;
-        case 'insertrkakl':
-          include ('view/content/rkakl-insert.php');
-        break;
-        case 'rab':
-          if($data[2]=='add'){
-            include ('view/content/rab-add.php');
-          } else if($data[2]=='add-rincian'){
-            $id = $data[3];
-            include ('view/content/rab-add-rincian.php');
-          } else {
-            $direktorat = $_SESSION['direktorat'];
-            $tahun = $mdl_rab->getYear();
-            include ('view/content/rab.php');
-          }
-        break;
-        case 'rabdetail':
-          if($data[2]=='rabakun'){
-            include ('view/content/rab-add.php');
-          }else{
-            $id_rab_view = $data[2];
-            include ('view/content/rabdetail.php');
-          }
-          break;
-        case 'rabakun':
-          include ('view/content/rab-add.php');
-          break;
-        case 'insertrab':
-          include ('view/content/rab-insert.php');
-        break;
-        case 'report':
-          include ('view/content/report.php');
+        case 'monitor':
+          include ('view/content/monitor.php');
         break;
         default:
           include ('view/content/home.php');
