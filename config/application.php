@@ -20,6 +20,7 @@ require_once __DIR__ .'/../model/modelRab.php';
 
 require_once __DIR__ .'/../model/modelLogUploadSoal.php';
 require_once __DIR__ .'/../model/modelLogUploadPeserta.php';
+require_once __DIR__ .'/../model/modelGeneratedSoal.php';
 require_once __DIR__ .'/../model/modelMasterKategori.php';
 require_once __DIR__ .'/../model/modelMasterPeserta.php';
 require_once __DIR__ .'/../model/modelMasterSoal.php';
@@ -39,7 +40,7 @@ $mdl_rab     = new modelRab();
 
 $mdl_genSoal = new modelGeneratedSoal();
 $mdl_upSoal = new modelLogUploadSoal();
-$mdl_upSoal = new modelLogUploadPeserta();
+$mdl_upPeserta = new modelLogUploadPeserta();
 $mdl_masSoal = new modelMasterSoal();
 $mdl_masPeserta = new modelMasterPeserta();
 $mdl_masKategori = new modelMasterKategori();

@@ -265,7 +265,7 @@ class SSP {
             "data"            => self::data_output( $columns, $data )
         );
     }
-    static function simpleJoin ( $request, $conn, $table, $table2, $primaryKey, $columns )
+    static function simpleJoin ( $request, $conn, $table, $key, $primaryKey, $columns )
     {
         $bindings = array();
         $db = self::db( $conn );
@@ -278,7 +278,7 @@ class SSP {
         // Main query to actually get the data
         $data = self::sql_exec( $db, $bindings,
             "SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`
-             FROM `$table` left join `$table2` on ".$table.".id_user = ".$table2.".id_pengguna
+             FROM `$table[0]` left join `$table[1]` on ".$table[0].".$key[0] = ".$table[1].".$key[1]
              $where
              $order
              $limit"
@@ -293,7 +293,7 @@ class SSP {
         // Total data set length
         $resTotalLength = self::sql_exec( $db,
             "SELECT COUNT(`{$primaryKey}`)
-             FROM   `$table`"
+             FROM   `$table[0]`"
         );
         $recordsTotal = $resTotalLength[0][0];
 
@@ -341,49 +341,10 @@ class SSP {
         );
         $recordsTotal = $resTotalLength[0][0];
 
-    static function simplejoin ( $request, $conn, $table, $primaryKey, $columns, $tableJoin=null, $joinWhere=null, $whereResult=null)
-    {
-        $bindings = array();
-        $db = self::db( $conn );
-        $localWhereResult = array();
-        $localWhereAll = array();
-        $whereAllSql = '';
-        $limit = self::limit( $request, $columns );
-        $order = self::order( $request, $columns );
-        $where = self::filter( $request, $columns, $bindings );
-        $whereResult = self::_flatten( $whereResult );
-        $whereAll = self::_flatten( $whereAll );
-        if ( $whereResult ) {
-            $where = $where ?
-                $where .' AND '.$whereResult :
-                'WHERE '.$whereResult;
-        }
-        if ( $whereAll ) {
-            $where = $where ?
-                $where .' AND '.$whereAll :
-                'WHERE '.$whereAll;
 
-            $whereAllSql = 'WHERE '.$whereAll;
-        }
-        $data = self::sql_exec( $db, $bindings,
-            "SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`
-             FROM `$table`
-             INNER JOIN $tableJoin
-             ON $joinWhere
-             $where
-             $order
-             $limit"
-        );
-        $resFilterLength = self::sql_exec( $db,
-            "SELECT FOUND_ROWS()"
-        );
-        $recordsFiltered = $resFilterLength[0][0];
-        $resTotalLength = self::sql_exec( $db, $bindings,
-            "SELECT COUNT(`{$primaryKey}`)
-             FROM   `$table` ".
-            $whereAllSql
-        );
-        $recordsTotal = $resTotalLength[0][0];
+        /*
+         * Output
+         */
         return array(
             "draw"            => intval( $request['draw'] ),
             "recordsTotal"    => intval( $recordsTotal ),
@@ -391,7 +352,6 @@ class SSP {
             "data"            => self::data_output( $columns, $data )
         );
     }
-
     static function simplewhere( $request, $conn, $table, $primaryKey, $columns, $whereResult=null, $whereAll=null )
     {
         $bindings = array();

@@ -25,10 +25,14 @@ else {
         case 'adduser':
           include ('view/content/pengguna-add.php');
         break;
-        case 'ujian':
-          include ('view/content/ujian.php');
         case 'upload-soal':
           include ('view/content/upload_soal.php');
+        break;
+        case 'upload-peserta':
+          include ('view/content/upload_peserta.php');
+        break;
+        case 'data-peserta':
+          include ('view/content/data_peserta.php');
         break;
         case 'rkakl':
           include ('view/content/rkakl.php');
