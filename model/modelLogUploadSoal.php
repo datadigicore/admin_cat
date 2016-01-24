@@ -80,37 +80,50 @@
       $urut=1;
       for ($i=2; $i < $arrayCount; $i++) { 
         $tipe_soal            = '';//trim($data[$i]["A"]," \t\n\r\0\x0B\xA0");
-        $penulis              = trim($info['penulis']," \t\n\r\0\x0B\xA0");//trim($data[$i]["B"]," \t\n\r\0\x0B\xA0");
+        $penulis              = htmlentities($info['penulis'],ENT_QUOTES);// trim($info['penulis']," \t\n\r\0\x0B\xA0");//trim($data[$i]["B"]," \t\n\r\0\x0B\xA0");
         $id_kategori          = trim($info['id_kategori']," \t\n\r\0\x0B\xA0");//trim($data[$i]["C"]," \t\n\r\0\x0B\xA0");
         $kisi                 = trim($info['kisi']," \t\n\r\0\x0B\xA0");//trim($data[$i]["D"]," \t\n\r\0\x0B\xA0");
+        
         $waktu                = '';//trim($data[$i]["E"]," \t\n\r\0\x0B\xA0");
         $tingkatan            = '';//trim($data[$i]["F"]," \t\n\r\0\x0B\xA0");
         $prosedur_penilaian   = '';//trim($data[$i]["G"]," \t\n\r\0\x0B\xA0");
-        $soal                 = trim($data[$i]["A"]," \t\n\r\0\x0B\xA0");
-        $kunci                = trim($data[$i]["F"]," \t\n\r\0\x0B\xA0");
-
-        $jawab_1              = trim($data[$i]["B"]," \t\n\r\0\x0B\xA0");
-        $jawab_2              = trim($data[$i]["C"]," \t\n\r\0\x0B\xA0");
-        $jawab_3              = trim($data[$i]["D"]," \t\n\r\0\x0B\xA0");
-        $jawab_4              = trim($data[$i]["E"]," \t\n\r\0\x0B\xA0");
+        $soal                 = htmlentities(htmlspecialchars($data[$i][1],ENT_QUOTES)); //trim($data[$i]["A"]," \t\n\r\0\x0B\xA0");
+        $kunci                = trim(htmlentities(htmlspecialchars($data[$i][6],ENT_QUOTES))); //trim($data[$i]["F"]," \t\n\r\0\x0B\xA0");
+        $jawab_1              = trim(htmlentities(htmlspecialchars($data[$i][2],ENT_QUOTES)));//trim($data[$i]["B"]," \t\n\r\0\x0B\xA0");
+        $jawab_2              = trim(htmlentities(htmlspecialchars($data[$i][3],ENT_QUOTES)));//trim($data[$i]["C"]," \t\n\r\0\x0B\xA0");
+        $jawab_3              = trim(htmlentities(htmlspecialchars($data[$i][4],ENT_QUOTES)));//trim($data[$i]["D"]," \t\n\r\0\x0B\xA0");
+        $jawab_4              = trim(htmlentities(htmlspecialchars($data[$i][5],ENT_QUOTES)));//trim($data[$i]["E"]," \t\n\r\0\x0B\xA0");
+        
         switch ($kunci){
           case 'A':
             $jawaban=$jawab_1;
+            $pilihan1=$jawab_2;
+            $pilihan2=$jawab_3;
+            $pilihan3=$jawab_4;
             break;
           case 'B':
             $jawaban=$jawab_2;
+            $pilihan1=$jawab_1;
+            $pilihan2=$jawab_3;
+            $pilihan3=$jawab_4;
             break;
           case 'C':
             $jawaban=$jawab_3;
+            $pilihan1=$jawab_1;
+            $pilihan2=$jawab_2;
+            $pilihan3=$jawab_4;
             break;
           case 'D':
             $jawaban=$jawab_4;
+            $pilihan1=$jawab_1;
+            $pilihan2=$jawab_2;
+            $pilihan3=$jawab_3;
             break;
           default:
             $jawaban="";
             break;
         }
-        $string .= "('".$urut."','".$tipe_soal."','".$penulis."','".$id_kategori."','".$kisi."','".$waktu."','".$tingkatan."','".$prosedur_penilaian."','".$soal."','".$jawaban."','".$jawab_1."','".$jawab_2."','".$jawab_3."','".$jawab_4."'),";
+        $string .= "('".$urut."','".$tipe_soal."','".$penulis."','".$id_kategori."','".$kisi."','".$waktu."','".$tingkatan."','".$prosedur_penilaian."','".$soal."','".$jawaban."','".$pilihan1."','".$pilihan2."','".$pilihan3."','"." "."'),";
         $urut++;
       }
 
