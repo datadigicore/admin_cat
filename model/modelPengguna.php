@@ -44,12 +44,21 @@
       $result = $this->query($query);
       return $result;
     }
-    public function lokasi() {
+    public function lokasi($sessLok="") {
       $query  = "SELECT * from lokasi";
       $result = $this->query($query);
       echo '<option value="" disabled selected>-- Pilih Lokasi --</option>';
       while($fetch = $this->fetch_array($result)) {
-        echo '<option value="'.$fetch["nama_lokasi"].'">'.$fetch["nama_lokasi"].'</option>';
+
+        if($sessLok==$fetch["nama_lokasi"]){
+          echo '<option value="'.$fetch["nama_lokasi"].'" selected>'.$fetch["nama_lokasi"].'</option>';
+        } else {
+          if($sessLok==""){
+            echo '<option value="'.$fetch["nama_lokasi"].'">'.$fetch["nama_lokasi"].'</option>';
+          }
+          
+        }
+        
       }
     }
     public function ruangan($data) {
@@ -58,6 +67,7 @@
                  FROM lokasi INNER JOIN ruangan ON lokasi.id_lokasi = ruangan.id_lokasi $where";
       $result = $this->query($query);
       echo '<option value="" disabled selected>-- Pilih Ruangan --</option>';
+      print_r($query);
       while($fetch = $this->fetch_array($result)) {
         echo '<option value="'.$fetch["nama_ruangan"].'">'.$fetch["nama_ruangan"].'</option>';
       }
