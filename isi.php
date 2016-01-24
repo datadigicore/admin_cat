@@ -25,7 +25,6 @@ else {
         case 'adduser':
           include ('view/content/pengguna-add.php');
         break;
-        
         case 'ujian':
           include ('view/content/ujian.php');
         break;
@@ -34,6 +33,7 @@ else {
         break;
         case 'acaksoal':
           if ($_POST['message'] == "load") {
+            $paket = $ujian->getJmlPaket($data[2]);
             include ('view/content/randomise-soal.php');
           }
           else{

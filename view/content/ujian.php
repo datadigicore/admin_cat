@@ -183,8 +183,8 @@
         url : "http://localhost/cat.polda/login/generatePaket/?id="+row_data,
       });
       var $form=$(document.createElement('form')).css({display:'none'}).attr("method","POST").attr("action","<?php echo $url_rewrite;?>process/ujian/randomize");
-      var $input=$(document.createElement('input')).css({display:'none'}).attr('name','kategori').val(kategori_data);
-      var $input2=$(document.createElement('input')).css({display:'none'}).attr('name','tanggal').val(tanggal_data);
+      var $input=$(document.createElement('input')).css({display:'none'}).attr('name','id').val(row_data);
+      var $input2=$(document.createElement('input')).css({display:'none'}).attr('name','kategori').val(kategori_data);
       var $input3=$(document.createElement('input')).css({display:'none'}).attr('name','lamaujian').val(lamaujian_data);
       var $input4=$(document.createElement('input')).css({display:'none'}).attr('name','jmlsoal').val(jmlsoal_data);
       var $input5=$(document.createElement('input')).css({display:'none'}).attr('name','jmlpeserta').val(jmlpeserta_data);

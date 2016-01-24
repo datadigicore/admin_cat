@@ -111,15 +111,11 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
+        <?php for ($i=0; $i < $paket->pilihan_paket ; $i++) { ?>
           <div class="col-xs-4">
-            <button style="width:100%;height:120px;font-size:24px;font-weight:bold;">Paket A</button>
+            <button id="paket<?php echo chr($i+65); ?>" style="width:100%;height:120px;font-size:24px;font-weight:bold;">Paket <?php echo chr($i+65); ?></button>
           </div>
-          <div class="col-xs-4">
-            <button style="width:100%;height:120px;font-size:24px;font-weight:bold;">Paket B</button>
-          </div>
-          <div class="col-xs-4">
-            <button style="width:100%;height:120px;font-size:24px;font-weight:bold;">Paket C</button>
-          </div>
+        <?php } ?>
         </div>
       </div>
       <div class="modal-footer" style="border:none">
@@ -162,4 +158,17 @@
     }
     setTimeout(refreshTabel, 3000);
   });
+  <?php for ($i=0; $i < $paket->pilihan_paket ; $i++) { ?>
+  $("#paket<?php echo chr($i+65); ?>").click(function(){
+    $.ajax({
+      type: "post",
+      url:  "<?php echo $url_rewrite;?>process/ujian/activatePaket",
+      data: {id:<?php echo $paket->id_ujian;?>,paket:"<?php echo chr($i+65); ?>"}
+    });
+    $.ajax({
+      type: "post",
+      url:  "http://localhost/cat.polda/login/generateSoal/?id="+<?php echo $paket->id_ujian;?>
+    });
+  });
+  <?php } ?>
 </script>
