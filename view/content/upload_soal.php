@@ -25,7 +25,7 @@
               </div>
             <?php endif ?>
             <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
-              <thead style="background-color:#11245B;color:white;">
+              <thead style="background-color:#4A4545;color:white;">
                 <tr>
                   <th>NO.</th>
                   <th>Tanggal Upload</th>
@@ -48,7 +48,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="<?php echo $url_rewrite;?>process/upload/import" method="POST" enctype="multipart/form-data">
-        <div class="modal-header" style="background-color:#111F3F !important; color:white;">
+        <div class="modal-header" style="background-color:#f9af00 !important; color:white;">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" style="color:white">×</span></button>
           <h4 class="modal-title">Import Soal</h4>

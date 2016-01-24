@@ -8,27 +8,27 @@ switch ($process) {
     $table = "master_peserta";
     $key   = "id_peserta";
     $column = array(
-      array( 'db' => 'id_peserta',   'dt' => 0 ),
-      array( 'db' => 'no_peserta',   'dt' => 1 ),
-      array( 'db' => 'nama',         'dt' => 2 ),
-      array( 'db' => 'nama_lokasi',  'dt' => 3 ),
-      array( 'db' => 'nama_ruangan', 'dt' => 4 ),
-      array( 'db' => 'nama_master',  'dt' => 5 ),
+      array( 'db' => 'master_peserta.id_peserta',   'dt' => 0, 'field' => 'id_peserta' ),
+      array( 'db' => 'no_peserta',                  'dt' => 1, 'field' => 'no_peserta' ),
+      array( 'db' => 'nama',                        'dt' => 2, 'field' => 'nama' ),
+      array( 'db' => 'id_lokasi',                   'dt' => 3, 'field' => 'id_lokasi' ),
+      array( 'db' => 'id_ruangan',                  'dt' => 4, 'field' => 'id_ruangan' ),
+      array( 'db' => 'master_kategori.nama_master', 'dt' => 5, 'field' => 'nama_master' ),
     );
-    $join = "INNER JOIN lokasi ON lokasi.id_lokasi = master_peserta.id_lokasi INNER JOIN ruangan ON ruangan.id_ruangan = master_peserta.id_ruangan INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
-    $datatable->get_table_more_join($table, $key, $column, $join, $where);
+    $join = "FROM {$table} INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
   case 'score':
     $table = "master_peserta";
     $key   = "id_peserta";
     $column = array(
-      array( 'db' => 'id_peserta',   'dt' => 0 ),
-      array( 'db' => 'no_peserta',   'dt' => 1 ),
-      array( 'db' => 'nama',         'dt' => 2 ),
-      array( 'db' => 'nama_lokasi',  'dt' => 3 ),
-      array( 'db' => 'nama_ruangan', 'dt' => 4 ),
-      array( 'db' => 'nama_master',  'dt' => 5 ),
-      array( 'db' => 'status_ujian_peserta', 'dt' => 6, 'formatter' => function($d,$row){ 
+      array( 'db' => 'master_peserta.id_peserta', 'dt' => 0, 'field' => 'id_peserta' ),
+      array( 'db' => 'no_peserta',                'dt' => 1, 'field' => 'no_peserta' ),
+      array( 'db' => 'nama',                      'dt' => 2, 'field' => 'nama' ),
+      array( 'db' => 'id_lokasi',                 'dt' => 3, 'field' => 'id_lokasi' ),
+      array( 'db' => 'id_ruangan',                'dt' => 4, 'field' => 'id_ruangan' ),
+      array( 'db' => 'nama_master',               'dt' => 5, 'field' => 'nama_master' ),
+      array( 'db' => 'generated_soal.status',     'dt' => 6, 'field' => 'status', 'formatter' => function($d,$row){ 
         if($d==1){
           return "<i>Sudah Verifikasi</i>";
         }
@@ -38,14 +38,17 @@ switch ($process) {
         if($d==3){
           return "<i>Selesai Ujian</i>";
         }
+        if($d==4){
+          return "<i>Sedang Suspend</i>";
+        }
         else{
           return '<i>Persiapan Ujian</i>';
         }
       }),
       array( 'db' => 'skor_total',   'dt' => 7 ),
     );
-    $join = "INNER JOIN lokasi ON lokasi.id_lokasi = master_peserta.id_lokasi INNER JOIN ruangan ON ruangan.id_ruangan = master_peserta.id_ruangan INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
-    $datatable->get_table_more_join($table, $key, $column, $join, $where);
+    $join = "FROM {$table} INNER JOIN generated_soal ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
   default:
     $utility->location_goto(".");
