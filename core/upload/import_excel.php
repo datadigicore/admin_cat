@@ -18,6 +18,9 @@ $target_file = $path_upload.$filename;
   }
 
   $allDataInSheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+  echo "style harris";
+  print_r($objPHPExcel->getActiveSheet()->getStyle('B4'));
+  echo "style harris";
   $infoData['kisi'] = $kisi; 
   $infoData['id_kategori'] = $id_kategori; 
   $infoData['penulis'] = $penulis; 

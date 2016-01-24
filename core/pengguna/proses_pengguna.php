@@ -1,7 +1,7 @@
 <?php
 include 'config/application.php';
 
-$sess_id    = $_SESSION['user_id'];
+$sess_id    = $_SESSION['id'];
 $data['username']  = $purifier->purify($_POST['username']);
 $data['password']  = $utility->sha512($_POST['password']);
 $data['level']     = $purifier->purify($_POST['level']);
@@ -40,7 +40,12 @@ switch ($process) {
       array( 'db' => 'level',   'dt' => 7 ),
       array( 'db' => 'status',  'dt' => 8 )
     );
-    $where = "level != 1";
+    if($_SESSION['level']==2){
+      $where = "level != 1 and level != 2 and lokasi = '".$_SESSION['lokasi']."'";
+    } else {
+      $where = "level != 1";
+    }
+    
     $datatable->get_table($table, $key, $column, $where);
   break;
   case 'activate':
@@ -64,7 +69,12 @@ switch ($process) {
     $utility->location_goto("content/setting");
   break;
   case 'lokasi':
-    $pengguna->lokasi();
+    if($_POST['sessLok']!=undefined){
+      $pengguna->lokasi($_POST['sessLok']);
+    } else {
+      $pengguna->lokasi();
+    }
+    
   break;
   case 'ruangan':
     $id = array('nama_lokasi' => $_POST['key']);

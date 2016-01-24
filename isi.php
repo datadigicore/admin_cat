@@ -25,6 +25,7 @@ else {
         case 'adduser':
           include ('view/content/pengguna-add.php');
         break;
+        
         case 'ujian':
           include ('view/content/ujian.php');
         break;
@@ -46,6 +47,19 @@ else {
         break;
         case 'monitor':
           include ('view/content/monitor.php');
+        break;
+        default:
+          include ('view/content/home.php');
+        break;
+      }
+    }
+    else if($_SESSION['level'] == 2){
+      switch ($data[1]) {
+        case 'user':
+          include ('view/content/pengguna-lokasi.php');
+        break;
+      case 'adduser':
+          include ('view/content/pengguna-add-lokasi.php');
         break;
         default:
           include ('view/content/home.php');
