@@ -76,7 +76,7 @@
     }  
     public function importSoal($data,$info) {
       $arrayCount = count($data);
-      $string = "INSERT INTO master_soal (`no_urut`,`tipe_soal`, `penulis`, `id_kategori`, `kisi`, `waktu`, `tingkatan`, `prosedur_penilaian`, `soal`, `1`, `2`, `3`, `4`, `5`) VALUES ";
+      $string = "INSERT INTO master_soal (`tipe_soal`, `penulis`, `id_kategori`, `kisi`, `waktu`, `tingkatan`, `prosedur_penilaian`, `soal`, `1`, `2`, `3`, `4`, `5`) VALUES ";
       $urut=1;
       for ($i=2; $i < $arrayCount; $i++) { 
         $tipe_soal            = '';//trim($data[$i]["A"]," \t\n\r\0\x0B\xA0");
@@ -123,7 +123,7 @@
             $jawaban="";
             break;
         }
-        $string .= "('".$urut."','".$tipe_soal."','".$penulis."','".$id_kategori."','".$kisi."','".$waktu."','".$tingkatan."','".$prosedur_penilaian."','".$soal."','".$jawaban."','".$pilihan1."','".$pilihan2."','".$pilihan3."','"." "."'),";
+        $string .= "('".$tipe_soal."','".$penulis."','".$id_kategori."','".$kisi."','".$waktu."','".$tingkatan."','".$prosedur_penilaian."','".$soal."','".$jawaban."','".$pilihan1."','".$pilihan2."','".$pilihan3."','"." "."'),";
         $urut++;
       }
 

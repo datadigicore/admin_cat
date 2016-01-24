@@ -1,9 +1,10 @@
 <?php
-require_once __DIR__ . '/../../utility/PHPExcel/IOFactory.php';
-require_once __DIR__ . '/../../utility/ExcelReader.php';
+define('MAX_FILE_SIZE', 999999999999999);
+//require_once __DIR__ . '/../../utility/PHPExcel/IOFactory.php';
+//require_once __DIR__ . '/../../utility/ExcelReader.php';
 require_once __DIR__ . '/../../utility/simple_html_dom.php';
 require_once __DIR__ . '/../../config/application.php';
-define('MAX_FILE_SIZE', 999999999999999);
+
 $filename = $argv[1];
 $id = $argv[2];
 $id_kategori = $argv[3];
@@ -15,9 +16,9 @@ $target_file = $path_upload.$filename;
 echo "wvHtml {$path_upload}$filename {$base_doc}$id_kategori.html ";
 
 $hasil=  shell_exec("wvHtml {$path_upload}$filename {$base_doc}$id_kategori.html "); //proses conversi
-sleep(20);
+//sleep(20);
 //proses pengambilan data menggunakan dom html
-echo "running migrasi soal $id_kategori.html<br/>";
+echo "running migrasi soal {$base_doc}$id_kategori.html<br/>";
 $html= file_get_html("{$base_doc}$id_kategori.html");
 $row=1;
 $data=array();
