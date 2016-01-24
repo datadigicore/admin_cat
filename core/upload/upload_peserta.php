@@ -86,18 +86,18 @@ switch ($process) {
   case 'table-peserta':
     $table = "master_peserta";
     $key   = "id_peserta";
-    $column = array(
-      array( 'db' => 'id_peserta',   'dt' => 0, 'field' => 'id_peserta' ),
-      array( 'db' => 'no_peserta',   'dt' => 1, 'field' => 'no_peserta' ),
-      array( 'db' => 'nama_lokasi',  'dt' => 2, 'field' => 'nama_lokasi' ),
-      array( 'db' => 'ruangan.nama', 'dt' => 3, 'field' => 'nama' ),
-      array( 'db' => 'master_peserta.nama',         'dt' => 4, 'field' => 'nama' ),
-      array( 'db' => 'pkt',          'dt' => 5, 'field' => 'pkt' ),
-      array( 'db' => 'kesatuan',     'dt' => 6, 'field' => 'kesatuan' ),
-      array( 'db' => 'nrp',          'dt' => 7, 'field' => 'nrp' ),
+    $columns = array(
+      array( 'db' => 'id_peserta',   'dt' => 0 ),
+      array( 'db' => 'no_peserta',   'dt' => 1 ),
+      array( 'db' => 'id_lokasi',  'dt' => 2),
+      array( 'db' => 'id_ruangan', 'dt' => 3),
+      array( 'db' => 'nama',   'dt' => 4 ),
+      array( 'db' => 'pkt',       'dt' => 5 ),
+      array( 'db' => 'kesatuan',     'dt' => 6 ),
+      array( 'db' => 'nrp',          'dt' => 7 ),
     );
-    $join = "FROM {$table} LEFT JOIN lokasi ON lokasi.id_lokasi = master_peserta.id_lokasi LEFt JOIN ruangan ON ruangan.id_ruangan = master_peserta.id_ruangan";
-    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+    // $join = "FROM {$table} LEFT JOIN lokasi ON lokasi.id_lokasi = master_peserta.id_lokasi LEFt JOIN ruangan ON ruangan.id_ruangan = master_peserta.id_ruangan";
+    $datatable->get_table($table, $key, $columns, $where);
   break;
   case 'table-log-peserta':
     $table = array("log_upload_peserta","pengguna");
