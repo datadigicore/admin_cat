@@ -75,10 +75,10 @@ switch ($process) {
     $filename = $result->nama_file;
     $mdl_upPeserta->updateStatusLogUploadPeserta($id,1);
 
-    echo "php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id'";
+    // echo "php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id' &";
     
 
-    echo exec("php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id' &",$op,$rt);
+    exec("php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id' &",$op,$rt);
     // print_r($op);
     // print_r($rt);
     $utility->load("content/upload-peserta","success","Sedang memproses soal");
