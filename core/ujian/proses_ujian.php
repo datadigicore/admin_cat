@@ -2,6 +2,7 @@
 include 'config/application.php';
 
 $sess_id    = $_SESSION['user_id'];
+$data['id']   = $purifier->purify($_POST['id']);
 $data['kategori']   = $purifier->purify($_POST['kategori']);
 $data['tanggal']    = date("Y-m-d H:i:s", strtotime($_POST['tanggal']));
 $data['lamaujian']  = $purifier->purify($_POST['lamaujian']);
@@ -74,19 +75,16 @@ switch ($process) {
     // print_r($data);
   break;
   case 'randomize':
-    $utility->load("content/acaksoal","","load");
+    $utility->load("content/acaksoal/".$data['id'],"","load");
   break;
-  // case 'edt':
-  //   $ujian->updateUjian($data);
-  //   $utility->location_goto("content/setting");
-  // break;
-  // case 'del':
-  //   $ujian->deleteUjian($hapus);
-  //   $utility->location_goto("content/setting");
-  // break;
   case 'activate':
     $id = $_POST['key'];
     $ujian->activateUjian($id);
+  break;
+  case 'activatePaket':
+    $data['id'] = $_POST['id'];
+    $data['paket'] = $_POST['paket'];
+    $ujian->activatePaketUjian($data);
   break;
   case 'verification':
     $id = $_POST['key'];
@@ -94,6 +92,7 @@ switch ($process) {
   break;
   case 'start':
     $id = $_POST['key'];
+    $ujian->updateTime($id);
     $ujian->mulaiUjian($id);
   break;
   case 'finish':

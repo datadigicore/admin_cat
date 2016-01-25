@@ -48,8 +48,21 @@
       return $result;
     }
 
+    public function activatePaketUjian($data) {
+      $query  = "UPDATE paket_soal SET status = 1 WHERE id_ujian='$data[id]' AND paket='$data[paket]'";
+      $result = $this->query($query);
+      return $result;
+    }
+
     public function verifikasiUjian($id) {
       $query  = "UPDATE ujian SET status_ujian = 1 WHERE id_ujian='$id'";
+      $result = $this->query($query);
+      return $result;
+    }
+
+    public function updateTime($id) {
+      $timenow = date("Y-m-d H:i:s", time());
+      $query  = "UPDATE ujian SET waktu_ujian = '$timenow' WHERE id_ujian='$id'";
       $result = $this->query($query);
       return $result;
     }
@@ -64,6 +77,13 @@
       $query  = "UPDATE ujian SET status_ujian = 3, status = 0 WHERE id_ujian='$id'";
       $result = $this->query($query);
       return $result;
+    }
+
+    public function getJmlPaket($id) {
+      $query  = "SELECT * from ujian WHERE id_ujian = $id";
+      $result = $this->query($query);
+      $fetch = $this->fetch_object($result);
+      return $fetch;
     }
 
     public function kategori() {
