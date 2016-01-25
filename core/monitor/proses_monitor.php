@@ -5,7 +5,7 @@ $sess_id    = $_SESSION['id'];
 
 switch ($process) {
   case 'table':
-    $table = "master_peserta";
+    $table = "generated_soal";
     $key   = "id_peserta";
     $column = array(
       array( 'db' => 'master_peserta.id_peserta',   'dt' => 0, 'field' => 'id_peserta' ),
@@ -35,11 +35,11 @@ switch ($process) {
       $where = "id_lokasi = '".$_SESSION['lokasi']."'";
     }
     
-    $join = "FROM {$table} INNER JOIN generated_soal ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
+    $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
   case 'score':
-    $table = "master_peserta";
+    $table = "generated_soal";
     $key   = "id_peserta";
     $column = array(
       array( 'db' => 'master_peserta.id_peserta', 'dt' => 0, 'field' => 'id_peserta' ),
@@ -73,7 +73,7 @@ switch ($process) {
       $where = "id_lokasi = '".$_SESSION['lokasi']."'";
     }
     
-    $join = "FROM {$table} INNER JOIN generated_soal ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = master_peserta.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
+    $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
   case 'suspend':
