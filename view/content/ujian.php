@@ -13,6 +13,31 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header with-border">
+            <h3 class="box-title" style="margin-top:6px;">Tabel Pengaturan Ujian</h3>
+          </div>
+          <div class="box-body">
+            <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
+              <thead style="background-color:#4A4545;color:white;">
+                <tr>
+                  <th>Id</th>
+                  <th>Kategori</th>
+                  <th>Tanggal Ujian</th>
+                  <th>Lama Ujian</th>
+                  <th>Jumlah Soal</th>
+                  <th>Jumlah Peserta</th>
+                  <th>Status Ujian</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header with-border">
             <h3 class="box-title" style="margin-top:6px;">Input Data Ujian</h3>
           </div>
           <div class="box-body">
@@ -83,31 +108,6 @@
                 </form>
               </div>
             </div>
-          </div>
-        </div>        
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="box">
-          <div class="box-header with-border">
-            <h3 class="box-title" style="margin-top:6px;">Tabel Pengaturan Ujian</h3>
-          </div>
-          <div class="box-body">
-            <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
-              <thead style="background-color:#4A4545;color:white;">
-                <tr>
-                  <th>Id</th>
-                  <th>Kategori</th>
-                  <th>Tanggal Ujian</th>
-                  <th>Lama Ujian</th>
-                  <th>Jumlah Soal</th>
-                  <th>Jumlah Peserta</th>
-                  <th>Status Ujian</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-            </table>
           </div>
         </div>        
       </div>
