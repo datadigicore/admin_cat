@@ -67,7 +67,7 @@ switch ($process) {
           return '<i>Persiapan Ujian</i>';
         }
       }),
-      array( 'db' => 'skor_total',   'dt' => 7, 'field' => 'skor_total' ),
+      array( 'db' => 'nilai',   'dt' => 7, 'field' => 'nilai' ),
     );
     if($_SESSION['level']==2){
       $where = "id_lokasi = '".$_SESSION['lokasi']."'";
