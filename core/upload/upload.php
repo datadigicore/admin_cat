@@ -152,11 +152,21 @@ switch ($process) {
     $primaryKey   = "id_soal";
     $columns = array(
       array( 'db' => 'id_soal', 'dt' => 0 ),
-      array( 'db' => 'soal',    'dt' => 1 ),
-      array( 'db' => '1',       'dt' => 2 ),
-      array( 'db' => '2',       'dt' => 3 ),
-      array( 'db' => '3',       'dt' => 4 ),
-      array( 'db' => '4',       'dt' => 5 ),
+      array( 'db' => 'soal',    'dt' => 1 , 'formatter' => function($d,$row){ 
+        return  html_entity_decode(htmlspecialchars_decode(substr($d,0,60),ENT_NOQUOTES));
+      }),
+      array( 'db' => '1',       'dt' => 2 , 'formatter' => function($d,$row){ 
+        return  html_entity_decode(htmlspecialchars_decode($d,ENT_NOQUOTES));
+      }),
+      array( 'db' => '2',       'dt' => 3 , 'formatter' => function($d,$row){ 
+        return  html_entity_decode(htmlspecialchars_decode($d,ENT_NOQUOTES));
+      }),
+      array( 'db' => '3',       'dt' => 4 , 'formatter' => function($d,$row){ 
+        return  html_entity_decode(htmlspecialchars_decode($d,ENT_NOQUOTES));
+      }),
+      array( 'db' => '4',       'dt' => 5 , 'formatter' => function($d,$row){ 
+        return  html_entity_decode(htmlspecialchars_decode($d,ENT_NOQUOTES));
+      })
     );
     $where = "id_kategori = $id";
     $datatable->get_table($table, $primaryKey, $columns, $where);
