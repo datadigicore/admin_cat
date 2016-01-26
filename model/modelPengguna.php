@@ -29,6 +29,35 @@
       return $result;
     }
 
+    public function addPeserta($data) {
+      $query      = "INSERT INTO master_peserta SET
+        no_peserta = '$data[noujian]',
+        id_lokasi  = '$data[lokasi]',
+        id_ruangan = '$data[ruang]',
+        nama       = '$data[nama]',
+        pkt        = '$data[pangkat]',
+        kesatuan   = '$data[kesatuan]',
+        nrp        = '$data[nrp]'
+      ";
+      $result = $this->query($query);
+      return $result;
+    }
+
+    public function editPeserta($data) {
+      $query       = "UPDATE master_peserta SET
+        no_peserta = '$data[noujian]',
+        id_lokasi  = '$data[lokasi]',
+        id_ruangan = '$data[ruang]',
+        nama       = '$data[nama]',
+        pkt        = '$data[pangkat]',
+        kesatuan   = '$data[kesatuan]',
+        nrp        = '$data[nrp]'
+        WHERE id_peserta = '$data[id]'
+      ";
+      $result = $this->query($query);
+      return $result;
+    }
+
     public function deletePengguna($id) {
       $query = "delete from pengguna where id='$id'";
       $result = $this->query($query);
