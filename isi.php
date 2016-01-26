@@ -77,7 +77,7 @@ else {
         case 'monitor':
           include ('view/content/monitor-lokasi.php');
         break;
-      case 'adduser':
+        case 'adduser':
           include ('view/content/pengguna-add-lokasi.php');
         break;
         default:
@@ -90,28 +90,9 @@ else {
         case 'table':
           include ('view/content/table.php');
         break;
-        case 'rab':
-          if($data[2]=='add'){
-            include ('view/content/rab-add.php');
-          } else if($data[2]=='add-rincian'){
-            include ('view/content/rab-add-rincian.php');
-          } else {
-            $direktorat = $_SESSION['direktorat'];
-            $program = $mdl_rab->getProg();
-            include ('view/content/rab.php');
-          }
+        case 'monitor':
+          include ('view/content/monitor-lokasi.php');
         break;
-        case 'rabdetail':
-          if($data[2]=='akun'){
-            include ('view/content/rab-add.php');
-          }else{
-            $id_rab_view = $data[2];
-            include ('view/content/rabdetail.php');
-          }
-          break;
-        case 'rabakun':
-          include ('view/content/rab-add.php');
-          break;
         default:
           include ('view/content/home.php');
         break;

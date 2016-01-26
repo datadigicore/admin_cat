@@ -74,6 +74,10 @@ switch ($process) {
     // print_r('<pre>');
     // print_r($data);
   break;
+  case 'truncate':
+    $ujian->truncateUjian($data);
+    $utility->load("content/ujian","success","Data berhasil ditambahkan");
+  break;
   case 'randomize':
     $utility->load("content/acaksoal/".$data['id'],"","load");
   break;

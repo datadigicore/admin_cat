@@ -59,7 +59,7 @@
     }
 
     public function deletePengguna($id) {
-      $query = "delete from pengguna where id='$id'";
+      $query = "delete from pengguna where id_pengguna='$id'";
       $result = $this->query($query);
       return $result;
     }
@@ -72,7 +72,7 @@
       $query = "UPDATE generated_soal SET
                 status            = 4,
                 durasi_pengerjaan = '$data[newdurasi]'
-                WHERE id_peserta  = '$data[id]'";
+                WHERE id          = '$data[id]'";
       $result = $this->query($query);
       return $result;
     }

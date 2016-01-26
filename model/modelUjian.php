@@ -54,6 +54,12 @@
       return $result;
     }
 
+    public function truncateUjian($data) {
+      $query  = "UPDATE paket_soal SET status = 1 WHERE id_ujian='$data[id]' AND paket='$data[paket]'";
+      $result = $this->query($query);
+      return $result;
+    }
+
     public function verifikasiUjian($id) {
       $query  = "UPDATE ujian SET status_ujian = 1 WHERE id_ujian='$id'";
       $result = $this->query($query);

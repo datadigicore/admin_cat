@@ -181,16 +181,18 @@
       $.ajax({
         type: "post",
         url : "<?php echo $link_generate_paket;?>"+row_data,
+        success : function(){
+          var $form=$(document.createElement('form')).css({display:'none'}).attr("method","POST").attr("action","<?php echo $url_rewrite;?>process/ujian/randomize");
+          var $input=$(document.createElement('input')).css({display:'none'}).attr('name','id').val(row_data);
+          var $input2=$(document.createElement('input')).css({display:'none'}).attr('name','kategori').val(kategori_data);
+          var $input3=$(document.createElement('input')).css({display:'none'}).attr('name','lamaujian').val(lamaujian_data);
+          var $input4=$(document.createElement('input')).css({display:'none'}).attr('name','jmlsoal').val(jmlsoal_data);
+          var $input5=$(document.createElement('input')).css({display:'none'}).attr('name','jmlpeserta').val(jmlpeserta_data);
+          $form.append($input).append($input2).append($input3).append($input4).append($input5);
+          $("body").append($form);
+          $form.submit();
+        }
       });
-      var $form=$(document.createElement('form')).css({display:'none'}).attr("method","POST").attr("action","<?php echo $url_rewrite;?>process/ujian/randomize");
-      var $input=$(document.createElement('input')).css({display:'none'}).attr('name','id').val(row_data);
-      var $input2=$(document.createElement('input')).css({display:'none'}).attr('name','kategori').val(kategori_data);
-      var $input3=$(document.createElement('input')).css({display:'none'}).attr('name','lamaujian').val(lamaujian_data);
-      var $input4=$(document.createElement('input')).css({display:'none'}).attr('name','jmlsoal').val(jmlsoal_data);
-      var $input5=$(document.createElement('input')).css({display:'none'}).attr('name','jmlpeserta').val(jmlpeserta_data);
-      $form.append($input).append($input2).append($input3).append($input4).append($input5);
-      $("body").append($form);
-      $form.submit();
     });
     $(document).on("click", "#aktif", function (){
       var tr = $(this).closest('tr');
