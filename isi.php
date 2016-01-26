@@ -34,6 +34,18 @@ else {
         case 'upload-soal':
           include ('view/content/upload_soal.php');
         break;
+        case 'soal':
+          include ('view/content/soal.php');
+        break;
+        case 'revisisoal':
+          if (isset($_POST['idsoal'])) {
+            $id_soal = $_POST['idsoal'];
+            include ('view/content/soal-revisi.php');
+          }
+          else{
+            include ('view/content/home.php');
+          }
+        break;
         case 'acaksoal':
           if ($_POST['message'] == "load") {
             $paket = $ujian->getJmlPaket($data[2]);

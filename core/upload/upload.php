@@ -123,6 +123,44 @@ switch ($process) {
     );
     $datatable->get_soal_view($table,$table2,$joinKey, $key, $column);
   break;
+  case 'table-datasoal':
+    $table = array("log_upload_soal","pengguna","master_kategori");
+    $joinKey = array("id_user","id_kategori","id_pengguna","id_master");
+    $key   = "id";
+    $column = array(
+      array( 'db' => 'id_master',   'dt' => 0 ),
+      array( 'db' => 'tgl_upload',  'dt' => 1, 'formatter' => function( $d, $row ) {
+            return date( 'j-M-Y \&\n\b\s\p\&\n\b\s\p\&\n\b\s\p H:i:s', strtotime($d));
+          }
+      ),
+      array( 'db' => 'nama_master', 'dt' => 2),
+      array( 'db' => 'penulis',     'dt' => 3),
+      array( 'db' => 'id_master',   'dt' => 4, 'formatter' => function($d,$row){ 
+        return  '<form method="POST" action="../content/revisisoal/">'.
+                '<div class="text-center">'.
+                  '<input type="hidden" name="idsoal" value="'.$d.'">'.
+                  '<button style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Revisi Soal</button>'.
+                '</div>'.
+                '</form>';
+      })
+    );
+    $datatable->get_soal_view($table,$table2,$joinKey, $key, $column);
+  break;
+  case 'table-soalsoal':
+    $id = $purifier->purify($_POST['idsoal']);
+    $table = "master_soal";
+    $primaryKey   = "id_soal";
+    $columns = array(
+      array( 'db' => 'id_soal', 'dt' => 0 ),
+      array( 'db' => 'soal',    'dt' => 1 ),
+      array( 'db' => '1',       'dt' => 2 ),
+      array( 'db' => '2',       'dt' => 3 ),
+      array( 'db' => '3',       'dt' => 4 ),
+      array( 'db' => '4',       'dt' => 5 ),
+    );
+    $where = "id_kategori = $id";
+    $datatable->get_table($table, $primaryKey, $columns, $where);
+  break;
   case 'view':
     ini_set('memory_limit', '-1');
     $filesave = $purifier->purify($_POST['filename']);
