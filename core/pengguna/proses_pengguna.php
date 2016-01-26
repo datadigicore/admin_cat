@@ -73,8 +73,7 @@ switch ($process) {
       $pengguna->lokasi($_POST['sessLok']);
     } else {
       $pengguna->lokasi();
-    }
-    
+    }  
   break;
   case 'ruangan':
     $id = array('nama_lokasi' => $_POST['key']);

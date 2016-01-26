@@ -13,6 +13,10 @@
         $process = $data[2]; 
         include "./core/pengguna/proses_pengguna.php";
       break;
+      case 'peserta':
+        $process = $data[2]; 
+        include "./core/peserta/proses_peserta.php";
+      break;
       case 'ujian':
         $process = $data[2]; 
         include "./core/ujian/proses_ujian.php";

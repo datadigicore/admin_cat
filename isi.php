@@ -25,11 +25,26 @@ else {
         case 'adduser':
           include ('view/content/pengguna-add.php');
         break;
+        case 'addpeserta':
+          include ('view/content/peserta-add.php');
+        break;
         case 'ujian':
           include ('view/content/ujian.php');
         break;
         case 'upload-soal':
           include ('view/content/upload_soal.php');
+        break;
+        case 'soal':
+          include ('view/content/soal.php');
+        break;
+        case 'revisisoal':
+          if (isset($_POST['idsoal'])) {
+            $id_soal = $_POST['idsoal'];
+            include ('view/content/soal-revisi.php');
+          }
+          else{
+            include ('view/content/home.php');
+          }
         break;
         case 'acaksoal':
           if ($_POST['message'] == "load") {
