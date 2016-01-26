@@ -88,7 +88,7 @@
         $tingkatan            = '';//trim($data[$i]["F"]," \t\n\r\0\x0B\xA0");
         $prosedur_penilaian   = '';//trim($data[$i]["G"]," \t\n\r\0\x0B\xA0");
         $soal                 = htmlentities(htmlspecialchars($data[$i][1],ENT_QUOTES)); //trim($data[$i]["A"]," \t\n\r\0\x0B\xA0");
-        $kunci                = trim(htmlentities(htmlspecialchars($data[$i][6],ENT_QUOTES))); //trim($data[$i]["F"]," \t\n\r\0\x0B\xA0");
+        $kunci                = trim(htmlentities(htmlspecialchars(strip_tags($data[$i][6]),ENT_QUOTES))); //trim($data[$i]["F"]," \t\n\r\0\x0B\xA0");
         $jawab_1              = trim(htmlentities(htmlspecialchars($data[$i][2],ENT_QUOTES)));//trim($data[$i]["B"]," \t\n\r\0\x0B\xA0");
         $jawab_2              = trim(htmlentities(htmlspecialchars($data[$i][3],ENT_QUOTES)));//trim($data[$i]["C"]," \t\n\r\0\x0B\xA0");
         $jawab_3              = trim(htmlentities(htmlspecialchars($data[$i][4],ENT_QUOTES)));//trim($data[$i]["D"]," \t\n\r\0\x0B\xA0");
