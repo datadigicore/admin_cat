@@ -480,6 +480,10 @@
         $("#table-nilai").DataTable().destroy();
       }
     tableLive = $("#table-nilai").DataTable({
+      dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
       "oLanguage": {
         "sInfoFiltered": ""
       },
@@ -524,6 +528,10 @@
         $("#table-gender").DataTable().destroy();
       }
     tableLive = $("#table-gender").DataTable({
+      dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
       "oLanguage": {
         "sInfoFiltered": ""
       },
@@ -563,6 +571,10 @@
         $("#table-kesatuan").DataTable().destroy();
       }
     tableLive = $("#table-kesatuan").DataTable({
+      dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
       "oLanguage": {
         "sInfoFiltered": ""
       },
@@ -611,7 +623,7 @@
         })
         .on('click', function (i, row) {  
            var gen = row.label;
-           showModalGender(gen)
+           showModalGender(gen);
         });
       
 

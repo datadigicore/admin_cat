@@ -123,6 +123,10 @@
       $("#filename-revisi").attr('value', $(this).val().replace(/C:\\fakepath\\/i, ''));
     });
     var table = $(".table").DataTable({
+      dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
       "oLanguage": {
         "sInfoFiltered": ""
       },

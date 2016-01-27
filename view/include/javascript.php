@@ -11,6 +11,13 @@
   <!-- DataTables -->
   <script src="<?php echo $url_rewrite;?>static/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo $url_rewrite;?>static/plugins/datatables/media/js/dataTables.bootstrap.min.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/datatables/media/js/dataTables.buttons.min.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/datatables/media/js/buttons.flash.min.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/datatables/media/js/jszip.min.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/datatables/media/js/pdfmake.min.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/datatables/media/js/vfs_fonts.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/datatables/media/js/buttons.html5.min.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/datatables/media/js/buttons.print.min.js"></script>
   <!-- Morris.js charts -->
   <script src="<?php echo $url_rewrite;?>static/dist/js/raphael-min.js"></script>
   <script src="<?php echo $url_rewrite;?>static/plugins/morris/morris.min.js"></script>  
