@@ -71,8 +71,6 @@ switch ($process) {
   case 'add':
     $ujian->insertUjian($data);
     $utility->load("content/ujian","success","Data berhasil ditambahkan");
-    // print_r('<pre>');
-    // print_r($data);
   break;
   case 'truncate':
     $ujian->truncateUjian($data);

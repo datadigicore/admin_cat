@@ -80,7 +80,7 @@
       $query = "UPDATE generated_soal SET
                 status            = 5,
                 tambahan_waktu = '$data[newtambahwaktu]'
-                WHERE id_peserta  = '$data[id]'";
+                WHERE id  = '$data[id]'";
       $result = $this->query($query);
       return $result;
     }

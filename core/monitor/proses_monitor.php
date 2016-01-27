@@ -47,7 +47,7 @@ switch ($process) {
     $table = "generated_soal";
     $key   = "id_peserta";
     $column = array(
-      array( 'db' => 'generated_soal.id',  'dt' => 0, 'field' => 'id_peserta' ),
+      array( 'db' => 'generated_soal.id',  'dt' => 0, 'field' => 'id' ),
       array( 'db' => 'no_peserta',         'dt' => 1, 'field' => 'no_peserta' ),
       array( 'db' => 'nama',               'dt' => 2, 'field' => 'nama' ),
       array( 'db' => 'id_lokasi',          'dt' => 3, 'field' => 'id_lokasi' ),
@@ -104,6 +104,7 @@ switch ($process) {
     $newtime = ($timenow - $timeserver)/60;
     $data['newtambahwaktu'] = $tambahwaktu + round($newtime);
     $pengguna->revisiPengguna($data);
+    $utility->load("content/monitor","success","Ujian Peserta Berhasil di Revisi");
   break;
   default:
     $utility->location_goto(".");

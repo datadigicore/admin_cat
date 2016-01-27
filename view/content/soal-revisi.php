@@ -45,7 +45,7 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <textarea type="text" class="form-control" id="soal" name="soal" placeholder="soal" required></textarea>
+          <textarea type="text" class="form-control" id="soal" name="soal" placeholder="soal" required rows="3" style="resize:none;"></textarea>
         </div>
         <div class="form-group">
           <input type="text" class="form-control" id="1" name="1" placeholder="Jawaban A" required>
