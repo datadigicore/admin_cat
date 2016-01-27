@@ -24,6 +24,7 @@ require_once __DIR__ .'/../model/modelGeneratedSoal.php';
 require_once __DIR__ .'/../model/modelMasterKategori.php';
 require_once __DIR__ .'/../model/modelMasterPeserta.php';
 require_once __DIR__ .'/../model/modelMasterSoal.php';
+require_once __DIR__ .'/../model/modelDashboard.php';
 // ====================================================
 
 // ============== TAMBAHKAN CLASS DISINI ==============
@@ -44,6 +45,7 @@ $mdl_upPeserta = new modelLogUploadPeserta();
 $mdl_masSoal = new modelMasterSoal();
 $mdl_masPeserta = new modelMasterPeserta();
 $mdl_masKategori = new modelMasterKategori();
+$mdl_dashboard = new modelDashboard();
 // ====================================================
 
 $config_security = HTMLPurifier_Config::createDefault();

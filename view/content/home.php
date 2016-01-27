@@ -1,3 +1,33 @@
+<?php
+  $rs_nilai = $mdl_dashboard->getNilaiPeserta();
+  $nilai = "[";
+  $kat = "[";
+  while($r=$db->fetch_array($rs_nilai)){
+    // $nilai .=  "{
+    //             name: 'Proprietary or Undetectable',
+    //             y: $r[0]
+    //         },";
+    $nilai.="$r[0],";
+    $kat.="$r[1],";
+  }
+  $nilai .= "]";
+  $kat .= "]";
+
+  $rs_kesatuan = $mdl_dashboard->getKesatuan();
+  $kesatuan = "[";
+  $jumlah = "[";
+  while($r=$db->fetch_array($rs_kesatuan)){
+    // $nilai .=  "{
+    //             name: 'Proprietary or Undetectable',
+    //             y: $r[0]
+    //         },";
+    $kesatuan.="'$r[0]',";
+    $jumlah.="$r[1],";
+
+  }
+  $kesatuan .= "]";
+  $jumlah .= "]";
+?>
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
@@ -9,7 +39,7 @@
     </ol>
   </section>
   <section class="content">
-    <div class="row">
+   <!--  <div class="row">
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-aqua">
           <div class="inner">
@@ -58,21 +88,37 @@
           <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
+    </div> -->
+    <div class="row">
+      <div class="col-lg-12 col-xs-12">
+        <div class="box box-primary">
+            <div class="box-body">
+              <div class="chart tab-pane active" id="nilai-chart" style="position: relative; height: 300px;"></div>
+          
+            </div>
+        </div>
+      </div>
     </div>
+
     <div class="row">
       <section class="col-lg-7 connectedSortable">
-        <div class="nav-tabs-custom">
+        <div class="box box-primary">
+            <div class="box-body">
+              <div class="chart tab-pane active" id="kesatuan-chart" style="position: relative; height: 300px;"></div>
+          
+            </div>
+        </div>
+        <!-- div class="nav-tabs-custom">
           <ul class="nav nav-tabs pull-right">
             <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
             <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
             <li class="pull-left header"><i class="fa fa-inbox"></i> Data Anggaran</li>
           </ul>
           <div class="tab-content no-padding">
-            <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-            <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+            
           </div>
-        </div>
-        <div class="box box-primary">
+        </div> -->
+        <!-- div class="box box-primary">
           <div class="box-header">
             <i class="ion ion-clipboard"></i>
             <h3 class="box-title">Agenda Kegiatan</h3>
@@ -171,8 +217,8 @@
           <div class="box-footer clearfix no-border">
             <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
           </div>
-        </div>
-        <div class="box box-info">
+        </div> -->
+        <!-- div class="box box-info">
           <div class="box-header">
             <i class="fa fa-envelope"></i>
             <h3 class="box-title">Kirim Pesan</h3>
@@ -196,10 +242,20 @@
           <div class="box-footer clearfix">
             <button class="pull-right btn btn-default" id="sendEmail">Send <i class="fa fa-arrow-circle-right"></i></button>
           </div>
-        </div>
+        </div> -->
       </section>
       <section class="col-lg-5 connectedSortable">
-        <div class="box box-solid bg-light-blue-gradient">
+        <div class="box box-primary">
+          <div class="box-header">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Grafik Gender Peserta</h3>
+            
+          </div>
+          <div class="box-body">
+            <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+          </div>
+        </div>
+        <!-- div class="box box-solid bg-light-blue-gradient">
           <div class="box-header">
             <div class="pull-right box-tools">
               <button class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
@@ -316,9 +372,323 @@
               </div>
             </div>
           </div>
-        </div>
+        </div -->
       </section>
     </div>
   </section>
 </div>
+<div class="modal fade" id="nilai-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Peserta dengan nilai <span id="nilai-psrt"></span></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="margin:auto 10px">
+        <table id="table-nilai" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
+              <thead style="background-color:#4A4545;color:white;">
+                <tr>
+                  <th>Id</th>
+                  <th>No Peserta</th>
+                  <th>Nama Peserta</th>
+                  <th>Lokasi</th>
+                  <th>Ruangan</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="kesatuan-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Peserta dengan dari kesatuan <span id="kesatuan-psrt"></span></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="margin:auto 10px">
+        <table id="table-kesatuan" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
+              <thead style="background-color:#4A4545;color:white;">
+                <tr>
+                  <th>Id</th>
+                  <th>No Peserta</th>
+                  <th>Nama Peserta</th>
+                  <th>Lokasi</th>
+                  <th>Ruangan</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="gender-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Peserta <span id="gender-psrt"></span></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="margin:auto 10px">
+        <table id="table-gender" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
+              <thead style="background-color:#4A4545;color:white;">
+                <tr>
+                  <th>Id</th>
+                  <th>No Peserta</th>
+                  <th>Nama Peserta</th>
+                  <th>Lokasi</th>
+                  <th>Ruangan</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 <script src="<?php echo $url_rewrite;?>static/dist/js/pages/dashboard.js"></script>
+<script >
+ $(document).ready(function(){
+  $('#nilai-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
+        var nil = this.textContent || this.innerText;
+        showModal(nil);
+    });
+  $('#kesatuan-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
+        var nil = this.textContent || this.innerText;
+        showModalKesatuan(nil);
+    });
+ });
+
+ 
+ function showModal(nilai){
+  
+    $('#nilai-modal').modal('show');
+    $('#nilai-psrt').html(nilai);
+    if ($.fn.DataTable.isDataTable( '#table-nilai' ) ) {
+        $("#table-nilai").DataTable().destroy();
+      }
+    tableLive = $("#table-nilai").DataTable({
+      "oLanguage": {
+        "sInfoFiltered": ""
+      },
+      "processing": true,
+      "serverSide": true,
+      "scrollX": true,
+      "ajax": {
+        "data": {nilai:nilai},
+        "url": "<?php echo $url_rewrite;?>process/monitor/nilai-chart",
+        "type": "POST"
+      },
+      "columnDefs" : [
+        {"targets" : 0,
+         "visible" : false},
+        {"targets" : 1},
+        {"targets" : 2},
+        {"targets" : 3},
+        {"targets" : 4}
+      ],
+       dom: 'Bfrtip',
+    buttons: [
+           'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+  
+
+    
+ }
+ function showModalGender(gender){
+  
+    $('#gender-modal').modal('show');
+    $('#gender-psrt').html(gender);
+    if(gender == "Pria"){
+      jenkel = "P";
+    }else{
+      jenkel ="W";
+    }
+    if ($.fn.DataTable.isDataTable( '#table-gender' ) ) {
+        $("#table-gender").DataTable().destroy();
+      }
+    tableLive = $("#table-gender").DataTable({
+      "oLanguage": {
+        "sInfoFiltered": ""
+      },
+      "processing": true,
+      "serverSide": true,
+      "scrollX": true,
+      "ajax": {
+        "data": {jenkel:jenkel},
+        "url": "<?php echo $url_rewrite;?>process/monitor/gender-chart",
+        "type": "POST"
+      },
+      "columnDefs" : [
+        {"targets" : 0,
+         "visible" : false},
+        {"targets" : 1},
+        {"targets" : 2},
+        {"targets" : 3},
+        {"targets" : 4}
+      ],
+       dom: 'Bfrtip',
+    buttons: [
+           'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+  
+
+    
+ }
+ function showModalKesatuan(kesatuan){
+  
+    $('#kesatuan-modal').modal('show');
+    $('#kesatuan-psrt').html(kesatuan);
+    if ($.fn.DataTable.isDataTable( '#table-kesatuan' ) ) {
+        $("#table-kesatuan").DataTable().destroy();
+      }
+    tableLive = $("#table-kesatuan").DataTable({
+      "oLanguage": {
+        "sInfoFiltered": ""
+      },
+      "processing": true,
+      "serverSide": true,
+      "scrollX": true,
+      "ajax": {
+        "data": {kesatuan:kesatuan},
+        "url": "<?php echo $url_rewrite;?>process/monitor/kesatuan-chart",
+        "type": "POST"
+      },
+      "columnDefs" : [
+        {"targets" : 0,
+         "visible" : false},
+        {"targets" : 1},
+        {"targets" : 2},
+        {"targets" : 3},
+        {"targets" : 4}
+      ],
+       dom: 'Bfrtip',
+    buttons: [
+           'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+  
+
+    
+ }
+  $.ajax({url: "<?echo $url_rewrite?>process/dashboard/gender",
+    type: 'POST',
+    data: {},
+    success: function(output) {
+       var decodedDataChart = $.parseJSON(output);
+        var gender = new Morris.Donut({
+          element: 'sales-chart',
+          resize: true,
+          colors: ["#3c8dbc", "#f56954", "#00a65a"],
+          data: [
+            {label: "Pria", value: decodedDataChart[0]},
+            {label: "Wanita", value: decodedDataChart[1]}
+          ],
+          hideHover: 'auto'
+        })
+        .on('click', function (i, row) {  
+           var gen = row.label;
+           showModalGender(gen)
+        });
+      
+
+     },
+    error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status + " "+ thrownError);
+  }});
+
+    $('#nilai-chart').highcharts({
+      chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Nilai Peserta'
+        },
+        subtitle: {
+            text: 'Klik bar untuk melihat data peserta'
+        },
+      xAxis: {
+            categories: <?php print_r($nilai)?>,
+        },
+
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function () {
+                            var nil = this.category;
+                            showModal(nil)
+                        }
+                    }
+                }
+            }
+        },
+
+        series: [{
+            data: <?php print_r($kat)?>
+        }]
+    });
+
+    $('#kesatuan-chart').highcharts({
+      chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Kesatuan Asal Peserta'
+        },
+        subtitle: {
+            text: 'Klik bar untuk melihat data peserta'
+        },
+      xAxis: {
+            categories: <?php print_r($kesatuan)?>,
+        },
+
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function () {
+                            var nil = this.category;
+                            showModalKesatuan(nil)
+                        }
+                    }
+                }
+            }
+        },
+
+        series: [{
+            data: <?php print_r($jumlah)?>
+        }]
+    });
+    $('#nilai-modal').on('show.bs.modal', function (e) {
+      // var button = $(event.relatedTarget);
+      // alert(JSON.stringify(button.data('foo')));
+      
+
+    });
+</script>

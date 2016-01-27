@@ -251,6 +251,7 @@ class SSP {
 			 $order
 			 $limit";
         }
+        // print_r($query);exit;
         
         $data = SSP::sql_exec( $db, $bindings,$query);
         // print_r('<pre>');

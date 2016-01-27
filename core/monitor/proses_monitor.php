@@ -76,6 +76,66 @@ switch ($process) {
     $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
+  case 'nilai-chart':
+    $nilai = $_POST['nilai'];
+    $table = "generated_soal";
+    $key   = "id_peserta";
+    $column = array(
+      array( 'db' => 'master_peserta.id_peserta', 'dt' => 0, 'field' => 'id_peserta' ),
+      array( 'db' => 'no_peserta',                'dt' => 1, 'field' => 'no_peserta' ),
+      array( 'db' => 'nama',                      'dt' => 2, 'field' => 'nama' ),
+      array( 'db' => 'id_lokasi',                 'dt' => 3, 'field' => 'id_lokasi' ),
+      array( 'db' => 'id_ruangan',                'dt' => 4, 'field' => 'id_ruangan' ),
+      
+    );
+    if($_SESSION['level']==2){
+      $where = "id_lokasi = '".$_SESSION['lokasi']."' and";
+    }
+    
+    $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
+    $where = "skor_total = '$nilai'";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break;
+  case 'kesatuan-chart':
+    $kesatuan = $_POST['kesatuan'];
+    $table = "generated_soal";
+    $key   = "id_peserta";
+    $column = array(
+      array( 'db' => 'master_peserta.id_peserta', 'dt' => 0, 'field' => 'id_peserta' ),
+      array( 'db' => 'no_peserta',                'dt' => 1, 'field' => 'no_peserta' ),
+      array( 'db' => 'nama',                      'dt' => 2, 'field' => 'nama' ),
+      array( 'db' => 'id_lokasi',                 'dt' => 3, 'field' => 'id_lokasi' ),
+      array( 'db' => 'id_ruangan',                'dt' => 4, 'field' => 'id_ruangan' ),
+      
+    );
+    if($_SESSION['level']==2){
+      $where = "id_lokasi = '".$_SESSION['lokasi']."' and";
+    }
+    
+    $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
+    $where = "kesatuan = '$kesatuan'";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break;
+  case 'gender-chart':
+    $jenkel = $_POST['jenkel'];
+    $table = "master_peserta";
+    $key   = "id_peserta";
+    $column = array(
+      array( 'db' => 'master_peserta.id_peserta', 'dt' => 0, 'field' => 'id_peserta' ),
+      array( 'db' => 'no_peserta',                'dt' => 1, 'field' => 'no_peserta' ),
+      array( 'db' => 'nama',                      'dt' => 2, 'field' => 'nama' ),
+      array( 'db' => 'id_lokasi',                 'dt' => 3, 'field' => 'id_lokasi' ),
+      array( 'db' => 'id_ruangan',                'dt' => 4, 'field' => 'id_ruangan' ),
+      
+    );
+    if($_SESSION['level']==2){
+      $where = "id_lokasi = '".$_SESSION['lokasi']."' and";
+    }
+    
+    $join = "FROM {$table}";
+    $where = "jenkel = '$jenkel'";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break;
   case 'suspend':
     $data['id'] = $purifier->purify($_POST['key']);
     $result = $pengguna->readTimePeserta($data['id']);

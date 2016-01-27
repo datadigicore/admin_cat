@@ -37,3 +37,7 @@
   <script src="<?php echo $url_rewrite;?>static/dist/js/app.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="<?php echo $url_rewrite;?>static/dist/js/demo.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/highcharts/highcharts.js"></script>
+  
+  <script src="<?php echo $url_rewrite;?>static/plugins/highcharts/modules/drilldown.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/highcharts/custom_events/customEvents.js"></script>
