@@ -29,8 +29,37 @@
       return $result;
     }
 
+    public function addPeserta($data) {
+      $query      = "INSERT INTO master_peserta SET
+        no_peserta = '$data[noujian]',
+        id_lokasi  = '$data[lokasi]',
+        id_ruangan = '$data[ruang]',
+        nama       = '$data[nama]',
+        pkt        = '$data[pangkat]',
+        kesatuan   = '$data[kesatuan]',
+        nrp        = '$data[nrp]'
+      ";
+      $result = $this->query($query);
+      return $result;
+    }
+
+    public function editPeserta($data) {
+      $query       = "UPDATE master_peserta SET
+        no_peserta = '$data[noujian]',
+        id_lokasi  = '$data[lokasi]',
+        id_ruangan = '$data[ruang]',
+        nama       = '$data[nama]',
+        pkt        = '$data[pangkat]',
+        kesatuan   = '$data[kesatuan]',
+        nrp        = '$data[nrp]'
+        WHERE id_peserta = '$data[id]'
+      ";
+      $result = $this->query($query);
+      return $result;
+    }
+
     public function deletePengguna($id) {
-      $query = "delete from pengguna where id='$id'";
+      $query = "delete from pengguna where id_pengguna='$id'";
       $result = $this->query($query);
       return $result;
     }
@@ -43,7 +72,7 @@
       $query = "UPDATE generated_soal SET
                 status            = 4,
                 durasi_pengerjaan = '$data[newdurasi]'
-                WHERE id_peserta  = '$data[id]'";
+                WHERE id          = '$data[id]'";
       $result = $this->query($query);
       return $result;
     }
@@ -51,7 +80,7 @@
       $query = "UPDATE generated_soal SET
                 status            = 5,
                 tambahan_waktu = '$data[newtambahwaktu]'
-                WHERE id_peserta  = '$data[id]'";
+                WHERE id  = '$data[id]'";
       $result = $this->query($query);
       return $result;
     }

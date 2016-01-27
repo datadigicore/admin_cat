@@ -89,10 +89,10 @@ switch ($process) {
     $columns = array(
       array( 'db' => 'id_peserta',   'dt' => 0 ),
       array( 'db' => 'no_peserta',   'dt' => 1 ),
-      array( 'db' => 'id_lokasi',  'dt' => 2),
-      array( 'db' => 'id_ruangan', 'dt' => 3),
-      array( 'db' => 'nama',   'dt' => 4 ),
-      array( 'db' => 'pkt',       'dt' => 5 ),
+      array( 'db' => 'id_lokasi',    'dt' => 2),
+      array( 'db' => 'id_ruangan',   'dt' => 3),
+      array( 'db' => 'nama',         'dt' => 4 ),
+      array( 'db' => 'pkt',          'dt' => 5 ),
       array( 'db' => 'kesatuan',     'dt' => 6 ),
       array( 'db' => 'nrp',          'dt' => 7 ),
     );

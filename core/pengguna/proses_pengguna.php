@@ -65,16 +65,16 @@ switch ($process) {
     $utility->location_goto("content/setting");
   break;
   case 'del':
-    $pengguna->deletePengguna($hapuspengguna);
-    $utility->location_goto("content/setting");
+    $id = $_POST['iddel'];
+    $pengguna->deletePengguna($id);
+    $utility->load("content/user","success","Data Pengguna Berhasil Dihapus");
   break;
   case 'lokasi':
     if($_POST['sessLok']!=undefined){
       $pengguna->lokasi($_POST['sessLok']);
     } else {
       $pengguna->lokasi();
-    }
-    
+    }  
   break;
   case 'ruangan':
     $id = array('nama_lokasi' => $_POST['key']);

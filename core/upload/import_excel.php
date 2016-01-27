@@ -1,5 +1,4 @@
 <?php
-define('MAX_FILE_SIZE', 999999999999999);
 //require_once __DIR__ . '/../../utility/PHPExcel/IOFactory.php';
 //require_once __DIR__ . '/../../utility/ExcelReader.php';
 require_once __DIR__ . '/../../utility/simple_html_dom.php';

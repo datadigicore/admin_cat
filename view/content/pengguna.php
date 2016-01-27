@@ -17,6 +17,12 @@
             <a href="<?php echo $url_rewrite;?>content/adduser" class="btn btn-flat btn-success btn-sm pull-right">Tambah Pengguna</a>
           </div>
           <div class="box-body">
+            <?php if (isset($_POST['message'])): ?>
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fa fa-check"></i><?php echo $_POST['message']; ?>
+              </div>
+            <?php endif ?>
             <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
               <thead style="background-color:#4A4545;color:white;">
                 <tr>
@@ -38,47 +44,70 @@
 </div>
 <div class="modal fade" id="editModal">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color:#f9af00 !important; color:white;">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" style="color:white">×</span></button>
-        <h4 class="modal-title">Edit Pengguna</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <div class="checkbox icheck" style="position:absolute;margin:6px;right:16px;background:white;">
-            <input type="checkbox" id="checkuser">  
+    <form method="post" action="<?php echo $url_rewrite;?>process/user/edt">
+    <input type="hidden" class="form-control" id="idedt" name="idedt" placeholder="">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#f9af00 !important; color:white;">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="color:white">×</span></button>
+          <h4 class="modal-title">Edit Pengguna</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="checkbox icheck" style="position:absolute;margin:6px;right:16px;background:white;">
+              <input type="checkbox" id="checkuser">  
+            </div>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username" readonly>
           </div>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Username" readonly>
-        </div>
-        <div class="form-group">
-          <div class="checkbox icheck" style="position:absolute;margin:6px;right:16px;background:white;">
-            <input type="checkbox" id="checkpass">
+          <div class="form-group">
+            <div class="checkbox icheck" style="position:absolute;margin:6px;right:16px;background:white;">
+              <input type="checkbox" id="checkpass">
+            </div>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" readonly>
           </div>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Password" readonly>
+          <div class="form-group">
+            <select class="form-control" name="level" id="level" required>
+              <option value="" disabled selected>-- Pilih Kewenangan --</option>
+              <option value="2">Admin Lokasi</option>
+              <option value="3">Admin Ruangan</option>
+            </select>
+          </div>
+          <div class="form-group" id="form-lokasi" hidden>
+            <select class="form-control" name="lokasi" id="lokasi">
+              <option value="" disabled selected>-- Pilih Lokasi --</option>
+            </select>
+          </div>
+          <div class="form-group" id="form-ruangan" hidden>
+            <select class="form-control" name="ruangan" id="ruangan">
+              <option value="" disabled selected>-- Pilih Ruangan --</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <select class="form-control" name="level" id="level" required>
-            <option value="" disabled selected>-- Pilih Kewenangan --</option>
-            <option value="2">Admin Lokasi</option>
-            <option value="3">Admin Ruangan</option>
-          </select>
-        </div>
-        <div class="form-group" id="form-lokasi" hidden>
-          <select class="form-control" name="lokasi" id="lokasi">
-            <option value="" disabled selected>-- Pilih Lokasi --</option>
-          </select>
-        </div>
-        <div class="form-group" id="form-ruangan" hidden>
-          <select class="form-control" name="ruangan" id="ruangan">
-            <option value="" disabled selected>-- Pilih Ruangan --</option>
-          </select>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-flat btn-success">Simpan Perubahan</button>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-flat btn-success">Simpan Perubahan</button>
+    </form>
+  </div>
+</div>
+<div class="modal fade" id="hapusModal">
+  <div class="modal-dialog">
+    <form method="post" action="<?php echo $url_rewrite;?>process/user/del">
+    <input type="hidden" class="form-control" id="iddel" name="iddel" placeholder="">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#d73925 !important; color:white;">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="color:white">×</span></button>
+          <h4 class="modal-title">Hapus Pengguna</h4>
+        </div>
+        <div class="modal-body">
+          Apa Anda Yakin Ingin Menghapus Pengguna?
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-flat btn-danger">Hapus Pengguna</button>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 <script>
@@ -106,7 +135,7 @@
          "data": null,
          "defaultContent":  '<div class="text-center">'+
                               '<a style="margin:0 2px;" id="btn-edt" href="#editModal" class="btn btn-xs btn-flat btn-success btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>'+
-                              '<a style="margin:0 2px;" id="btn-del" href="#modal-deleteProject" class="open-deleteProject btn btn-xs btn-flat btn-danger btn-sm" data-toggle="modal"><i class="fa fa-trash-o"></i> Hapus</a>'+
+                              '<a style="margin:0 2px;" id="btn-del" href="#hapusModal" class="open-deleteProject btn btn-xs btn-flat btn-danger btn-sm" data-toggle="modal"><i class="fa fa-trash-o"></i> Hapus</a>'+
                             '</div>',
          "targets": 6 },
          {"targets" : 7,
@@ -149,7 +178,12 @@
     $(document).on("click", "#btn-edt", function (){
       var tr = $(this).closest('tr');
       tabrow = table.row( tr );
-      $("#username").val(tabrow.data()[1]);
+      $("#idedt").val(tabrow.data()[0]);
+    });
+    $(document).on("click", "#btn-del", function (){
+      var tr = $(this).closest('tr');
+      tabrow = table.row( tr );
+      $("#iddel").val(tabrow.data()[0]);
     });
   });
   function clear(){

@@ -112,7 +112,7 @@
       <div class="modal-body">
         <div class="form-group">
         <?php for ($i=0; $i < $paket->pilihan_paket ; $i++) { ?>
-          <div class="col-xs-4">
+          <div class="col-xs-<?php echo floor(12/$paket->pilihan_paket);?>">
             <button id="paket<?php echo chr($i+65); ?>" style="width:100%;height:120px;font-size:24px;font-weight:bold;">Paket <?php echo chr($i+65); ?></button>
           </div>
         <?php } ?>
@@ -123,8 +123,27 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="waitingModal" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#f9af00 !important; color:white;">
+        <h4 class="modal-title">Mohon Menunggu</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="progress progress-lg active">
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+              Sedang Melakukan Proses Pengacakan
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   $(function () {
+    $("#waitingModal").modal("show");
     var table = $(".table").DataTable({
       "oLanguage": {
         "sInfoFiltered": ""
@@ -154,12 +173,15 @@
       "order": [[ 2, "asc" ]]
     });
     function refreshTabel(){
+      $("#waitingModal").modal("hide");
       $("#chooseModal").modal("show");
     }
-    setTimeout(refreshTabel, 3000);
+    setTimeout(refreshTabel, 5000);
   });
   <?php for ($i=0; $i < $paket->pilihan_paket ; $i++) { ?>
   $("#paket<?php echo chr($i+65); ?>").click(function(){
+    $("#chooseModal").modal("hide");
+    $("#waitingModal").modal("show");
     $.ajax({
       type: "post",
       url:  "<?php echo $url_rewrite;?>process/ujian/activatePaket",

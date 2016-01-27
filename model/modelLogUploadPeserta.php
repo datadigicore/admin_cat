@@ -72,7 +72,7 @@
       $arrayCount = count($data);
       $string = "INSERT INTO `master_peserta`(`id_peserta`, `id_ujian`, `id_lokasi`, `id_ruangan`, `no_peserta`, `nama`, `nrp`, `jenkel`, `pkt`, `jabatan` ,`kesatuan`, `tempat_lahir`, `tgl_lahir`, `status_ujian`, `waktu_mulai`, `durasi_pengerjaan`, `tambahan_waktu`, `waktu_selesai`, `skor_total`, `keterangan`) VALUES";
       // $urut=1;
-      for ($i=3; $i < $arrayCount; $i++) { 
+      for ($i=3; $i <=$arrayCount; $i++) { 
         $id_peserta   ='';
         $id_ujian            = '';//trim($data[$i]["A"]," \t\n\r\0\x0B\xA0");
         $id_lokasi            = trim($data[$i]["C"]," \t\n\r\0\x0B\xA0");//trim($data[$i]["A"]," \t\n\r\0\x0B\xA0");

@@ -16,6 +16,12 @@
             <h3 class="box-title" style="margin-top:6px;">Tabel Pengaturan Peserta</h3>
           </div>
           <div class="box-body">
+            <?php if (isset($_POST['message'])): ?>
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fa fa-check"></i><?php echo $_POST['message']; ?>
+              </div>
+            <?php endif ?>
             <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
               <thead style="background-color:#4A4545;color:white;">
                 <tr>

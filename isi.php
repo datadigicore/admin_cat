@@ -25,11 +25,26 @@ else {
         case 'adduser':
           include ('view/content/pengguna-add.php');
         break;
+        case 'addpeserta':
+          include ('view/content/peserta-add.php');
+        break;
         case 'ujian':
           include ('view/content/ujian.php');
         break;
         case 'upload-soal':
           include ('view/content/upload_soal.php');
+        break;
+        case 'soal':
+          include ('view/content/soal.php');
+        break;
+        case 'revisisoal':
+          if (isset($_POST['idsoal'])) {
+            $id_soal = $_POST['idsoal'];
+            include ('view/content/soal-revisi.php');
+          }
+          else{
+            include ('view/content/home.php');
+          }
         break;
         case 'acaksoal':
           if ($_POST['message'] == "load") {
@@ -60,9 +75,9 @@ else {
           include ('view/content/pengguna-lokasi.php');
         break;
         case 'monitor':
-          include ('view/content/monitor-lokasi.php');
+          include ('view/content/monitor.php');
         break;
-      case 'adduser':
+        case 'adduser':
           include ('view/content/pengguna-add-lokasi.php');
         break;
         default:
@@ -75,28 +90,9 @@ else {
         case 'table':
           include ('view/content/table.php');
         break;
-        case 'rab':
-          if($data[2]=='add'){
-            include ('view/content/rab-add.php');
-          } else if($data[2]=='add-rincian'){
-            include ('view/content/rab-add-rincian.php');
-          } else {
-            $direktorat = $_SESSION['direktorat'];
-            $program = $mdl_rab->getProg();
-            include ('view/content/rab.php');
-          }
+        case 'monitor':
+          include ('view/content/monitor.php');
         break;
-        case 'rabdetail':
-          if($data[2]=='akun'){
-            include ('view/content/rab-add.php');
-          }else{
-            $id_rab_view = $data[2];
-            include ('view/content/rabdetail.php');
-          }
-          break;
-        case 'rabakun':
-          include ('view/content/rab-add.php');
-          break;
         default:
           include ('view/content/home.php');
         break;
