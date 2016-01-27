@@ -53,11 +53,11 @@ switch ($process) {
           );
         
         $mdl_upPeserta->setLogUploadPeserta($data);
-        $utility->load("content/upload-peserta","success","Data soal telah berhasil diunggah");
+        $utility->load("content/upload-peserta","success","Data peserta telah berhasil diunggah");
 
       }
       else {
-        $utility->load("content/upload-peserta","warning","Belum ada file soal yang di lampirkan");
+        $utility->load("content/upload-peserta","warning","Belum ada file peserta yang di lampirkan");
       }
     
     die();
@@ -81,7 +81,7 @@ switch ($process) {
     exec("php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id' &",$op,$rt);
     // print_r($op);
     // print_r($rt);
-    $utility->load("content/upload-peserta","success","Sedang memproses soal");
+    $utility->load("content/upload-peserta","success","Sedang memproses peserta");
   break;
   case 'table-peserta':
     $table = "master_peserta";
@@ -123,7 +123,7 @@ switch ($process) {
                   '<div class="text-center">'.
                     '<i>Siap diproses</i><br>'.
                     '<input type="hidden" name="id-log" value="'.$row[0].'">'.
-                    '<button style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses Soal</button>'.
+                    '<button style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses Peserta</button>'.
                   '</div>'.
                   '</form>';
         } else if($d==1){
