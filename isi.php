@@ -75,7 +75,7 @@ else {
           include ('view/content/pengguna-lokasi.php');
         break;
         case 'monitor':
-          include ('view/content/monitor-lokasi.php');
+          include ('view/content/monitor.php');
         break;
         case 'adduser':
           include ('view/content/pengguna-add-lokasi.php');
@@ -91,7 +91,7 @@ else {
           include ('view/content/table.php');
         break;
         case 'monitor':
-          include ('view/content/monitor-lokasi.php');
+          include ('view/content/monitor.php');
         break;
         default:
           include ('view/content/home.php');
