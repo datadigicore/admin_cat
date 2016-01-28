@@ -29,6 +29,12 @@
 
       return $result;
     }
+    public function getStatus(){
+      $query="SELECT generated_soal.status, count(generated_soal.status) FROM generated_soal INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori group by generated_soal.status order by generated_soal.status ASC ";
+      $result = $this->query($query);
+
+      return $result;
+    }
 
     public function setGeneratedSoal($data){
       $id_paket       = $data['id_paket'];

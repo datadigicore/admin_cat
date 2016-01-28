@@ -172,7 +172,7 @@ switch ($process) {
         
       })
     );
-    $join = "FROM {$table} inner join generated_soal on master_peserta.id_peserta = generated_soal.id_peserta inner join ujian on generated_soal.id_ujian = ujian.id_ujian where ujian.status_ujian=3 group by id_ruangan";
+    $join = "FROM {$table} inner join generated_soal on master_peserta.id_peserta = generated_soal.id_peserta inner join ujian on generated_soal.id_ujian = ujian.id_ujian where ujian.status_ujian=3 or ujian.status_ujian=2 group by id_ruangan";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
   case 'perorang':
@@ -188,11 +188,8 @@ switch ($process) {
         
       })
     );
-    if($_SESSION['level']==2){
-      $where = "id_lokasi = '".$_SESSION['lokasi']."'";
-    }
     $join = "FROM {$table} inner join generated_soal on master_peserta.id_peserta = generated_soal.id_peserta inner join ujian on generated_soal.id_ujian = ujian.id_ujian";
-    $where = "id_ruangan = '$ruang' and ujian.status_ujian=3";
+    $where = "id_ruangan = '$ruang' and (ujian.status_ujian=3 or ujian.status_ujian=2)";
 $datatable->get_table_exjoin($table, $key, $column, $join, $where);
 break;
   case 'file':
@@ -223,7 +220,7 @@ break;
         return  '<form method="POST" action="../content/file-ruang">'.
                   '<div class="text-center">'.
                     '<input type="hidden" name="id_lokasi" value="'.$d.'">'.
-                    '<a href="http://localhost/cat.polda/login/nilaitoPdf/?id=1&ruang='.$row[1].'" style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses File</a>'.
+                    '<a href="'.$domain.'/login/nilaitoPdf/?id=1&ruang='.$row[1].'" style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses File</a>'.
                   '</div>'.
                   '</form>';
       })
