@@ -282,8 +282,24 @@ break;
     }
     
     $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
-    $where = "generated_soal.nilai = '$nilai'";
+    $where = "generated_soal.nilai = '$nilai' and ujian.status_ujian = 2";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break;
+  case 'update-nilai-chart':
+    $rs_nilai = $mdl_dashboard->getNilaiPeserta();
+    $nilai = "[";
+    $kat = "[";
+    while($r=$db->fetch_array($rs_nilai)){
+      // $nilai .=  "{
+      //             name: 'Proprietary or Undetectable',
+      //             y: $r[0]
+      //         },";
+      $nilai.="$r[0],";
+      $kat.="$r[1],";
+    }
+    $nilai .= "]";
+    $kat .= "]";
+    echo json_encode(array('nilai' =>$nilai, 'kategori'=> $kat));
   break;
   case 'kesatuan-chart':
     $kesatuan = $_POST['kesatuan'];

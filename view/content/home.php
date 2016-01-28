@@ -540,20 +540,7 @@
 </div>
 <script src="<?php echo $url_rewrite;?>static/dist/js/pages/dashboard.js"></script>
 <script >
- $(document).ready(function(){
-  // $('#nilai-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
-  //       var nil = this.textContent || this.innerText;
-  //       showModal(nil);
-  //   });
-  // $('#kesatuan-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
-  //       var nil = this.textContent || this.innerText;
-  //       showModalKesatuan(nil);
-  //   });
-  // $('#status-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
-  //       var nil = this.textContent || this.innerText;
-  //       showModalStatus(nil);
-  //   });
- });
+ 
 
  
  function showModal(nilai){
@@ -799,13 +786,15 @@
         alert(xhr.status + " "+ thrownError);
   }});
 
-    $('#nilai-chart').highcharts({
+    var nilai_chart = $('#nilai-chart').highcharts({
       legend: {
           enabled:false
         },
 
       chart: {
-            type: 'column'
+        renderTo: 'nilai-chart',
+            type: 'column',
+            
         },
         title: {
             text: 'Nilai Peserta'
@@ -960,4 +949,35 @@
       
 
     });
+
+    $(document).ready(function(){
+    // setInterval(function(){ 
+    //                         $.ajax({url: "<?echo $url_rewrite?>process/monitor/update-nilai-chart",
+    //                           type: 'POST',
+    //                           success: function(output) {
+    //                             op = JSON.parse(output);
+    //                             // alert(JSON.stringify(nilai_chart));
+    //                               nilai_chart.addSeries = op.kategori;
+    //                               nilai_chart.update({
+    //                                   categories: op.nilai
+    //                               });
+    //                               // nilai_chart.series['data'] = op.kategori;
+    //                            },
+    //                           error: function (xhr, ajaxOptions, thrownError) {
+    //                               alert(xhr.status + " "+ thrownError);
+    //                         }});
+    //                       }, 3000);
+  // $('#nilai-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
+  //       var nil = this.textContent || this.innerText;
+  //       showModal(nil);
+  //   });
+  // $('#kesatuan-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
+  //       var nil = this.textContent || this.innerText;
+  //       showModalKesatuan(nil);
+  //   });
+  // $('#status-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
+  //       var nil = this.textContent || this.innerText;
+  //       showModalStatus(nil);
+  //   });
+ });
 </script>
