@@ -19,6 +19,12 @@
         $_SESSION['level']      = $result->level;
         $_SESSION['lokasi']     = $result->lokasi;
         $_SESSION['ruangan']    = $result->ruangan;
+        if ($result->level == 1) {
+          $_SESSION['suspend']  = 1;
+        }
+        else {
+          $_SESSION['suspend']  = $suspend;
+        }
         $utility->location_goto("content/home");
       }
       else {

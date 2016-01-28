@@ -56,7 +56,12 @@ switch ($process) {
       }),
       array( 'db' => 'generated_soal.status',       'dt' => 6, 'field' => 'status', 'formatter' => function($d,$row){ 
         if ($d==4) {
-          return '<div class="text-center"><button id="revisi" class="btn btn-flat btn-success btn-xs"><i class="fa fa-undo"></i> &nbsp;&nbsp;Revisi&nbsp;&nbsp;&nbsp;</button></div>';
+          if ($_SESSION['suspend'] == 1) {
+            return '<div class="text-center"><button id="revisi" class="btn btn-flat btn-success btn-xs"><i class="fa fa-undo"></i> &nbsp;&nbsp;Revisi&nbsp;&nbsp;&nbsp;</button></div>';
+          }
+          else{
+            return '<div class="text-center"><i>Aktif</i></div>';
+          }
         }
         if ($d==3) {
           return '<div class="text-center"><i>Ujian Selesai</i></div>';
@@ -65,7 +70,12 @@ switch ($process) {
           return '<div class="text-center"><i>Telah Direvisi</i></div>';
         }
         else {
-          return '<div class="text-center"><button id="suspend" class="btn btn-flat btn-danger btn-xs"><i class="fa fa-warning"></i> Suspend</button></div>';
+          if ($_SESSION['suspend'] == 1) {
+            return '<div class="text-center"><button id="suspend" class="btn btn-flat btn-danger btn-xs"><i class="fa fa-warning"></i> Suspend</button></div>';
+          }
+          else{
+            return '<div class="text-center"><i>Aktif</i></div>';
+          }
         }
       })
     );
