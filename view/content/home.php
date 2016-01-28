@@ -684,9 +684,52 @@
 
     
  }
- function showModalStatus(status){
+ function showModalStatus(nil){
   
     $('#status-modal').modal('show');
+    
+    switch(nil){
+      case '0':
+      status = 'Belum Verifikasi';
+      break;
+      case '1':
+      status = 'Sudah Verifikasi';
+      break;
+      case '2':
+      status = 'Sedang Ujian';
+      break;
+      case '3':
+      status = 'Sudah Selesai';
+      break;
+      case '4': 
+      case '5':
+      status = 'Suspend';
+      break;
+      case 'Belum Verifikasi':
+      status = 'Belum Verifikasi';
+      nil = '0';
+      break;
+      case 'Sudah Verifikasi':
+      status = 'Sudah Verifikasi';
+      nil = '1';
+      break;
+      case 'Sedang Ujian':
+      status = 'Sedang Ujian';
+      nil = '2';
+      break;
+      case 'Sudah Selesai':
+      status = 'Sudah Selesai';
+      nil = '3';
+      break;
+      case 'Suspend':
+      status = 'Suspend';
+      nil = '4';
+      break;
+      default:
+      status = 'tes';
+      nil = '';
+      break;
+    }
     $('#status-psrt').html(status);
     if ($.fn.DataTable.isDataTable( '#table-status' ) ) {
         $("#table-status").DataTable().destroy();
@@ -703,7 +746,7 @@
       "serverSide": true,
       "scrollX": true,
       "ajax": {
-        "data": {status:status},
+        "data": {status:nil},
         "url": "<?php echo $url_rewrite;?>process/monitor/status-chart",
         "type": "POST"
       },
@@ -894,7 +937,7 @@
                               status = "";
                               break;
                             } 
-                            showModalStatus(nil);
+                            showModalStatus(status);
                         }
                     }
                 }
