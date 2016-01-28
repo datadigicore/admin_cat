@@ -25,7 +25,6 @@
                   <th>Jawaban B</th>
                   <th>Jawaban C</th>
                   <th>Jawaban D</th>
-                  <th>Aksi</th>
                 </tr>
               </thead>
             </table>
@@ -87,13 +86,7 @@
         {"targets" : 2},
         {"targets" : 3},
         {"targets" : 4},
-        {"targets" : 5},
-        {"orderable": false,
-         "data": null,
-         "defaultContent":  '<div class="text-center">'+
-                              '<a style="margin:0 2px;" id="btn-edt" href="#editModal" class="btn btn-xs btn-flat btn-success btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit Soal</a>'+
-                            '</div>',
-         "targets": 6 }
+        {"targets" : 5}
       ],
       "order": [[ 0, "desc" ]]
     });

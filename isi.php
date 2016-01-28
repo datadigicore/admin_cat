@@ -40,7 +40,7 @@ else {
         case 'soal':
           include ('view/content/soal.php');
         break;
-        case 'revisisoal':
+        case 'viewsoal':
           if (isset($_POST['idsoal'])) {
             $id_soal = $_POST['idsoal'];
             include ('view/content/soal-revisi.php');
