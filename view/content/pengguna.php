@@ -45,7 +45,7 @@
 <div class="modal fade" id="editModal">
   <div class="modal-dialog">
     <form method="post" action="<?php echo $url_rewrite;?>process/user/edt">
-    <input type="hidden" class="form-control" id="idedt" name="idedt" placeholder="">
+    <input type="hidden" class="form-control" id="idedt" name="id" placeholder="">
       <div class="modal-content">
         <div class="modal-header" style="background-color:#f9af00 !important; color:white;">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -53,18 +53,6 @@
           <h4 class="modal-title">Edit Pengguna</h4>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-            <div class="checkbox icheck" style="position:absolute;margin:6px;right:16px;background:white;">
-              <input type="checkbox" id="checkuser">  
-            </div>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Username" readonly>
-          </div>
-          <div class="form-group">
-            <div class="checkbox icheck" style="position:absolute;margin:6px;right:16px;background:white;">
-              <input type="checkbox" id="checkpass">
-            </div>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" readonly>
-          </div>
           <div class="form-group">
             <select class="form-control" name="level" id="level" required>
               <option value="" disabled selected>-- Pilih Kewenangan --</option>
@@ -84,7 +72,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-flat btn-success">Simpan Perubahan</button>
+          <button type="submit" class="btn btn-flat btn-success">Simpan Perubahan</button>
         </div>
       </div>
     </form>

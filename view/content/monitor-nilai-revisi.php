@@ -113,7 +113,7 @@
       "serverSide": true,
       "scrollX": true,
       "ajax": {
-        "url": "<?php echo $url_rewrite;?>process/monitor/log",
+        "url": "<?php echo $url_rewrite;?>process/monitor/log-revisi",
         "type": "POST",
         "data": {"kategori": "<?php echo $kategori; ?>"}
       },

@@ -17,13 +17,10 @@
 
     public function updatePengguna($data) {
       $query       = "UPDATE pengguna SET
-        username  = '$data[username]',
-        password  = '$data[password]',
         level     = '$data[level]',
         lokasi    = '$data[lokasi]',
-        ruangan   = '$data[ruangan]',
-        status    = '$data[status]'
-        WHERE id   = '$id'
+        ruangan   = '$data[ruangan]'
+        WHERE id_pengguna  = '$data[id]'
       ";
       $result = $this->query($query);
       return $result;
@@ -78,8 +75,8 @@
     }
     public function revisiPengguna($data) {
       $query = "UPDATE generated_soal SET
-                status            = 5,
-                tambahan_waktu = '$data[newtambahwaktu]'
+                status    = 5,
+                durasi_pengerjaan = durasi_pengerjaan + '$data[newtambahwaktu]'
                 WHERE id  = '$data[id]'";
       $result = $this->query($query);
       $query  = "SELECT * from generated_soal WHERE id  = '$data[id]' limit 1 ";
@@ -145,7 +142,7 @@
       }
     }
     public function readTimePeserta($data) {
-      $where  = "where id_peserta = $data";
+      $where  = "where id = $data";
       $query  = "SELECT * from generated_soal $where";
       $result = $this->query($query);
       $fetch  = $this->fetch_object($result);

@@ -2,6 +2,7 @@
 include 'config/application.php';
 
 $sess_id    = $_SESSION['id'];
+$data['id']        = $purifier->purify($_POST['id']);
 $data['username']  = $purifier->purify($_POST['username']);
 $data['password']  = $utility->sha512($_POST['password']);
 $data['level']     = $purifier->purify($_POST['level']);
@@ -58,11 +59,11 @@ switch ($process) {
   break;
   case 'add':
     $pengguna->insertPengguna($data);
-    $utility->load("content/adduser","success","Data berhasil ditambahkan");
+    $utility->load("content/adduser","success","Data Pengguna Berhasil Ditambahkan");
   break;
   case 'edt':
     $pengguna->updatePengguna($data);
-    $utility->location_goto("content/setting");
+    $utility->load("content/user","success","Data Pengguna Berhasil Diperbaharui");
   break;
   case 'del':
     $id = $_POST['iddel'];
