@@ -245,7 +245,7 @@ break;
     }
     
     $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
-    $where = "skor_total = '$nilai'";
+    $where = "generated_soal.nilai = '$nilai'";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
   case 'kesatuan-chart':
