@@ -106,6 +106,8 @@ switch ($process) {
     if ($str == 1) {
       $utility->load("content/ujian","success","Soal berhasil diacak");
     }
+    else {
+    }
   break;
   case 'verification':
     $id = $_POST['key'];

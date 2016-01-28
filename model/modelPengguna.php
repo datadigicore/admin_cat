@@ -68,7 +68,7 @@
     public function suspendPengguna($data) {
       $query = "UPDATE generated_soal SET
                 status            = 4,
-                durasi_pengerjaan = '$data[newdurasi]'
+                tambahan_waktu    = '$data[newdurasi]'
                 WHERE id          = '$data[id]'";
       $result = $this->query($query);
       return $result;
@@ -76,7 +76,8 @@
     public function revisiPengguna($data) {
       $query = "UPDATE generated_soal SET
                 status    = 5,
-                durasi_pengerjaan = durasi_pengerjaan + '$data[newtambahwaktu]'
+                durasi_pengerjaan = '$data[durasibaru]',
+                tambahan_waktu = tambahan_waktu + '$data[newtambahwaktu]'
                 WHERE id  = '$data[id]'";
       $result = $this->query($query);
       $query  = "SELECT * from generated_soal WHERE id  = '$data[id]' limit 1 ";
