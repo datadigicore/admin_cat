@@ -142,13 +142,19 @@
     </div>
 
     <div class="row">
-      <section class="col-lg-7 connectedSortable">
+      <div class="col-lg-12 col-xs-12">
         <div class="box box-primary">
             <div class="box-body">
               <div class="chart tab-pane active" id="kesatuan-chart" style="position: relative; height: 300px;"></div>
           
             </div>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <section class="col-lg-7 connectedSortable">
+        
         <div class="box box-primary">
             <div class="box-body">
               <div class="chart tab-pane active" id="status-chart" style="position: relative; height: 300px;"></div>
