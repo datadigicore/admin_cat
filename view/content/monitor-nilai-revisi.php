@@ -22,6 +22,7 @@
                   <th>Id</th>
                   <th>No Peserta</th>
                   <th>Nama Peserta</th>
+                  <th>Pangkat</th>
                   <th>Kesatuan</th>
                   <th>Lokasi</th>
                   <th>Ruangan</th>
@@ -125,9 +126,8 @@
         {"targets" : 4},
         {"targets" : 5},
         {"targets" : 6},
-        {"targets" : 7},
-        {"targets" : 7},
-              ],
+        {"targets" : 7}
+      ],
       "order": [[ 1, "asc" ]]
     });
     var tableLive = $("#tableLive").DataTable({
@@ -159,9 +159,10 @@
         {"targets" : 4},
         {"targets" : 5},
         {"targets" : 6},
-        {"targets" : 7}
+        {"targets" : 7},
+        {"targets" : 8}
       ],
-      "order": [[ 7, "desc" ]]
+      "order": [[ 1, "asc" ]]
     });
   });
 </script>

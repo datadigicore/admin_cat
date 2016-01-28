@@ -136,10 +136,10 @@ switch ($process) {
       array( 'db' => 'nama_master', 'dt' => 2),
       array( 'db' => 'penulis',     'dt' => 3),
       array( 'db' => 'id_master',   'dt' => 4, 'formatter' => function($d,$row){ 
-        return  '<form method="POST" action="../content/revisisoal/">'.
+        return  '<form method="POST" action="../content/viewsoal/">'.
                 '<div class="text-center">'.
                   '<input type="hidden" name="idsoal" value="'.$d.'">'.
-                  '<button style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Revisi Soal</button>'.
+                  '<button style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> View Soal</button>'.
                 '</div>'.
                 '</form>';
       })
