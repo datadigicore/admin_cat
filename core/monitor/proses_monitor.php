@@ -4,6 +4,42 @@ include 'config/application.php';
 $sess_id    = $_SESSION['id'];
 
 switch ($process) {
+    case 'log':
+    $table = "log_penambahan_waktu";
+    $key   = "id_peserta";
+    $column = array(
+      array( 'db' => 'log_penambahan_waktu.id_log',           'dt' => 0, 'field' => 'id_log' ),
+      array( 'db' => 'no_peserta',                  'dt' => 1, 'field' => 'no_peserta' ),
+      array( 'db' => 'nama',                        'dt' => 2, 'field' => 'nama' ),
+      array( 'db' => 'id_lokasi',                   'dt' => 3, 'field' => 'id_lokasi' ),
+      array( 'db' => 'id_ruangan',                  'dt' => 4, 'field' => 'id_ruangan' ),
+      array( 'db' => 'log_penambahan_waktu.tambahan_waktu', 'dt' => 5, 'field' => 'tambahan_waktu' ), 
+      array( 'db' => 'log_penambahan_waktu.alasan', 'dt' => 6, 'field' => 'alasan' ),
+      array( 'db' => 'master_kategori.nama_master', 'dt' => 7, 'field' => 'nama_master', 'formatter' => function($d,$row){ 
+          return "<small><i>{$d}</i></small>";
+      }),
+      array( 'db' => 'log_penambahan_waktu.status',       'dt' => 8, 'field' => 'status', 'formatter' => function($d,$row){ 
+       
+        if ($d==5) {
+          return '<i>Telah Direvisi</i>';
+        }
+      })
+    );
+    if($_SESSION['level']==2){
+      $where = "id_lokasi = '$_SESSION[lokasi]' && ujian.status = 1";
+    }
+    elseif($_SESSION['level']==3){
+      $where = "id_lokasi = '$_SESSION[lokasi]' && id_ruangan = '$_SESSION[ruangan]' && ujian.status = 1";
+    }
+    else{
+      $where = "ujian.status = 1";
+    }
+    $join = "FROM {$table} INNER JOIN master_peserta ON log_penambahan_waktu.id_peserta = master_peserta.id_peserta INNER JOIN ujian "
+    . "ON ujian.id_ujian = log_penambahan_waktu.id_ujian "
+            . "INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break; 
+  
   case 'table':
     $table = "generated_soal";
     $key   = "id_peserta";

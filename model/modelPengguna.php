@@ -82,6 +82,22 @@
                 tambahan_waktu = '$data[newtambahwaktu]'
                 WHERE id  = '$data[id]'";
       $result = $this->query($query);
+      //hasil
+      $id_ujian=$fetch->id_ujian;
+      $id_paket=$fetch->id_paket;
+      $id_peserta=$fetch->id_peserta;
+      $id_kategori=$fetch->id_kategori;
+      $waktu_mulai=$fetch->waktu_mulai;
+      $durasi_pengerjaan=$fetch->durasi_pengerjaan;
+      $tambahan_waktu=$fetch->tambahan_waktu;
+      $status=$fetch->status;
+      $alasan=$fetch->alasan;
+      $query_insert="INSERT INTO `log_penambahan_waktu`(`id_ujian`, `id_paket`, `id_peserta`, `id_kategori`, "
+              . "`waktu_mulai`, `durasi_pengerjaan`, `tambahan_waktu`, `status`, `alasan`) values"
+              . "($id_ujian, $id_paket, $id_peserta, $id_kategori, "
+              . "'$waktu_mulai', $durasi_pengerjaan, $tambahan_waktu, $status, '$data[alasan]')";
+      $result = $this->query($query_insert);
+      
       return $result;
     }
     public function deactivatePengguna($id) {

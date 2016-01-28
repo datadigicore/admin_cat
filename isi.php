@@ -19,6 +19,9 @@ else {
     include ('view/include/sidebar.php');
     if ($_SESSION['level'] == 1) {  
       switch ($data[1]) {
+        case 'log':
+          include ('view/content/log.php');
+        break;
         case 'user':
           include ('view/content/pengguna.php');
         break;
