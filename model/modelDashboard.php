@@ -18,7 +18,7 @@
     }
 
     public function getNilaiPeserta(){
-      $query="SELECT skor_total, count(skor_total) FROM generated_soal INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori group by skor_total order by skor_total ASC ";
+      $query="SELECT nilai, count(nilai) FROM generated_soal INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori group by nilai order by nilai ASC ";
       $result = $this->query($query);
 
       return $result;
