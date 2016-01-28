@@ -2,5 +2,7 @@ config/config.php
 static/uploads/
 static/hasil/
 .htaccess
-log/*
+log/
 hasil
+1.html
+tes.txt

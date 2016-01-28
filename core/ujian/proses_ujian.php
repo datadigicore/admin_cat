@@ -60,7 +60,12 @@ switch ($process) {
           return "<small><i>Berlangsung</i></small>";
         }
         else{
-          return "<small><i>Selesai</i></small>";
+          return  '<form method="POST" action="../content/monitor-nilai">'.
+                  '<div class="text-center">'.
+                    '<input type="hidden" name="kategori" value="'.$row[1].'">'.
+                    '<button class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> &nbsp;Hasil Ujian</button>'.
+                  '</div>'.
+                  '</form>';
         }
       })
     );
