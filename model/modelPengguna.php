@@ -75,8 +75,8 @@
     }
     public function revisiPengguna($data) {
       $query = "UPDATE generated_soal SET
-                status            = 5,
-                tambahan_waktu = '$data[newtambahwaktu]'
+                status    = 5,
+                durasi    = durasi + '$data[newtambahwaktu]'
                 WHERE id  = '$data[id]'";
       $result = $this->query($query);
       $query  = "SELECT * from generated_soal WHERE id  = '$data[id]' limit 1 ";
