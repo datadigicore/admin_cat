@@ -27,6 +27,47 @@
   }
   $kesatuan .= "]";
   $jumlah .= "]";
+
+  $rs_status = $mdl_dashboard->getStatus();
+  
+  $temp=0;
+  while($r=$db->fetch_array($rs_status)){
+
+    switch($r[0]){
+      case 0:
+      $status3="'Belum Verifikasi',";
+      break;
+      case 1:
+      $status3="Sudah Verifikasi";
+      break;
+      case 2:
+      $status3="Sedang Ujian";
+      break;
+      case 3:
+      $status3="Sudah Selesai";
+      break;
+      case 4:
+      case 5:
+      $status3="Suspend";
+      break;
+      default:
+      $status3="";
+      break;
+    } 
+    $status2[$status3]+=$r[1];
+  }
+
+  $status4 = "[";
+  $jumlah3 = "[";
+  foreach ($status2 as $key => $value){
+    $status4.="'$key',";
+    $jumlah3.="$value,";
+  }
+  $status4 .= "]";
+  $jumlah3 .= "]";
+  print_r($status2);
+  echo($status4);
+  echo($jumlah3);
 ?>
 <div class="content-wrapper">
   <section class="content-header">
@@ -105,6 +146,12 @@
         <div class="box box-primary">
             <div class="box-body">
               <div class="chart tab-pane active" id="kesatuan-chart" style="position: relative; height: 300px;"></div>
+          
+            </div>
+        </div>
+        <div class="box box-primary">
+            <div class="box-body">
+              <div class="chart tab-pane active" id="status-chart" style="position: relative; height: 300px;"></div>
           
             </div>
         </div>
@@ -431,6 +478,33 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="status-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Peserta dengan dari status <span id="status-psrt"></span></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="margin:auto 10px">
+        <table id="table-status" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
+              <thead style="background-color:#4A4545;color:white;">
+                <tr>
+                  <th>Id</th>
+                  <th>No Peserta</th>
+                  <th>Nama Peserta</th>
+                  <th>Lokasi</th>
+                  <th>Ruangan</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="gender-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -468,6 +542,10 @@
   $('#kesatuan-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
         var nil = this.textContent || this.innerText;
         showModalKesatuan(nil);
+    });
+  $('#status-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
+        var nil = this.textContent || this.innerText;
+        showModalStatus(nil);
     });
  });
 
@@ -606,6 +684,46 @@
 
     
  }
+ function showModalStatus(status){
+  
+    $('#status-modal').modal('show');
+    $('#status-psrt').html(status);
+    if ($.fn.DataTable.isDataTable( '#table-status' ) ) {
+        $("#table-status").DataTable().destroy();
+      }
+    tableLive = $("#table-status").DataTable({
+      dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+      "oLanguage": {
+        "sInfoFiltered": ""
+      },
+      "processing": true,
+      "serverSide": true,
+      "scrollX": true,
+      "ajax": {
+        "data": {status:status},
+        "url": "<?php echo $url_rewrite;?>process/monitor/status-chart",
+        "type": "POST"
+      },
+      "columnDefs" : [
+        {"targets" : 0,
+         "visible" : false},
+        {"targets" : 1},
+        {"targets" : 2},
+        {"targets" : 3},
+        {"targets" : 4}
+      ],
+       dom: 'Bfrtip',
+    buttons: [
+           'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+ }
   $.ajax({url: "<?echo $url_rewrite?>process/dashboard/gender",
     type: 'POST',
     data: {},
@@ -633,6 +751,10 @@
   }});
 
     $('#nilai-chart').highcharts({
+      legend: {
+          enabled:false
+        },
+
       chart: {
             type: 'column'
         },
@@ -644,6 +766,14 @@
         },
       xAxis: {
             categories: <?php print_r($nilai)?>,
+            title:{
+              text:"Nilai"
+            }
+        },
+        yAxis: {
+            title:{
+              text:"Jumlah Peserta"
+            }
         },
 
         plotOptions: {
@@ -662,10 +792,15 @@
 
         series: [{
             data: <?php print_r($kat)?>
-        }]
+        }],
+
     });
 
     $('#kesatuan-chart').highcharts({
+      legend: {
+          enabled:false
+        },
+
       chart: {
             type: 'column'
         },
@@ -677,6 +812,14 @@
         },
       xAxis: {
             categories: <?php print_r($kesatuan)?>,
+        title:{
+              text:"Kesatuan"
+            }
+        },
+        yAxis: {
+            title:{
+              text:"Jumlah Peserta"
+            }
         },
 
         plotOptions: {
@@ -695,6 +838,71 @@
 
         series: [{
             data: <?php print_r($jumlah)?>
+        }]
+    });
+
+    $('#status-chart').highcharts({
+      legend: {
+          enabled:false
+        },
+
+      chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Status Peserta'
+        },
+        subtitle: {
+            text: 'Klik bar untuk melihat data peserta'
+        },
+      xAxis: {
+            categories: <?php print_r($status4)?>,
+        title:{
+              text:"Status Peserta"
+            }
+        },
+        yAxis: {
+            title:{
+              text:"Jumlah Peserta"
+            }
+        },
+
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function () {
+                            var nil = this.category;
+                            switch(nil){
+                              case 'Belum Verifikasi':
+                              status = 0;
+                              break;
+                              case 'Sudah Verifikasi':
+                              status = 1;
+                              break;
+                              case 'Sedang Ujian':
+                              status = 2;
+                              break;
+                              case 'Sudah Selesai':
+                              status = 3;
+                              break;
+                              case 'Suspend':
+                              status = 4;
+                              break;
+                              default:
+                              status = "";
+                              break;
+                            } 
+                            showModalStatus(status);
+                        }
+                    }
+                }
+            }
+        },
+
+        series: [{
+            data: <?php print_r($jumlah3)?>
         }]
     });
     $('#nilai-modal').on('show.bs.modal', function (e) {

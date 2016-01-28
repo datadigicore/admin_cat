@@ -22,7 +22,7 @@
               <select class="form-control" id="id-ujian">
                 <option value=""> Pilih Ujian</option>
                 <?php 
-                  $qry = $db->query("SELECT id_ujian, nama_master FROM ujian join master_kategori on ujian.id_kategori = master_kategori.id_master WHERE ujian.status_ujian = 3");
+                  $qry = $db->query("SELECT id_ujian, nama_master FROM ujian join master_kategori on ujian.id_kategori = master_kategori.id_master WHERE ujian.status_ujian = 3 or ujian.status_ujian = 2 ");
                    // echo "<option value=\"\" >pilih kode akun</option>";
                    while ($row = $db->fetch_object($qry)) {
                         $id = $row->id_ujian;
