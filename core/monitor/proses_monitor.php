@@ -383,7 +383,7 @@ break;
     $data['alasan'] = $purifier->purify($_POST['alasan']);
     $result = $pengguna->readTimePeserta($data['id']);
     $timeserver = strtotime($result->waktu_mulai);
-    $timesuspend = strtotime(date("Y-m-d H:i:s","+".$result->durasi_pengerjaan." minutes", $timeserver));
+    $timesuspend = strtotime(date("Y-m-d H:i:s",strtotime("+".$result->durasi_pengerjaan." minutes", $timeserver)));
     // print_r($timesuspend);
     $timenow = strtotime(date("Y-m-d H:i:s", time()));
     $newtime = ($timenow - $timesuspend)/60;
