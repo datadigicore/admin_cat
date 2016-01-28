@@ -142,7 +142,7 @@
       }
     }
     public function readTimePeserta($data) {
-      $where  = "where id_peserta = $data";
+      $where  = "where id = $data";
       $query  = "SELECT * from generated_soal $where";
       $result = $this->query($query);
       $fetch  = $this->fetch_object($result);

@@ -351,6 +351,7 @@ break;
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
   case 'suspend':
+    date_default_timezone_set("Asia/Jakarta");
     $data['id'] = $purifier->purify($_POST['key']);
     $result = $pengguna->readTimePeserta($data['id']);
     $timeserver = strtotime($result->waktu_mulai);
