@@ -76,6 +76,15 @@ else {
         case 'monitor':
           include ('view/content/monitor.php');
         break;
+        case 'monitor-nilai':
+          if (isset($_POST['kategori'])) {
+            $kategori = $_POST['kategori'];
+            include ('view/content/monitor-nilai-revisi.php');
+          }
+          else{
+            include ('view/content/home.php');
+          }
+        break;
         case 'file-ruangan':
 
           include ('view/content/file-ruangan.php');
