@@ -35,7 +35,7 @@
 
     switch($r[0]){
       case 0:
-      $status3="'Belum Verifikasi',";
+      $status3="Belum Verifikasi";
       break;
       case 1:
       $status3="Sudah Verifikasi";
@@ -65,9 +65,9 @@
   }
   $status4 .= "]";
   $jumlah3 .= "]";
-  print_r($status2);
-  echo($status4);
-  echo($jumlah3);
+  // print_r($status2);
+  // echo($status4);
+  // echo($jumlah3);
 ?>
 <div class="content-wrapper">
   <section class="content-header">
