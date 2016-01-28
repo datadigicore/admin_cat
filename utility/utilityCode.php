@@ -351,9 +351,9 @@ function background($Command, $Priority = 0){
           //echo("Masuk $c");
           $filename = $_FILES[$file]['name'];
           $name = explode('.', $filename);
-          echo in_array($_FILES[$file]['type'], $allowed);
+          //echo in_array($_FILES[$file]['type'], $allowed);
           if (in_array($_FILES[$file]['type'], $allowed)) {
-               echo("Masuk 112");
+               echo("..");
                //Where the file must be uploaded to
                if ($folder)
                     $folder .= '/'; //Add a '/' at the end of the folder
