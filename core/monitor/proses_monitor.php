@@ -210,7 +210,7 @@ break;
         return  '<form method="POST" action="../content/file-ruang">'.
                   '<div class="text-center">'.
                     '<input type="hidden" name="id_lokasi" value="'.$d.'">'.
-                    '<a href="http://localhost/cat.polda/login/nilaitoPdf/?id=1&ruang='.$row[1].'" style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses File</a>'.
+                    '<a href="'.$domain.'/login/nilaitoPdf/?id=1&ruang='.$row[1].'" style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses File</a>'.
                   '</div>'.
                   '</form>';
       })
