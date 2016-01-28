@@ -110,7 +110,7 @@
       if(id_ujian!=""){
       $.ajax({
         type: "post",
-        url : "http://catpoldametro.gunadarma.net/login/nilaitoPdf?id="+id_ujian+"&ruang="+button,
+        url : "http://catpoldametro.gunadarma.net/login/nilaitoPdf/?id="+id_ujian+"&ruang="+button,
         success: function(data)
         {
           alert("data berhasil dibuat, silakan download");
