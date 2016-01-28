@@ -24,7 +24,7 @@
                   <th>Nama Peserta</th>
                   <th>Lokasi</th>
                   <th>Ruangan</th>
-                   <th>Tambahn waktu</th>
+                   <th>Tambahan waktu</th>
                   <th>Alasan Revisi</th>
                   <th>Kategori Ujian</th>
                    <th>Status Ujian</th>
