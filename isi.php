@@ -86,7 +86,8 @@ else {
         } else {
           $ruang=$_POST['ruang'];
         }
-          include ('view/content/file-perorangan.php');
+        include ('view/content/file-perorangan.php');
+        break;
         case 'monitor-file':
           include ('view/content/monitor-file.php');
         break;

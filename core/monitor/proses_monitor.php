@@ -122,7 +122,6 @@ switch ($process) {
     $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
-
   case 'ruangan':
     $table = "master_peserta";
     $key   = "id_ruangan";
@@ -157,6 +156,8 @@ switch ($process) {
     }
     $join = "FROM {$table} inner join generated_soal on master_peserta.id_peserta = generated_soal.id_peserta inner join ujian on generated_soal.id_ujian = ujian.id_ujian";
     $where = "id_ruangan = '$ruang' and ujian.status_ujian=3";
+$datatable->get_table_exjoin($table, $key, $column, $join, $where);
+break;
   case 'file':
     $table = "lokasi";
     $key   = "id_lokasi";

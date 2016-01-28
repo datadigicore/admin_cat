@@ -124,31 +124,6 @@
       ],
       "order": [[ 1, "asc" ]]
     });
-    $(document).on("click", "#suspend", function (){
-      var tr = $(this).closest('tr');
-      tabrow = table.row( tr );
-      row_id = tabrow.data()[0];
-      $.ajax({
-        type: "post",
-        url : "<?php echo $url_rewrite;?>process/monitor/suspend",
-        data: {key:row_id},
-        success: function(data)
-        {
-          table.draw();
-        }
-      });
-      return false;
-    });
-    $(document).on("click", "#revisi", function (){
-      var tr = $(this).closest('tr');
-      tabrow = table.row( tr );
-      row_id = tabrow.data()[0];
-      nopeserta_data = tabrow.data()[1];
-      namapeserta_data = tabrow.data()[2];
-      $("#editModal").modal("show");
-      $("#idpeserta").val(row_id);
-      $("#nopeserta").val(nopeserta_data);
-      $("#namapeserta").val(namapeserta_data);
-    });
+    
   });
 </script>
