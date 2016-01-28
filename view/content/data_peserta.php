@@ -5,7 +5,7 @@
       <small>Menu</small>
     </h1>
     <ol class="breadcrumb">
-      <li><i class="fa fa-table"></i> Data Peserta</li>
+      <li><i class="fa fa-group"></i> Data Peserta</li>
     </ol>
   </section>
   <section class="content">
@@ -123,7 +123,7 @@
       $("#filename-revisi").attr('value', $(this).val().replace(/C:\\fakepath\\/i, ''));
     });
     var table = $(".table").DataTable({
-      dom: 'Bfrtip',
+      dom: 'lBfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],

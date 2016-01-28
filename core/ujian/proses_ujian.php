@@ -88,6 +88,20 @@ switch ($process) {
     $data['paket'] = $_POST['paket'];
     $ujian->activatePaketUjian($data);
   break;
+  case 'activateRandom':
+    $data['id'] = $_POST['id'];
+    $data['paket'] = substr($_POST['paket'], -1);
+    $ujian->activateUjian($data['id']);
+    $ujian->activatePaketUjian($data);
+    $url = $link_generate_soal.$data['id'];
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    $str = curl_exec($curl);
+    curl_close($curl);
+    if ($str == 1) {
+      $utility->load("content/ujian","success","Soal berhasil diacak");
+    }
+  break;
   case 'verification':
     $id = $_POST['key'];
     $ujian->verifikasiUjian($id);

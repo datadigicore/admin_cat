@@ -4,6 +4,42 @@ include 'config/application.php';
 $sess_id    = $_SESSION['id'];
 
 switch ($process) {
+    case 'log':
+    $table = "log_penambahan_waktu";
+    $key   = "id_peserta";
+    $column = array(
+      array( 'db' => 'log_penambahan_waktu.id_log',           'dt' => 0, 'field' => 'id_log' ),
+      array( 'db' => 'no_peserta',                  'dt' => 1, 'field' => 'no_peserta' ),
+      array( 'db' => 'nama',                        'dt' => 2, 'field' => 'nama' ),
+      array( 'db' => 'id_lokasi',                   'dt' => 3, 'field' => 'id_lokasi' ),
+      array( 'db' => 'id_ruangan',                  'dt' => 4, 'field' => 'id_ruangan' ),
+      array( 'db' => 'log_penambahan_waktu.tambahan_waktu', 'dt' => 5, 'field' => 'tambahan_waktu' ), 
+      array( 'db' => 'log_penambahan_waktu.alasan', 'dt' => 6, 'field' => 'alasan' ),
+      array( 'db' => 'master_kategori.nama_master', 'dt' => 7, 'field' => 'nama_master', 'formatter' => function($d,$row){ 
+          return "<small><i>{$d}</i></small>";
+      }),
+      array( 'db' => 'log_penambahan_waktu.status',       'dt' => 8, 'field' => 'status', 'formatter' => function($d,$row){ 
+       
+        if ($d==5) {
+          return '<i>Telah Direvisi</i>';
+        }
+      })
+    );
+    if($_SESSION['level']==2){
+      $where = "id_lokasi = '$_SESSION[lokasi]' && ujian.status = 1";
+    }
+    elseif($_SESSION['level']==3){
+      $where = "id_lokasi = '$_SESSION[lokasi]' && id_ruangan = '$_SESSION[ruangan]' && ujian.status = 1";
+    }
+    else{
+      $where = "ujian.status = 1";
+    }
+    $join = "FROM {$table} INNER JOIN master_peserta ON log_penambahan_waktu.id_peserta = master_peserta.id_peserta INNER JOIN ujian "
+    . "ON ujian.id_ujian = log_penambahan_waktu.id_ujian "
+            . "INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break; 
+  
   case 'table':
     $table = "generated_soal";
     $key   = "id_peserta";
@@ -86,6 +122,7 @@ switch ($process) {
     $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
+
   case 'ruangan':
     $table = "master_peserta";
     $key   = "id_ruangan";
@@ -120,6 +157,40 @@ switch ($process) {
     }
     $join = "FROM {$table} inner join generated_soal on master_peserta.id_peserta = generated_soal.id_peserta inner join ujian on generated_soal.id_ujian = ujian.id_ujian";
     $where = "id_ruangan = '$ruang' and ujian.status_ujian=3";
+  case 'file':
+    $table = "lokasi";
+    $key   = "id_lokasi";
+    $column = array(
+      array( 'db' => 'id_lokasi',    'dt' => 0, 'field' => 'id' ),
+      array( 'db' => 'nama_lokasi',  'dt' => 1, 'field' => 'nama_lokasi' ),
+      array( 'db' => 'id_lokasi',    'dt' => 2, 'field' => 'id_lokasi', 'formatter' => function($d,$row){ 
+        return  '<form method="POST" action="../content/file-ruang">'.
+                  '<div class="text-center">'.
+                    '<input type="hidden" name="id_lokasi" value="'.$d.'">'.
+                    '<button style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses File</button>'.
+                  '</div>'.
+                  '</form>';
+      })
+    );
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break;
+  case 'file-lokasi':
+    $id = $_POST['lokasi'];
+    $table = "ruangan";
+    $key   = "id_ruangan";
+    $column = array(
+      array( 'db' => 'id_ruangan',    'dt' => 0, 'field' => 'id' ),
+      array( 'db' => 'nama',  'dt' => 1, 'field' => 'nama' ),
+      array( 'db' => 'id_ruangan',    'dt' => 2, 'field' => 'id_lokasi', 'formatter' => function($d,$row){ 
+        return  '<form method="POST" action="../content/file-ruang">'.
+                  '<div class="text-center">'.
+                    '<input type="hidden" name="id_lokasi" value="'.$d.'">'.
+                    '<a href="http://localhost/cat.polda/login/nilaitoPdf/?id=1&ruang='.$row[1].'" style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses File</a>'.
+                  '</div>'.
+                  '</form>';
+      })
+    );
+    $where ="id_lokasi = '$id'";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
   case 'nilai-chart':

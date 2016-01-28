@@ -92,7 +92,7 @@
 <script>
   $(function () {
     var table = $("#table").DataTable({
-      dom: 'Bfrtip',
+      dom: 'lBfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
@@ -119,7 +119,7 @@
       "order": [[ 1, "asc" ]]
     });
     var tableLive = $("#tableLive").DataTable({
-      dom: 'Bfrtip',
+      dom: 'lBfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
