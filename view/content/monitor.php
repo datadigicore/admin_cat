@@ -115,7 +115,7 @@
       },
       "columnDefs" : [
         {"targets" : 0,
-         "visible" : true},
+         "visible" : false},
         {"targets" : 1},
         {"targets" : 2},
         {"targets" : 3},
