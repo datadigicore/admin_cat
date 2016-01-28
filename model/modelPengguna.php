@@ -17,13 +17,10 @@
 
     public function updatePengguna($data) {
       $query       = "UPDATE pengguna SET
-        username  = '$data[username]',
-        password  = '$data[password]',
         level     = '$data[level]',
         lokasi    = '$data[lokasi]',
-        ruangan   = '$data[ruangan]',
-        status    = '$data[status]'
-        WHERE id   = '$id'
+        ruangan   = '$data[ruangan]'
+        WHERE id_pengguna  = '$data[id]'
       ";
       $result = $this->query($query);
       return $result;
