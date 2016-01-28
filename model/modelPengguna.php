@@ -82,6 +82,9 @@
                 tambahan_waktu = '$data[newtambahwaktu]'
                 WHERE id  = '$data[id]'";
       $result = $this->query($query);
+      $query  = "SELECT * from generated_soal WHERE id  = '$data[id]' limit 1 ";
+      $result = $this->query($query);
+      $fetch  = $this->fetch_object($result);
       //hasil
       $id_ujian=$fetch->id_ujian;
       $id_paket=$fetch->id_paket;

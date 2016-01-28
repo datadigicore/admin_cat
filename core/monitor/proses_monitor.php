@@ -291,6 +291,7 @@ break;
   case 'revisi':
     $data['id'] = $purifier->purify($_POST['key']);
     $tambahwaktu = $purifier->purify($_POST['tambahwaktu']);
+    $data['alasan'] = $purifier->purify($_POST['alasan']);
     $result = $pengguna->readTimePeserta($data['id']);
     $timeserver = strtotime($result->waktu_mulai);
     $timenow = strtotime(date("Y-m-d H:i:s", time()));

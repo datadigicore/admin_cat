@@ -81,6 +81,9 @@
           <span style="position:absolute;margin:7px;right:50px">Menit</span>
           <input type="number" class="form-control" name="tambahwaktu" placeholder="Tambahan Waktu Ujian" required>
         </div>
+        <div class="form-group">
+          <textarea class="form-control" name="alasan" placeholder="Alasan" style="resize:none;" required></textarea>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-flat btn-success">Submit</button>
@@ -92,6 +95,10 @@
 <script>
   $(function () {
     var table = $("#table").DataTable({
+      aLengthMenu: [
+          [10, 25, 50, 100, -1],
+          [10, 25, 50, 100, "All"]
+      ],
       dom: 'lBfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
@@ -119,6 +126,10 @@
       "order": [[ 1, "asc" ]]
     });
     var tableLive = $("#tableLive").DataTable({
+      aLengthMenu: [
+          [10, 25, 50, 100, -1],
+          [10, 25, 50, 100, "All"]
+      ],
       dom: 'lBfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
