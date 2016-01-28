@@ -142,14 +142,13 @@ switch ($process) {
       array( 'db' => 'generated_soal.id',  'dt' => 0, 'field' => 'id' ),
       array( 'db' => 'no_peserta',         'dt' => 1, 'field' => 'no_peserta' ),
       array( 'db' => 'nama',               'dt' => 2, 'field' => 'nama' ),
-      array( 'db' => 'pkt',                'dt' => 3, 'field' => 'pkt'),
-      array( 'db' => 'kesatuan',           'dt' => 4, 'field' => 'kesatuan'),
-      array( 'db' => 'id_lokasi',          'dt' => 5, 'field' => 'id_lokasi' ),
-      array( 'db' => 'id_ruangan',         'dt' => 6, 'field' => 'id_ruangan' ),
-      array( 'db' => 'nama_master',        'dt' => 7, 'field' => 'nama_master', 'formatter' => function($d,$row){ 
+      array( 'db' => 'kesatuan',           'dt' => 3, 'field' => 'kesatuan'),
+      array( 'db' => 'id_lokasi',          'dt' => 4, 'field' => 'id_lokasi' ),
+      array( 'db' => 'id_ruangan',         'dt' => 5, 'field' => 'id_ruangan' ),
+      array( 'db' => 'nama_master',        'dt' => 6, 'field' => 'nama_master', 'formatter' => function($d,$row){ 
           return "<small><i>{$d}</i></small>";
       }),
-      array( 'db' => 'nilai',              'dt' => 8, 'field' => 'nilai' ),
+      array( 'db' => 'nilai',   'dt' => 7, 'field' => 'nilai' ),
     );
     if($_SESSION['level']==2){
       $where = "id_lokasi = '".$_SESSION['lokasi']."' && master_kategori.nama_master = '$kategori'";
