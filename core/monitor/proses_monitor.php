@@ -361,6 +361,7 @@ break;
     $pengguna->suspendPengguna($data);
   break;
   case 'revisi':
+    date_default_timezone_set("Asia/Jakarta");
     $data['id'] = $purifier->purify($_POST['key']);
     $tambahwaktu = $purifier->purify($_POST['tambahwaktu']);
     $data['alasan'] = $purifier->purify($_POST['alasan']);
