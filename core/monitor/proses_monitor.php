@@ -86,6 +86,42 @@ switch ($process) {
     $join = "FROM {$table} INNER JOIN master_peserta ON generated_soal.id_peserta = master_peserta.id_peserta INNER JOIN ujian ON ujian.id_ujian = generated_soal.id_ujian INNER JOIN master_kategori ON master_kategori.id_master = ujian.id_kategori";
     $datatable->get_table_exjoin($table, $key, $column, $join, $where);
   break;
+  case 'file':
+    $table = "lokasi";
+    $key   = "id_lokasi";
+    $column = array(
+      array( 'db' => 'id_lokasi',    'dt' => 0, 'field' => 'id' ),
+      array( 'db' => 'nama_lokasi',  'dt' => 1, 'field' => 'nama_lokasi' ),
+      array( 'db' => 'id_lokasi',    'dt' => 2, 'field' => 'id_lokasi', 'formatter' => function($d,$row){ 
+        return  '<form method="POST" action="../content/file-ruang">'.
+                  '<div class="text-center">'.
+                    '<input type="hidden" name="id_lokasi" value="'.$d.'">'.
+                    '<button style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses File</button>'.
+                  '</div>'.
+                  '</form>';
+      })
+    );
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break;
+  case 'file-lokasi':
+    $id = $_POST['lokasi'];
+    $table = "ruangan";
+    $key   = "id_ruangan";
+    $column = array(
+      array( 'db' => 'id_ruangan',    'dt' => 0, 'field' => 'id' ),
+      array( 'db' => 'nama',  'dt' => 1, 'field' => 'nama' ),
+      array( 'db' => 'id_ruangan',    'dt' => 2, 'field' => 'id_lokasi', 'formatter' => function($d,$row){ 
+        return  '<form method="POST" action="../content/file-ruang">'.
+                  '<div class="text-center">'.
+                    '<input type="hidden" name="id_lokasi" value="'.$d.'">'.
+                    '<a href="http://localhost/cat.polda/login/nilaitoPdf/?id=1&ruang='.$row[1].'" style="margin:0 2px;" class="btn btn-flat btn-primary btn-sm" type="submit"><i class="fa fa-file-text-o"></i> Proses File</a>'.
+                  '</div>'.
+                  '</form>';
+      })
+    );
+    $where ="id_lokasi = '$id'";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break;
   case 'nilai-chart':
     $nilai = $_POST['nilai'];
     $table = "generated_soal";

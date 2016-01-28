@@ -16,6 +16,12 @@
             <h3 class="box-title" style="margin-top:6px;">Tabel Pengaturan Ujian</h3>
           </div>
           <div class="box-body">
+            <?php if (isset($_POST['message'])): ?>
+              <div class="alert alert-<?php echo $_POST['alert']; ?> alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fa fa-exclamation-triangle"></i><?php echo $_POST['message']; ?>
+              </div>
+            <?php endif ?>
             <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
               <thead style="background-color:#4A4545;color:white;">
                 <tr>
@@ -41,12 +47,6 @@
             <h3 class="box-title" style="margin-top:6px;">Input Data Ujian</h3>
           </div>
           <div class="box-body">
-          <?php if (isset($_POST['message'])): ?>
-            <div class="alert alert-<?php echo $_POST['alert']; ?> alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <i class="icon fa fa-exclamation-triangle"></i><?php echo $_POST['message']; ?>
-            </div>
-          <?php endif ?>
             <div class="panel panel-default" style="margin-bottom:0">
               <div class="panel-heading te-panel-heading">
                 <i class="glyphicon glyphicon-file"></i> Form Input

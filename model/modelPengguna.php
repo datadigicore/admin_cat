@@ -89,6 +89,14 @@
       $result = $this->query($query);
       return $result;
     }
+    public function getLokasi() {
+      $query  = "SELECT * from lokasi";
+      $result = $this->query($query);
+      foreach ($result as $item) {
+        $array[] = $item["nama_lokasi"];
+      }
+      return $array;
+    }
     public function lokasi($sessLok="") {
       $query  = "SELECT * from lokasi";
       $result = $this->query($query);

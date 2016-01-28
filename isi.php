@@ -55,6 +55,15 @@ else {
             include ('view/content/home.php');
           }
         break;
+        case 'file-ruang':
+          if (isset($_POST['id_lokasi'])) {
+            $lokasi = $_POST['id_lokasi'];
+            include ('view/content/monitor-file-ruang.php');
+          }
+          else{
+            include ('view/content/monitor-file-ruang.php');
+          }
+        break;
         case 'upload-peserta':
           include ('view/content/upload_peserta.php');
         break;
@@ -63,6 +72,9 @@ else {
         break;
         case 'monitor':
           include ('view/content/monitor.php');
+        break;
+        case 'monitor-file':
+          include ('view/content/monitor-file.php');
         break;
         default:
           include ('view/content/home.php');

@@ -25,13 +25,24 @@
         $process = $data[2]; 
         include "./core/monitor/proses_monitor.php";
       break;
+      case 'monitor-file':
+        exec("ls hasil/*.pdf",$output);
+        $lokasi = $pengguna->getLokasi();
+        for ($i=0; $i < count($lokasi) ; $i++) { 
+          for ($j=0; $j < count($output); $j++) { 
+            if (substr($lokasi[$i], 7, 1) == substr($output[$j], 6, 1)) {
+              $output[$lokasi[$i]][$j] = str_replace('hasil/', '', $output[$j]); 
+            }
+          }
+        }
+        print_r('<pre>');
+        print_r($output);
+        // print_r($output['lokasi']);
+        // echo json_encode();
+      break;
       case 'dashboard':
         $process = $data[2]; 
         include "./core/dashboard/dashboard.php";
-      break;
-      case 'rkakl':
-        $process = $data[2]; 
-        include "./core/rkakl/proses_rkakl.php";
       break;
       case 'upload':
         $process = $data[2]; 
@@ -40,24 +51,6 @@
       case 'upload_peserta':
         $process = $data[2]; 
         include "./core/upload/upload_peserta.php";
-      break;
-      case 'rab':
-        $process = $data[2]; 
-        include "./core/rab/proses_rab.php";
-      break;
-      case 'rab_rinci':
-        $process = $data[2]; 
-        include "./core/rab/proses_rab_rinci.php";
-      break;
-      case 'example':
-        if ($data[2] == "hapusexample") {
-          $hapusdata = $purifier->purify($data[3]);
-        }
-        else if ($data[2] == "anotherexample") {
-          $publishdata = $purifier->purify($data[3]);
-          $publishvalue = $purifier->purify($data[4]);
-        }
-        include "./core/today/proses_today.php";
       break;
       default:
         header('HTTP/1.1 404 Not Found');

@@ -105,6 +105,9 @@
 </div>
 <div class="modal fade" id="chooseModal" data-backdrop="static">
   <div class="modal-dialog">
+    <form method="post" action="<?php echo $url_rewrite;?>process/ujian/activateRandom">
+    <input type="hidden" name="id" value="<?php echo $paket->id_ujian;?>">
+    
     <div class="modal-content">
       <div class="modal-header" style="background-color:#f9af00 !important; color:white;">
         <h4 class="modal-title">Pilih Paket Soal</h4>
@@ -113,7 +116,7 @@
         <div class="form-group">
         <?php for ($i=0; $i < $paket->pilihan_paket ; $i++) { ?>
           <div class="col-xs-<?php echo floor(12/$paket->pilihan_paket);?>">
-            <button id="paket<?php echo chr($i+65); ?>" style="width:100%;height:120px;font-size:24px;font-weight:bold;">Paket <?php echo chr($i+65); ?></button>
+            <input type="submit" id="paket<?php echo chr($i+65); ?>" value="Paket <?php echo chr($i+65); ?>" name="paket" style="width:100%;height:120px;font-size:24px;font-weight:bold;">
           </div>
         <?php } ?>
         </div>
@@ -121,6 +124,7 @@
       <div class="modal-footer" style="border:none">
       </div>
     </div>
+    </form>
   </div>
 </div>
 <div class="modal fade" id="waitingModal" data-backdrop="static">
@@ -176,29 +180,10 @@
       $("#waitingModal").modal("hide");
       $("#chooseModal").modal("show");
     }
-    setTimeout(refreshTabel, 5000);
+    setTimeout(refreshTabel, 3000);
   });
-  <?php for ($i=0; $i < $paket->pilihan_paket ; $i++) { ?>
-  $("#paket<?php echo chr($i+65); ?>").click(function(){
+  $( "form" ).submit(function( event ) {
     $("#chooseModal").modal("hide");
     $("#waitingModal").modal("show");
-    $.ajax({
-      type: "post",
-      url:  "<?php echo $url_rewrite;?>process/ujian/activatePaket",
-      data: {id:<?php echo $paket->id_ujian;?>,paket:"<?php echo chr($i+65); ?>"}
-    });
-    $.ajax({
-      type: "post",
-      url:  "<?php echo $url_rewrite;?>process/ujian/activate",
-      data: {key:<?php echo $paket->id_ujian;?>}
-    });
-    $.ajax({
-      type: "post",
-      url:  "<?php echo $link_generate_soal;?>"+<?php echo $paket->id_ujian;?>,
-      success:function(){
-        window.location.href = '<?php echo $url_rewrite;?>content/ujian';
-      }
-    });
   });
-  <?php } ?>
 </script>
