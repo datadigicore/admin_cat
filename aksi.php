@@ -21,6 +21,10 @@
         $process = $data[2]; 
         include "./core/ujian/proses_ujian.php";
       break;
+      case 'hasil':
+        $process = $data[2]; 
+        include "./core/hasil/hasil.php";
+      break;
       case 'monitor':
         $process = $data[2]; 
         include "./core/monitor/proses_monitor.php";

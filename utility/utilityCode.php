@@ -52,7 +52,7 @@ function background($Command, $Priority = 0){
               </script>");
      }
 
-     public function load($lokasi, $alert, $message) {
+     public function load($lokasi, $alert, $message,$postdata) {
           $alamat = $this->url_rewrite_class;
           if (isset($message)) {
              echo("<body></body>
@@ -68,8 +68,13 @@ function background($Command, $Priority = 0){
                     j.setAttribute('type','hidden');
                     j.setAttribute('name','message');
                     j.setAttribute('value','".$message."');
+                    var k = document.createElement('input');
+                    k.setAttribute('type','hidden');
+                    k.setAttribute('name','postdata');
+                    k.setAttribute('value','".$postdata."');
                     f.appendChild(i);
                     f.appendChild(j);
+                    f.appendChild(k);
                     document.body.appendChild(f);
                     f.submit();
                    </script>");

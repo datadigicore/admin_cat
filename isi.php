@@ -64,6 +64,18 @@ else {
         case 'monitor':
           include ('view/content/monitor.php');
         break;
+        case 'file-ruangan':
+
+          include ('view/content/file-ruangan.php');
+        break;
+        case 'file-perorangan':
+        if(isset($_POST['postdata'])){
+          $ruang=$_POST['postdata'];
+        } else {
+          $ruang=$_POST['ruang'];
+        }
+          include ('view/content/file-perorangan.php');
+        break;
         default:
           include ('view/content/home.php');
         break;
@@ -76,6 +88,17 @@ else {
         break;
         case 'monitor':
           include ('view/content/monitor.php');
+        break;
+        case 'file-ruangan':
+          include ('view/content/file-ruangan.php');
+        break;
+        case 'file-perorangan':
+        if(isset($_POST['postdata'])){
+          $ruang=$_POST['postdata'];
+        } else {
+          $ruang=$_POST['ruang'];
+        }
+          include ('view/content/file-perorangan.php');
         break;
         case 'adduser':
           include ('view/content/pengguna-add-lokasi.php');
@@ -92,6 +115,17 @@ else {
         break;
         case 'monitor':
           include ('view/content/monitor.php');
+        break;
+        case 'file-ruangan':
+          include ('view/content/file-ruangan.php');
+        break;
+        case 'file-perorangan':
+          if(isset($_POST['postdata'])){
+          $ruang=$_POST['postdata'];
+        } else {
+          $ruang=$_POST['ruang'];
+        }
+          include ('view/content/file-perorangan.php');
         break;
         default:
           include ('view/content/home.php');
