@@ -541,18 +541,18 @@
 <script src="<?php echo $url_rewrite;?>static/dist/js/pages/dashboard.js"></script>
 <script >
  $(document).ready(function(){
-  $('#nilai-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
-        var nil = this.textContent || this.innerText;
-        showModal(nil);
-    });
-  $('#kesatuan-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
-        var nil = this.textContent || this.innerText;
-        showModalKesatuan(nil);
-    });
-  $('#status-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
-        var nil = this.textContent || this.innerText;
-        showModalStatus(nil);
-    });
+  // $('#nilai-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
+  //       var nil = this.textContent || this.innerText;
+  //       showModal(nil);
+  //   });
+  // $('#kesatuan-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
+  //       var nil = this.textContent || this.innerText;
+  //       showModalKesatuan(nil);
+  //   });
+  // $('#status-chart .highcharts-axis-labels text, .highcharts-axis-labels span').click(function () {
+  //       var nil = this.textContent || this.innerText;
+  //       showModalStatus(nil);
+  //   });
  });
 
  
