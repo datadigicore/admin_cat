@@ -74,10 +74,15 @@
       return $result;
     }
     public function revisiPengguna($data) {
+      // $query = "UPDATE generated_soal SET
+      //           status    = 5,
+      //           durasi_pengerjaan = '$data[durasibaru]',
+      //           tambahan_waktu = tambahan_waktu + '$data[newtambahwaktu]'
+      //           WHERE id  = '$data[id]'";
       $query = "UPDATE generated_soal SET
                 status    = 5,
                 durasi_pengerjaan = '$data[durasibaru]',
-                tambahan_waktu = tambahan_waktu + '$data[newtambahwaktu]'
+                tambahan_waktu =  '$data[newtambahwaktu]'
                 WHERE id  = '$data[id]'";
       $result = $this->query($query);
       $query  = "SELECT * from generated_soal WHERE id  = '$data[id]' limit 1 ";

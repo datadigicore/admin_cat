@@ -15,6 +15,7 @@ $target_file = $path_upload.$filename;
   }
 
   $allDataInSheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+  echo "<pre>";
   print_r($allDataInSheet);
   // $data_insert = array(
   //   "tanggal"    => date("Y-m-d H:i:s",$time),

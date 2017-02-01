@@ -87,7 +87,7 @@
         
         $jabatan                 = trim($data[$i]["I"]," \t\n\r\0\x0B\xA0");
         $no_ujian                 = trim($data[$i]["B"]," \t\n\r\0\x0B\xA0");
-        $nama                = mysql_real_escape_string(trim($data[$i]["E"]," \t\n\r\0\x0B\xA0"));
+        $nama                = (trim($data[$i]["E"]," \t\n\r\0\x0B\xA0"));
 
         $jenkel              = trim($data[$i]["F"]," \t\n\r\0\x0B\xA0");
         if($jenkel)

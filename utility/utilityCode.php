@@ -52,7 +52,7 @@ function background($Command, $Priority = 0){
               </script>");
      }
 
-     public function load($lokasi, $alert, $message,$postdata) {
+     public function load($lokasi, $alert, $message,$postdata="") {
           $alamat = $this->url_rewrite_class;
           if (isset($message)) {
              echo("<body></body>

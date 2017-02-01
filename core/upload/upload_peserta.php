@@ -78,7 +78,7 @@ switch ($process) {
     // echo "php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id' &";
     
 
-    exec("php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id' &",$op,$rt);
+    exec("php -f ".$base_path."core/upload/import_excel_peserta.php '$filename' '$id' >log/peserta.txt &",$op,$rt);
     // print_r($op);
     // print_r($rt);
     $utility->load("content/upload-peserta","success","Sedang memproses peserta");

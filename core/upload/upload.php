@@ -153,7 +153,8 @@ switch ($process) {
     $columns = array(
       array( 'db' => 'id_soal', 'dt' => 0 ),
       array( 'db' => 'soal',    'dt' => 1 , 'formatter' => function($d,$row){ 
-        return  substr(html_entity_decode(htmlspecialchars_decode($d,ENT_NOQUOTES)),0,40)."...";
+        //return  substr(html_entity_decode(htmlspecialchars_decode($d,ENT_NOQUOTES)),0,40)."...";
+        return  html_entity_decode(htmlspecialchars_decode($d,ENT_NOQUOTES))."...";
       }),
       array( 'db' => '1',       'dt' => 2 , 'formatter' => function($d,$row){ 
         return  substr(html_entity_decode(htmlspecialchars_decode($d,ENT_NOQUOTES)),0,15)."...";

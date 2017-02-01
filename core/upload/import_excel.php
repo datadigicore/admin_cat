@@ -13,11 +13,10 @@ $target_file = $path_upload.$filename;
   
 //import data soal dari word
 echo "wvHtml {$path_upload}$filename {$base_doc}$id_kategori.html ";
-
 $hasil=  shell_exec("wvHtml {$path_upload}$filename {$base_doc}$id_kategori.html "); //proses conversi
 //sleep(20);
 //proses pengambilan data menggunakan dom html
-echo "running migrasi soal {$base_doc}$id_kategori.html<br/>";
+echo "\nrunning migrasi soal {$base_doc}$id_kategori.html\n";
 $html= file_get_html("{$base_doc}$id_kategori.html");
 $row=1;
 $data=array();
