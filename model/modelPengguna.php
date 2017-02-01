@@ -101,7 +101,7 @@
       $query_insert="INSERT INTO `log_penambahan_waktu`(`id_ujian`, `id_paket`, `id_peserta`, `id_kategori`, "
               . "`waktu_mulai`, `durasi_pengerjaan`, `tambahan_waktu`, `status`, `alasan`) values"
               . "($id_ujian, $id_paket, $id_peserta, $id_kategori, "
-              . "'$waktu_mulai', $durasi_pengerjaan, $data[newtambahwaktu], $status, '$data[alasan]')";
+              . "'$waktu_mulai', $durasi_pengerjaan, $tambahan_waktu, $status, '$data[alasan]')";
       $result = $this->query($query_insert);
       
       return $result;
