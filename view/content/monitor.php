@@ -153,7 +153,8 @@
         {"targets" : 4},
         {"targets" : 5},
         {"targets" : 6},
-        {"targets" : 7}
+        {"targets" : 7,
+         "visible" : false}
       ],
       "order": [[ 7, "desc" ]]
     });

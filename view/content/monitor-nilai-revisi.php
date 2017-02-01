@@ -160,7 +160,8 @@
         {"targets" : 5},
         {"targets" : 6},
         {"targets" : 7},
-        {"targets" : 8}
+        {"targets" : 8,
+         "visible" : false}
       ],
       "order": [[ 1, "asc" ]]
     });

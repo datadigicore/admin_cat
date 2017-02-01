@@ -104,13 +104,14 @@
       ],
       "order": [[ 1, "asc" ]]
     });
+
     $(document).on("click", "#create", function (){
       var button = $(this).val();
       var id_ujian = $("#id-ujian").val();
       if(id_ujian!=""){
       $.ajax({
         type: "post",
-        url : "<?php echo $domain ?>/login/nilaitoPdf/?id="+id_ujian+"&ruang="+button+"*",
+        url : "<?php echo $url_rewrite;?>process/upload/make_pdf",
         success: function(data)
         {
           alert("data berhasil dibuat, silakan download");
@@ -121,6 +122,25 @@
         alert("Pilih Ujian Terlebih Dahulu");
       }
     });
+
+    // $(document).on("click", "#create", function (){
+    //   var button = $(this).val();
+    //   var id_ujian = $("#id-ujian").val();
+    //   if(id_ujian!=""){
+    //   $.ajax({
+    //     type: "post",
+    //     url : "<?php echo $domain ?>/login/nilaitoPdf/?id="+id_ujian+"&ruang="+button+"*",
+    //     success: function(data)
+    //     {
+    //       alert("data berhasil dibuat, silakan download");
+    //     }
+    //   });
+    //   return false;
+    //   } else {
+    //     alert("Pilih Ujian Terlebih Dahulu");
+    //   }
+    // });
+    
     // $(document).on("click", "#download", function (){
     //   var tr = $(this).closest('tr');
     //   tabrow = table.row( tr );

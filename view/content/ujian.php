@@ -33,6 +33,7 @@
                   <th>Jumlah Peserta</th>
                   <th>Status Ujian</th>
                   <th>Status</th>
+                  <th>Hasil Ujian</th>
                 </tr>
               </thead>
             </table>
@@ -153,7 +154,8 @@
         {"targets" : 4},
         {"targets" : 5},
         {"targets" : 6},
-        {"targets" : 7}
+        {"targets" : 7},
+        {"targets" : 8}
       ],
       "order": [[ 0, "desc" ]]
     });
