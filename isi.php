@@ -39,7 +39,7 @@ else {
           $id = $data[2];
           $id_ruangan = "D436/LePKom*";
           
-          exec("php -f ".$base_path."core/upload/make_pdf.php '$id' '$id_ruangan' >$ujian_path"."log/pdf.txt &");
+          exec("php -f ".$base_path."core/upload/make_pdf.php '$id' '$id_ruangan' >$base_path"."log/pdf.txt &");
           $utility->load("content/ujian","success","File Ujian Sedang Diproses");
           // include ('view/content/ujian.php');
         break;
