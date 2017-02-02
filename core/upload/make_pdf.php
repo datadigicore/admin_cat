@@ -70,7 +70,7 @@ require_once __DIR__ . '/../../config/application.php';
 
             }
 
-            $save_path="/srv/www/htdocs/siip/cat.polda/logs/hasil/";
+            $save_path="$ujian_path"."logs/hasil/";
 
             $ruangan = str_replace("/", "_", $user['id_ruangan']);
             $now = strtoupper($ujian->changeDate($value['waktu_mulai']));
@@ -115,7 +115,7 @@ require_once __DIR__ . '/../../config/application.php';
             echo(' cd '.$save_path.'tex; for i in *.tex; do pdflatex -output-directory '.$save_path.' $i;done');
 
             $filename = $save_path."all/"."{$ruangan}-NilaiAkademik-{$nama_master}.pdf";
-            $log_txt="/srv/www/htdocs/siip/cat.polda/logs/hasil2.txt";
+            $log_txt="$ujian_path"."logs/hasil2.txt";
 
             $status= system("/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &");
             echo $status;
