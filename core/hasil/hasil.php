@@ -102,12 +102,13 @@ switch ($process) {
   break;
   case 'download-perorangan':
     $ruangan=$_POST['ruang'];
-    $nama=$_POST['nama'];
+    $nama=str_replace(" ", "_", $_POST['nama']);
     $substr_ruangan = str_replace("/","_",$ruangan);
 
-    $op = shell_exec( "ls ".$ujian_path."logs/hasil/ | grep '$substr_ruangan-$nama'" );
-    // echo "ls ".$ujian_path."logs/hasil/ | grep '$substr_ruangan-$nama'";
+    $op = shell_exec( "ls ".$ujian_path."logs/hasil/ | grep  '$substr_ruangan-$nama.*\.pdf$'" );
+    // echo "ls ".$ujian_path."logs/hasil/ | grep '$substr_ruangan-$nama.*\.pdf$'";
     $file = $ujian_path."logs/hasil/".trim($op," \t\n\r\0\x0B");
+    // echo $file;
     // exit;
     if (file_exists($file) && is_file($file)) {
     header('Content-Description: File Transfer');

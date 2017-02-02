@@ -91,15 +91,15 @@ require_once __DIR__ . '/../../config/application.php';
                 $nomor = $no+1;
                 $content2=str_replace("no".$nomor, $soalSort[$no]['opt'], $content2);
             }
-            $nama_lengkap = str_replace(" ", "", $user['nama']);
+            $nama_lengkap = str_replace(" ", "_", $user['nama']);
             
-            $fp = fopen($save_path."tex/".$ruangan."_".$nama_lengkap."_".$nama_master.'.tex', 'w');
+            $fp = fopen($save_path."tex/".$ruangan."-".$nama_lengkap."_".$nama_master.'.tex', 'w');
             fwrite($fp, $content2);
             fclose($fp);
 
             $pdftk_file=$save_path.$ruangan."*.pdf";
             if($command_pdflatex==""){
-                $command_pdflatex.= "pdflatex -output-directory ".$save_path." core/upload/tex/".$ruangan."_".$nama_lengkap."_".$nama_master.".tex";
+                $command_pdflatex.= "pdflatex -output-directory ".$save_path." core/upload/tex/".$ruangan."-".$nama_lengkap."_".$nama_master.".tex";
             }
             else{
                 $command_pdflatex.= " && pdflatex -output-directory ".$save_path." core/upload/tex/".$ruangan."_".$nama_lengkap."_".$nama_master.".tex";

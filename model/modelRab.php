@@ -1,4 +1,4 @@
-<?php
+  <?php
   require_once __DIR__ . "/../utility/database/mysql_db.php";
 
   class modelRab extends mysql_db {
