@@ -19,6 +19,9 @@ else {
     include ('view/include/sidebar.php');
     if ($_SESSION['level'] == 1) {  
       switch ($data[1]) {
+        case 'countdown':
+          include ('view/content/admin_countdown.php');
+        break;
         case 'log':
           include ('view/content/log.php');
         break;
