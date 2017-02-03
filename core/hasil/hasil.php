@@ -109,17 +109,20 @@ case 'download-ruangan':
     $op = shell_exec( "ls ".$ujian_path."logs/hasil/all/ | grep  '$substr_ruangan.*\.pdf$'" );
     // echo "ls ".$ujian_path."logs/hasil/ | grep '$substr_ruangan-$nama.*\.pdf$'";
     $file = $ujian_path."logs/hasil/all/".trim($op," \t\n\r\0\x0B");
-    // echo $file;
-    // exit;
+    //echo $file;
+    $nama_file=explode("/",$file);
+    $file2=end($nama_file);
     if (file_exists($file) && is_file($file)) {
-    header('Content-Description: File Transfer');
+    /*header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="'.basename($file).'"');
     header('Expires: 0');
     header('Cache-Control: must-revalidate');
     header('Pragma: public');
     header('Content-Length: ' . filesize($file));
-    readfile($file);
+    readfile($file);*/
+    $namafile_web="$domain"."/logs/hasil/all/$file2";
+    echo "<script>window.location.href='$namafile_web';</script>";
     exit;
     }else{
       $utility->load("content/file-perorangan","warning","File tidak tersedia",$ruangan);
@@ -138,15 +141,19 @@ case 'download-ruangan':
     $file = $ujian_path."logs/hasil/".trim($op," \t\n\r\0\x0B");
     // echo $file;
     // exit;
+    $nama_file=explode("/",$file);
+    $file2=end($nama_file);
     if (file_exists($file) && is_file($file)) {
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="'.basename($file).'"');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($file));
-    readfile($file);
+    // header('Content-Description: File Transfer');
+    // header('Content-Type: application/octet-stream');
+    // header('Content-Disposition: attachment; filename="'.basename($file).'"');
+    // header('Expires: 0');
+    // header('Cache-Control: must-revalidate');
+    // header('Pragma: public');
+    // header('Content-Length: ' . filesize($file));
+    // readfile($file);
+     $namafile_web="$domain"."/logs/hasil/$file2";
+    echo "<script>window.location.href='$namafile_web';</script>";
     exit;
     }else{
       $utility->load("content/file-perorangan","warning","File tidak tersedia",$ruangan);
