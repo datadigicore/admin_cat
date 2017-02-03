@@ -10,6 +10,7 @@ require_once __DIR__ . '/../../config/application.php';
       $pdftk_file="";
       $command_pdflatex="";
       $master_name="";
+      $kd_paket;
       $peserta = array();
         $id = $argv[1];
         $id_ruangan = $argv[2];
@@ -72,7 +73,7 @@ require_once __DIR__ . '/../../config/application.php';
                 $soalSort[$k]['fulljwb'] = $jwb['opt'].". ".$jwb['jawaban'];
 
             }
-
+            $kd_paket = $value['paket'];
             //$save_path="/srv/www/htdocs/siip/cat.polda/logs/hasil/";
              $save_path="$ujian_path"."logs/hasil/";
             $ruangan = str_replace("/", "_", $user['id_ruangan']);
@@ -87,7 +88,9 @@ require_once __DIR__ . '/../../config/application.php';
             $content2=str_replace("a.nopeserta", $user['no_peserta'], $content2);
             $content2=str_replace("a.nama", $user['nama'], $content2);
             $content2=str_replace("a.jeniskelamin", $user['jenkel'], $content2);
-            $content2=str_replace("a.skor", $user['skor'], $content2);
+            $content2=str_replace("a.skor", $value['nilai'], $content2);
+            $content2=str_replace("a.paket", $kd_paket, $content2);
+            $content2=str_replace("a.tglujian", $now, $content2);
             $content2=str_replace("a.mataujian", $kategori['nama_master'], $content2);
             // $content2=str_replace("a.paket", $kategori['nama_master'], $content2);
 
