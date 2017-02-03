@@ -132,6 +132,7 @@
     }
   });
   $(function () {
+    init();
     $('#datetime').datetimepicker({
     });
     var table = $(".table").DataTable({
@@ -215,6 +216,12 @@
       tabrow = table.row( tr );
       row_id = tabrow.data()[0];
       action = "start";
+
+      var conn = new WebSocket('ws://localhost:8080');
+      conn.onopen = function(e) {
+        conn.send(2);
+      };
+
       ajaxPostButton(action);
     });
     $(document).on("click", "#selesai", function (){
@@ -225,4 +232,28 @@
       ajaxPostButton(action);
     });
   });
+
+  function init()
+  {
+      var conn = new WebSocket('ws://localhost:8080');
+
+      conn.addEventListener("open", function (e) {
+
+      });
+      conn.addEventListener("error", function (e) {
+        var n = noty({text: 'Failed to connect to websocket. Retrying ...',maxVisible: 1,timeout: 2000});
+        init();
+      });
+
+      conn.onopen = function(e) {
+        var n = noty({text: 'Success connect to websocket',maxVisible: 1,timeout: 2000});
+        console.log("Connection established!");
+
+      };
+
+      conn.onmessage = function(e) {
+        console.log(e.data);
+      };
+
+  }
 </script>

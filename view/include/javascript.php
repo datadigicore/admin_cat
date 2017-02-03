@@ -48,3 +48,4 @@
   
   <script src="<?php echo $url_rewrite;?>static/plugins/highcharts/modules/drilldown.js"></script>
   <script src="<?php echo $url_rewrite;?>static/plugins/highcharts/custom_events/customEvents.js"></script>
+  <script src="<?php echo $url_rewrite;?>static/plugins/noty/packaged/jquery.noty.packaged.min.js"></script>
