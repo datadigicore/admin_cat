@@ -100,9 +100,13 @@
           [10, 25, 50, 100, "All"]
       ],
       dom: 'lBfrtip',
+      
         buttons: [
+        <?php if ($_SESSION['level'] == 1): ?>
             'copy', 'csv', 'excel', 'pdf', 'print'
+            <?php endif ?>
         ],
+
       "oLanguage": {
         "sInfoFiltered": ""
       },
@@ -131,9 +135,13 @@
           [10, 25, 50, 100, "All"]
       ],
       dom: 'lBfrtip',
+      
         buttons: [
+        <?php if ($_SESSION['level'] == 1): ?>
             'copy', 'csv', 'excel', 'pdf', 'print'
+            <?php endif ?>
         ],
+        
       "oLanguage": {
         "sInfoFiltered": ""
       },
@@ -153,8 +161,12 @@
         {"targets" : 4},
         {"targets" : 5},
         {"targets" : 6},
-        {"targets" : 7,
+        <?php if ($_SESSION['level'] == 1): ?>
+        {"targets" : 7}
+         <?php else: ?>
+         {"targets" : 7,
          "visible" : false}
+         <?php endif ?>
       ],
       "order": [[ 7, "desc" ]]
     });

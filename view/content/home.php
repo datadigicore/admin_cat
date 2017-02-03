@@ -130,6 +130,7 @@
         </div>
       </div>
     </div> -->
+    <?php if ($_SESSION['level'] == 1): ?>
     <div class="row">
       <div class="col-lg-12 col-xs-12">
         <div class="box box-primary">
@@ -140,7 +141,7 @@
         </div>
       </div>
     </div>
-
+<?php endif ?>
     <div class="row">
       <div class="col-lg-12 col-xs-12">
         <div class="box box-primary">
