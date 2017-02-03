@@ -71,35 +71,63 @@ switch ($process) {
   case 'download-lantai':
     $ruangan=$_POST['ruang'];
   break;
-  case 'download-ruangan':
-    $ruangan=$_POST['ruang'];
-    $substr_ruangan = substr($ruangan,0,4);
-    $op = shell_exec ( "ls ".$ujian_path."logs/hasil/all/ | grep '$substr_ruangan*'" );
-    //echo $op;
-    //echo "ls ".$ujian_path."logs/hasil/all/ | grep '$substr_ruangan*'";
-    $file = $ujian_path."logs/hasil/all/".trim($op," \t\n\r\0\x0B");
-    //echo "$op";
-    //exit();
-    if (file_exists($file) && is_file($file)) {
+  // case 'download-ruangan':
+  //   $ruangan=$_POST['ruang'];
+  //   $substr_ruangan = substr($ruangan,0,4);
+  //   $op = shell_exec ( "ls ".$ujian_path."logs/hasil/all/ | grep '$substr_ruangan*'" );
+  //   //echo $op;
+  //   //echo "ls ".$ujian_path."logs/hasil/all/ | grep '$substr_ruangan*'";
+  //   $file = $ujian_path."logs/hasil/all/".trim($op," \t\n\r\0\x0B");
+  //   //echo "$op";
+  //   //exit();
+  //   if (file_exists($file) && is_file($file)) {
 
-      $namafile_web="{$domain}/logs/hasil/all/$op";  
-     // echo "$namafile_web";
-     header("Location: $namafile_web");
-     //echo "<script>window.location.href='$namafile_web';</script>";
-    /*header('Content-Description: File Transfer');
+  //     $namafile_web="{$domain}/logs/hasil/all/$op";  
+  //    // echo "$namafile_web";
+  //    header("Location: $namafile_web");
+  //    //echo "<script>window.location.href='$namafile_web';</script>";
+  //   /*header('Content-Description: File Transfer');
+  //   header('Content-Type: application/octet-stream');
+  //   header('Content-Disposition: attachment; filename="'.basename($file).'"');
+  //   header('Expires: 0');
+  //   header('Cache-Control: must-revalidate');
+  //   header('Pragma: public');
+  //   header('Content-Length: ' . filesize($file));
+  //   readfile($file);*/
+  // //  exit;
+  //   }else{
+  //     $utility->load("content/file-ruangan","warning","File tidak tersedia");
+  //   }
+  //   echo file_get_contents($ujian_path."/logs/hasil/".$op);
+  // break;
+
+case 'download-ruangan':
+    $ruangan=$_POST['ruang'];
+    $nama=str_replace(" ", "_", $_POST['nama']);
+    $substr_ruangan = str_replace("/","_",$ruangan);
+
+    $op = shell_exec( "ls ".$ujian_path."logs/hasil/all/ | grep  '$substr_ruangan.*\.pdf$'" );
+    // echo "ls ".$ujian_path."logs/hasil/ | grep '$substr_ruangan-$nama.*\.pdf$'";
+    $file = $ujian_path."logs/hasil/all/".trim($op," \t\n\r\0\x0B");
+    // echo $file;
+    // exit;
+    if (file_exists($file) && is_file($file)) {
+    header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="'.basename($file).'"');
     header('Expires: 0');
     header('Cache-Control: must-revalidate');
     header('Pragma: public');
     header('Content-Length: ' . filesize($file));
-    readfile($file);*/
-  //  exit;
+    readfile($file);
+    exit;
     }else{
-      $utility->load("content/file-ruangan","warning","File tidak tersedia");
+      $utility->load("content/file-perorangan","warning","File tidak tersedia",$ruangan);
     }
-    echo file_get_contents($ujian_path."/logs/hasil/".$op);
+    echo file_get_contents($ujian_path."logs/hasil/".$op);
   break;
+
+
   case 'download-perorangan':
     $ruangan=$_POST['ruang'];
     $nama=str_replace(" ", "_", $_POST['nama']);

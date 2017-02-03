@@ -6,8 +6,10 @@ require_once __DIR__ . '/../../config/application.php';
 
 
       global $CONFIG;
+      $ruang_data = array();
       $pdftk_file="";
       $command_pdflatex="";
+      $master_name="";
       $peserta = array();
         $id = $argv[1];
         $id_ruangan = $argv[2];
@@ -20,6 +22,7 @@ require_once __DIR__ . '/../../config/application.php';
         $jml_soal=0;
         // print_r($ujian_data);
         $nama_master= str_replace(" ", "", $kategori['nama_master']);
+        $master_name=$nama_master;
         foreach ($peserta as $key => $value) {
             if($time == 50){
                 $time = 0;
@@ -70,9 +73,10 @@ require_once __DIR__ . '/../../config/application.php';
 
             }
 
-            $save_path="$ujian_path"."logs/hasil/";
-
+            //$save_path="/srv/www/htdocs/siip/cat.polda/logs/hasil/";
+             $save_path="$ujian_path"."logs/hasil/";
             $ruangan = str_replace("/", "_", $user['id_ruangan']);
+            $ruang_data[$ruangan] = $ruangan;
             $now = strtoupper($ujian->changeDate($value['waktu_mulai']));
             $filename = $base_path."core/upload/template/hasil_ujian.tex";
             $handle = fopen($filename, "r");
@@ -115,10 +119,16 @@ require_once __DIR__ . '/../../config/application.php';
             echo(' cd '.$save_path.'tex; for i in *.tex; do pdflatex -output-directory '.$save_path.' $i;done');
 
             $filename = $save_path."all/"."{$ruangan}-NilaiAkademik-{$nama_master}.pdf";
+            //$log_txt="/srv/www/htdocs/siip/cat.polda/logs/hasil2.txt";
             $log_txt="$ujian_path"."logs/hasil2.txt";
-
-            $status= system("/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &");
-            echo $status;
+            foreach ($ruang_data as $value) {
+                $pdftk_file=$save_path.$value."*.pdf";
+                $filename = $save_path."all/"."{$value}-NilaiAkademik-{$master_name}.pdf";
+                $status= system("/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &");
+                echo "/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &";
+            }
+            // $status= system("/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &");
+            // echo $status;
             // echo "/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &";
             $ujian->update_data(" status_pdf=2 "," ujian "," id_ujian='$id' ");
 ?> 
