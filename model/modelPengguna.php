@@ -68,7 +68,7 @@
     public function suspendPengguna($data) {
       $query = "UPDATE generated_soal SET
                 status            = 4,
-                tambahan_waktu    = '$data[newdurasi]'
+
                 WHERE id          = '$data[id]'";
       $result = $this->query($query);
       return $result;
