@@ -67,8 +67,8 @@
     }
     public function suspendPengguna($data) {
       $query = "UPDATE generated_soal SET
-                status            = 4,
-
+                status            = 4
+  
                 WHERE id          = '$data[id]'";
       $result = $this->query($query);
       return $result;
