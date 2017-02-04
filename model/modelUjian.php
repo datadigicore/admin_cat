@@ -3,6 +3,75 @@
 
   class modelUjian extends mysql_db {
 
+    public function penjelasan($data){
+      $get_id_peserta = $this->getData('master_peserta',0,"no_peserta='$data' ");
+      // print_r($get_id_peserta);
+
+      $id_peserta = $get_id_peserta['id_peserta'];
+      $ujian = $this->getData('ujian',0,"status_ujian = 3");
+
+      // print_r($ujian);
+
+        if($ujian['id_ujian']){
+            $detailujian = $this->getData('master_kategori',0,"id_master = {$ujian['id_kategori']}");
+
+            $paket = $this->getData('paket_soal',0,"id_kategori = {$ujian['id_kategori']} AND status = 1");
+            // print_r($paket);
+            $tmp_soal = $this->getData('generated_soal',0,"id_paket = {$paket['id_paket']} AND id_peserta = {$id_peserta} AND id_ujian = {$ujian['id_ujian']}");
+            // print_r($tmp_soal);
+            // exit;
+            $getSoal = $this->getData('master_soal',1,"id_soal IN ({$tmp_soal['soal']})");
+
+            foreach ($getSoal as $key => $value) {
+                $getSoal[$key]['soal'] = html_entity_decode(htmlspecialchars_decode($value['soal'],ENT_NOQUOTES));
+                $getSoal[$key]['1'] = html_entity_decode(htmlspecialchars_decode($value['1'],ENT_NOQUOTES));
+                $getSoal[$key]['2'] = html_entity_decode(htmlspecialchars_decode($value['2'],ENT_NOQUOTES));
+                $getSoal[$key]['3'] = html_entity_decode(htmlspecialchars_decode($value['3'],ENT_NOQUOTES));
+                $getSoal[$key]['4'] = html_entity_decode(htmlspecialchars_decode($value['4'],ENT_NOQUOTES));
+
+                if(1==$getSoal[$key]['kisi']) $getSoal[$key]['kunci'] = $value['1'];
+                if(2==$getSoal[$key]['kisi']) $getSoal[$key]['kunci'] = $value['2'];
+                if(3==$getSoal[$key]['kisi']) $getSoal[$key]['kunci'] = $value['3'];
+                if(4==$getSoal[$key]['kisi']) $getSoal[$key]['kunci'] = $value['4'];
+                  
+            }
+
+            $opts = unserialize($tmp_soal['opt']);
+            
+            $exp = explode(",", $tmp_soal['soal']);
+            $opt = explode(",", $tmp_soal['opt']);
+            foreach ($exp as $key => $value) {
+                foreach ($getSoal as $k => $val) {
+                    if($value == $val['id_soal']){
+                        $soalSort[$key] = $val;
+                    }
+                }
+            }
+            
+            $letters = range('A', 'Z');
+            foreach ($soalSort as $key => $value) {
+                $opt = explode(",", $opts[$key]);
+                foreach ($opt as $j => $vals) {
+                   $soalSort[$key]['pilihan'][$j]['full'] = $letters[$j].". ".$value[$vals];
+                   $soalSort[$key]['pilihan'][$j]['opt'] = $letters[$j];
+                   $soalSort[$key]['pilihan'][$j]['ajax'] = $letters[$j]."|".$value[$vals];
+                }
+            }
+            // print_r($soalSort);
+            foreach ($soalSort as $key => $value) {
+                $kisi = $this->getData('master_kategori',0,"id_master = {$value['kisi']}");
+                $soalSort[$key]['kisi'] = $kisi['nama_master'];
+
+                $jwb = $this->getData('jawaban',0,"id_kategori = {$value['id_kategori']} AND id_soal = {$value['id_soal']} AND id_peserta = {$id_peserta} AND id_ujian = {$ujian['id_ujian']}");
+                $soalSort[$key]['jawaban'] = $jwb['jawaban'];
+                $soalSort[$key]['opt'] = $jwb['opt'];
+                $soalSort[$key]['fulljwb'] = $jwb['opt'].". ".$jwb['jawaban'];
+
+            }
+            return $soalSort;
+
+    }
+  }
 
     public function update_data($data,$table,$cond)
     {

@@ -222,7 +222,9 @@ switch ($process) {
       array( 'db' => 'no_peserta',  'dt' => 1, 'field' => 'no_peserta' ),
       array( 'db' => 'id_ruangan',  'dt' => 2, 'field' => 'id_ruangan' ),
       array( 'db' => 'master_peserta.id_peserta',       'dt' => 3, 'field' => 'id_peserta', 'formatter' => function($d,$row){ 
-      return '<div class="text-center"><div class="btn-group" role="group" aria-label="Basic example"><button id="create" class="btn btn-primary" value="'.$d.'" style="display:none"> Buat PDF</button><form method="post" action="../process/hasil/download-perorangan" id="download-perorangan-'.$row[1].'" name="download-perorangan"><input type="hidden" name="nama" value="'.$row[0].'"><button id="download" class="btn btn-primary" name="ruang" value="'.$row[2].'"> Download</button></form></div></div>';
+      return '<div class="text-center"><div class="btn-group" role="group" aria-label="Basic example"><button id="create" class="btn btn-primary" value="'.$d.'" style="display:none"> Buat PDF</button><form method="post" action="../process/hasil/download-perorangan" id="download-perorangan-'.$row[1].'" name="download-perorangan"><input type="hidden" name="nama" value="'.$row[0].'"><button id="download" class="btn btn-primary btn-block" name="ruang" value="'.$row[2].'"> Download</button><div></div>
+        <a href="'.$url_rewrite.'penjelasan/'.$row[1].'" class="btn btn-success" btn-block role="button">Tampilkan Soal</a>
+      </form></div></div>';
         
       })
     );

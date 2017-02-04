@@ -37,6 +37,14 @@ else {
         case 'ujian':
           include ('view/content/ujian.php');
         break;
+        case 'penjelasan':
+        // echo "<pre>"; 
+          $peserta = $data[2]."/".$data[3]."/".$data[4];
+          // echo $peserta;
+          $hasil = $ujian->penjelasan(trim($peserta));
+          // print_r($hasil);
+          include ('view/content/penjelasan.php');
+        break;
         case 'hasil_ujian':
           // echo "<pre>";
           $id = $data[2];
