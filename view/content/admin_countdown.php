@@ -38,8 +38,8 @@
                     <div class="row">
                         <div class="button text-center">
                             <button class="btn btn-warning btn-lg tombol" id="refresh"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
-                            <button class="btn btn-success btn-lg tombol" id="start"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Start</button>
-                            <button class="btn btn-danger btn-lg tombol" id="stop"><i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop</button>
+                            <!--<button class="btn btn-success btn-lg tombol" id="start"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Start</button>-->
+                            <!--<button class="btn btn-danger btn-lg tombol" id="stop"><i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop</button>-->
                         </div>
                         
                     </div>
