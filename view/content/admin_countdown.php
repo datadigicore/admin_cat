@@ -32,7 +32,7 @@
       <div class="col-xs-12">
                     <div class="jumbotron text-center text-center" id="jumbotron-polda">
                         <div id="countdown">
-                            99:99:99
+                            <span id="hour">--</span>:<span id="min">--</span>:<span id="sec">--</span>
                         </div> 
                     </div>
                     <div class="row">
@@ -97,7 +97,7 @@ function clockStop() {
   clearInterval(timerId)
   timerId = null
 }
-clockStart(3454456);
+clockStart();
 </script>
 
 <script>
