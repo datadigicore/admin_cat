@@ -3,6 +3,13 @@
 
   class modelUjian extends mysql_db {
 
+    public function get_countdown($id_ujian){
+        $sql = "SELECT id_ujian, TIME_TO_SEC(waktu_ujian)+(lama_ujian*60)-time_to_sec(NOW())  selisih FROM ujian where id_ujian='$id_ujian' and status_ujian=2 ";
+        $result = $this->query($sql);
+        $data = $this->fetch_array($result);
+        return $data['selisih'];
+    }
+
     public function penjelasan($data){
       $get_id_peserta = $this->getData('master_peserta',0,"no_peserta='$data' ");
       // print_r($get_id_peserta);

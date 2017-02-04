@@ -57,7 +57,8 @@ switch ($process) {
           return "<small><i>Berlangsung</i></small>";
         }
         if($d==1 && $row[status_ujian]==2){
-          return "<small><i>Berlangsung</i></small>";
+          return "<small><i>Berlangsung</i></small>".'
+                 <div><a href="'.$url_rewrite.'countdown/'.$row[0].'" class="btn btn-primary btn-xs btn-block" btn-block role="button">Live Countdown</a></div>';
         }
         else{
           return  '<form method="POST" action="../content/monitor-nilai">'.

@@ -47,6 +47,58 @@
     </div>
   </section>
 </div>
+<script>
+var timerId // current timer if started
+function sec_to_time(sec){
+  var hour = parseInt(sec /3600)
+  var minute = parseInt((sec%3600)/60)
+  var second = parseInt((sec%3600)%60)
+  // alert(hour+" "+minutes+" "+second);
+  return [hour, minute, second]
+}
+//sec_to_time(3700)
+var date = new Date()
+var sisa
+function update() {
+  var date
+  sisa = localStorage.getItem("last_second");
+  if(sisa==0){
+    clockStop()
+  }
+  date = sec_to_time(sisa)
+
+  var hours = date[0]
+  if (hours < 10) hours = '0'+hours
+  document.getElementById('hour').innerHTML = hours
+
+  var minutes = date[1]
+  if (minutes < 10) minutes = '0'+minutes
+  document.getElementById('min').innerHTML = minutes
+
+  var seconds = date[2]
+  if (seconds < 10) seconds = '0'+seconds
+  document.getElementById('sec').innerHTML = seconds
+  sisa--
+  
+  localStorage.setItem("last_second",sisa)
+}
+
+function clockStart() {
+var duration = "<?php echo $count; ?>";
+if(parseInt(duration)>0){  
+  if (timerId) return
+  localStorage.setItem("last_second",duration)
+  timerId = setInterval(update, 1000)
+  update()  // (*)
+}
+}
+
+function clockStop() {
+  clearInterval(timerId)
+  timerId = null
+}
+clockStart(3454456);
+</script>
 
 
 

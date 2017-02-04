@@ -20,6 +20,8 @@ else {
     if ($_SESSION['level'] == 1) {  
       switch ($data[1]) {
         case 'countdown':
+          $id_ujian = $data[2];
+          $count = $ujian->get_countdown($id_ujian);
           include ('view/content/admin_countdown.php');
         break;
         case 'log':
