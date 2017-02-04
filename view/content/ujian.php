@@ -134,6 +134,7 @@
   $(function () {
     init();
     $('#datetime').datetimepicker({
+      format:'DD/MM/YYYY HH:mm:ss',
     });
     var table = $(".table").DataTable({
       "oLanguage": {
