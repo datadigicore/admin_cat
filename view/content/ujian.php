@@ -210,6 +210,12 @@
       tabrow = table.row( tr );
       row_id = tabrow.data()[0];
       action = "verification";
+
+      var conn = new WebSocket('ws://localhost:8080');
+      conn.onopen = function(e) {
+        conn.send("refresh");
+      };
+
       ajaxPostButton(action);
     });
     $(document).on("click", "#mulai", function (){

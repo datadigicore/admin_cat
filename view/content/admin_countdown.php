@@ -37,9 +37,9 @@
                     </div>
                     <div class="row">
                         <div class="button text-center">
-                            <button class="btn btn-warning btn-lg tombol"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
-                            <button class="btn btn-success btn-lg tombol"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Start</button>
-                            <button class="btn btn-danger btn-lg tombol"><i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop</button>
+                            <button class="btn btn-warning btn-lg tombol" id="refresh"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
+                            <button class="btn btn-success btn-lg tombol" id="start"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Start</button>
+                            <button class="btn btn-danger btn-lg tombol" id="stop"><i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop</button>
                         </div>
                         
                     </div>
@@ -98,6 +98,60 @@ function clockStop() {
   timerId = null
 }
 clockStart(3454456);
+</script>
+
+<script>
+    function init()
+    {
+            var conn = new WebSocket('ws://localhost:8080');
+
+            conn.addEventListener("open", function (e) {
+
+            });
+            conn.addEventListener("error", function (e) {
+                var n = noty({text: 'Failed to connect to websocket. Retrying ...',maxVisible: 1,timeout: 2000});
+                init();
+            });
+
+            conn.onopen = function(e) {
+                var n = noty({text: 'Success connect to websocket',maxVisible: 1,timeout: 2000});
+                console.log("Connection established!");
+
+            };
+
+            conn.onmessage = function(e) {
+                console.log(e.data);
+                if (e.data == 2) {
+                    static_event(e.data);
+                }
+            };
+
+    }
+
+    $("#refresh").on('click', function(){
+        var conn = new WebSocket('ws://localhost:8080');
+        conn.onopen = function(e) {
+            conn.send('refresh');
+        };
+    });
+
+    $("#start").on('click', function(){
+        var conn = new WebSocket('ws://localhost:8080');
+        conn.onopen = function(e) {
+            conn.send(2);
+        };
+    });
+
+    $("#stop").on('click', function(){
+        var conn = new WebSocket('ws://localhost:8080');
+        conn.onopen = function(e) {
+            conn.send('stop');
+        };
+    });
+
+    $(document).ready(function () {
+        init();
+    })
 </script>
 
 
