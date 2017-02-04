@@ -211,7 +211,7 @@
       row_id = tabrow.data()[0];
       action = "verification";
 
-      var conn = new WebSocket('ws://localhost:8080');
+      var conn = new WebSocket('ws://<?php echo $websocket;?>');
       conn.onopen = function(e) {
         conn.send("refresh");
       };
@@ -224,7 +224,7 @@
       row_id = tabrow.data()[0];
       action = "start";
 
-      var conn = new WebSocket('ws://localhost:8080');
+      var conn = new WebSocket('ws://<?php echo $websocket;?>');
       conn.onopen = function(e) {
         conn.send(2);
       };
@@ -242,7 +242,7 @@
 
   function init()
   {
-      var conn = new WebSocket('ws://localhost:8080');
+      var conn = new WebSocket('ws://<?php echo $websocket;?>');
 
       conn.addEventListener("open", function (e) {
 

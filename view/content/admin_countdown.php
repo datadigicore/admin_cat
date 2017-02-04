@@ -103,7 +103,7 @@ clockStart();
 <script>
     function init()
     {
-            var conn = new WebSocket('ws://localhost:8080');
+            var conn = new WebSocket('ws://<?php echo $websocket;?>');
 
             conn.addEventListener("open", function (e) {
 
@@ -129,21 +129,21 @@ clockStart();
     }
 
     $("#refresh").on('click', function(){
-        var conn = new WebSocket('ws://localhost:8080');
+        var conn = new WebSocket('ws://<?php echo $websocket;?>');
         conn.onopen = function(e) {
             conn.send('refresh');
         };
     });
 
     $("#start").on('click', function(){
-        var conn = new WebSocket('ws://localhost:8080');
+        var conn = new WebSocket('ws://<?php echo $websocket;?>');
         conn.onopen = function(e) {
             conn.send(2);
         };
     });
 
     $("#stop").on('click', function(){
-        var conn = new WebSocket('ws://localhost:8080');
+        var conn = new WebSocket('ws://<?php echo $websocket;?>');
         conn.onopen = function(e) {
             conn.send('stop');
         };
