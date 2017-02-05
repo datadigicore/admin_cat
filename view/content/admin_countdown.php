@@ -30,6 +30,24 @@
   <section class="content">
     <div class="row">
       <div class="col-xs-12">
+            <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
+              <thead style="background-color:#4A4545;color:white;">
+                <tr>
+                  <th>Mata Ujian</th>
+                  <th>Tanggal Ujian / Waktu Mulai Ujian</th>
+                  <th>Lama Ujian</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><?php echo $mata_ujian ?></td>
+                  <td><?php echo str_replace(" ", " / ",$tanggal_ujian) ?></td>
+                  <td><?php echo $durasi_ujian." Menit" ?></td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="col-xs-12">
                     <div class="jumbotron text-center text-center" id="jumbotron-polda">
                         <div id="countdown">
                             <span id="hour">--</span>:<span id="min">--</span>:<span id="sec">--</span>

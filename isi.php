@@ -21,6 +21,12 @@ else {
       switch ($data[1]) {
         case 'countdown':
           $id_ujian = $data[2];
+          $detil_ujian = explode("+", $data[3]);
+          $mata_ujian = str_replace("%20", " ",$detil_ujian[0]);
+          $tanggal_ujian = str_replace("%20", " ",$detil_ujian[1]);
+          $durasi_ujian = str_replace("%20", " ",$detil_ujian[2]);
+          // print_r($tanggal_ujian);
+          // exit;
           $count = $ujian->get_countdown($id_ujian);
           include ('view/content/admin_countdown.php');
         break;
