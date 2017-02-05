@@ -29,6 +29,28 @@
   </section> -->
   <section class="content">
     <div class="row">
+      <!-- <div class="col-xs-12">
+            <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
+              <thead style="background-color:#4A4545;color:white;">
+                <tr>
+                  <th>Mata Ujian</th>
+                  <th>Tanggal Ujian</th>
+                  <th>Lama Ujian</th>
+                  <th>Jumlah Soal</th>
+                  <th>Jumlah Peserta</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Mata Ujian</td>
+                  <td>Tanggal Ujian</td>
+                  <td>Lama Ujian</td>
+                  <td>Jumlah Soal</td>
+                  <td>Jumlah Peserta</td>
+                </tr>
+              </tbody>
+            </table>
+      </div> -->
       <div class="col-xs-12">
             <table id="table" class="display nowrap table table-bordered table-striped" cellspacing="0" width="100%">
               <thead style="background-color:#4A4545;color:white;">

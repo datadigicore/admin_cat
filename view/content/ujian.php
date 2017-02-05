@@ -168,6 +168,12 @@
         data: {key:row_id},
         success: function(data)
         {
+          if (action == "start") {
+            var conn = new WebSocket('ws://<?php echo $websocket;?>');
+            conn.onopen = function(e) {
+              conn.send(2);
+            };
+          }
           table.draw();
         }
       });
@@ -223,11 +229,6 @@
       tabrow = table.row( tr );
       row_id = tabrow.data()[0];
       action = "start";
-
-      var conn = new WebSocket('ws://<?php echo $websocket;?>');
-      conn.onopen = function(e) {
-        conn.send(2);
-      };
 
       ajaxPostButton(action);
     });
