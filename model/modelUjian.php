@@ -15,7 +15,7 @@
       // print_r($get_id_peserta);
 
       $id_peserta = $get_id_peserta['id_peserta'];
-      $ujian = $this->getData('ujian',0,"status_ujian = 3");
+      $ujian = $this->getData('ujian',0,"status_ujian >= 2");
 
       // print_r($ujian);
 

@@ -70,20 +70,22 @@ switch ($process) {
         }
       }),
       array( 'db' => 'status_pdf',         'dt' => 8, 'formatter' => function($d,$row){ 
-        if($row[status_ujian]!=3){
+        if($row[status_ujian]>=2){
           return "";
         }
-        if($d==0){
-          return '<a href="'.$url_rewrite.'hasil_ujian/'.$row[0].'" class="btn btn-primary btn-block btn-xs" role="button">Buat PDF</a>';
-        }
-        if($d==1){
-          return "<small><i>Sedang Memproses</i></small>";
-        }
-        if($d==2){
-          return '<a href="'.$url_rewrite.'file-ruangan" class="btn btn-success btn-block btn-xs">Download File</a>'.'<div><a href="'.$url_rewrite.'hasil_ujian/'.$row[0].'" class="btn btn-primary btn-block btn-xs" role="button">Buat Ulang</a>';
-        }
         else{
-          return  '';
+          if($d==0){
+            return '<a href="'.$url_rewrite.'hasil_ujian/'.$row[0].'" class="btn btn-primary btn-block btn-xs" role="button">Buat PDF</a>';
+          }
+          if($d==1){
+            return "<small><i>Sedang Memproses</i></small>";
+          }
+          if($d==2){
+            return '<a href="'.$url_rewrite.'file-ruangan" class="btn btn-success btn-block btn-xs">Download File</a>'.'<div><a href="'.$url_rewrite.'hasil_ujian/'.$row[0].'" class="btn btn-primary btn-block btn-xs" role="button">Buat Ulang</a>';
+          }
+          else{
+            return  '';
+          }
         }
       })
     );
