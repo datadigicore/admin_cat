@@ -58,7 +58,8 @@ switch ($process) {
         }
         if($d==1 && $row[status_ujian]==2){
           return "<small><i>Berlangsung</i></small>".'
-                 <div><a href="'.$url_rewrite.'countdown/'.$row[0].'/-'.$row[1].'-'.str_replace("/", "_", $row[2]).'-'.$row[3].'" class="btn btn-primary btn-xs btn-block" btn-block role="button">Live Countdown</a></div>';
+
+                 <div><a href="'.$url_rewrite.'countdown/'.$row[0].'/'.$row[1].'+'.$row[2].'+'.$row[3].'" class="btn btn-primary btn-xs btn-block" btn-block role="button">Live Countdown</a></div>';
         }
         else{
           return  '<form method="POST" action="../content/monitor-nilai">'.
