@@ -70,7 +70,7 @@ switch ($process) {
         }
       }),
       array( 'db' => 'status_pdf',         'dt' => 8, 'formatter' => function($d,$row){ 
-        if($row[status_ujian]>=2){
+        if($row[status_ujian]<2){
           return "";
         }
         else{
