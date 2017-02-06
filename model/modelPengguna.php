@@ -15,6 +15,14 @@
       return $result;
     }
 
+    public function activity_log($username, $activity_desc){
+      $query = " INSERT INTO activity_log SET 
+                  user_name ='$username',
+                  description = '$activity_desc',
+                  activity_time = NOW() ";
+      return $this->query($query); 
+    }
+
     public function updatePengguna($data) {
       $query       = "UPDATE pengguna SET
         level     = '$data[level]',

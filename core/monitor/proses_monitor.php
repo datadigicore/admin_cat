@@ -380,6 +380,7 @@ break;
     $data['newdurasi'] = round($newtime);
     // echo $timenow."-".$timeserver."=".$newtime;
     $pengguna->suspendPengguna($data);
+    $pengguna->activity_log($_SESSION['username'], "Melakukan Suspend Pada Id_peserta ".$data['id']." Pada Waktu ".$timenow);
   break;
   case 'revisi':
     date_default_timezone_set("Asia/Jakarta");
@@ -389,6 +390,7 @@ break;
     $result = $pengguna->readTimePeserta($data['id']);
     $data['durasibaru'] = $result->durasi_pengerjaan - $result->tambahan_waktu;
     $pengguna->revisiPengguna($data);
+    $pengguna->activity_log($_SESSION['username'], "Melakukan Revisi pada peserta ".$data['id']." dengan alasan ".$data['alasan']." dan tambahan waktu ".$data['newtambahwaktu']." menit");
     $utility->load("content/monitor","success","Ujian Peserta Berhasil di Revisi");
   break;
   default:

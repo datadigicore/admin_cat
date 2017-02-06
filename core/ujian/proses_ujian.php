@@ -96,6 +96,8 @@ switch ($process) {
   break;
   case 'add':
     $ujian->insertUjian($data);
+    $det_ujian=implode(", ", $data);
+    $pengguna->activity_log($_SESSION['username'], "Berhasil Menambah ujian ".$det_ujian);
     $utility->load("content/ujian","success","Data berhasil ditambahkan");
   break;
   case 'truncate':
@@ -126,6 +128,7 @@ switch ($process) {
     curl_close($curl);
     if ($str == 1) {
       $utility->load("content/ujian","success","Soal berhasil diacak");
+      $pengguna->activity_log($_SESSION['username'], "Berhasil Mengacak Soal pada id ujian ".$data['id']);
     }
     else {
     }
@@ -133,15 +136,19 @@ switch ($process) {
   case 'verification':
     $id = $_POST['key'];
     $ujian->verifikasiUjian($id);
+    $pengguna->activity_log($_SESSION['username'], "Verifikasi Ujian Pada id ujian ".$id);
   break;
   case 'start':
     $id = $_POST['key'];
     $ujian->updateTime($id);
     $ujian->mulaiUjian($id);
+    $pengguna->activity_log($_SESSION['username'], "Memulai Ujian Pada id ujian ".$id);
+
   break;
   case 'finish':
     $id = $_POST['key'];
     $ujian->selesaiUjian($id);
+    $pengguna->activity_log($_SESSION['username'], "Menyelesaikan Ujian Pada id ujian ".$id);
   break;
   case 'kategori':
     $ujian->kategori();
