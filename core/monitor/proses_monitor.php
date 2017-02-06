@@ -226,7 +226,7 @@ switch ($process) {
       if($_SESSION['level']==1){
         $tampil_soal = '
         <div>
-        <a href="'.$url_rewrite.'pdf_perorang/'.$row[4].'" class="btn btn-danger" btn-block role="button">Buat Ulang PDF</a>
+        <a href="'.$url_rewrite.'pdf_perorang/'.$row[4].'/'.str_replace("/", "_", $_POST['ruang']).'" class="btn btn-danger" btn-block role="button">Buat Ulang PDF</a>
         <a href="'.$url_rewrite.'penjelasan/'.$row[1].'" class="btn btn-success" btn-block role="button">Tampilkan Soal</a>
       </form></div></div>';
       } 

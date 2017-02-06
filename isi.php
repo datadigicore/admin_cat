@@ -21,7 +21,11 @@ else {
       switch ($data[1]) {
         case 'pdf_perorang':
         $id_peserta = $data[2];
-        exec("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id' '$id_ruangan' '$id_peserta' >$base_path"."log/pdf_perorang.txt &"); 
+        $ruang = str_replace("_", "/", $data[3]);
+        // echo $ruangan; 
+        exec("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id' '$id_ruangan' '$id_peserta' >$base_path"."log/pdf_perorang.txt &");
+        
+        include ('view/content/file-perorangan.php'); 
         break;
         case 'countdown':
           $id_ujian = $data[2];
