@@ -23,9 +23,10 @@ else {
         $id_peserta = $data[2];
         $ruang = str_replace("_", "/", $data[3]);
         // echo $ruangan; 
-        exec("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id' '$id_ruangan' '$id_peserta' >$base_path"."log/pdf_perorang.txt &");
-        
-        include ('view/content/file-perorangan.php'); 
+        exec("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id_peserta' >$base_path"."log/pdf_perorang.txt &");
+        $_POST['ruang']=$ruang;
+        $utility->load("content/file-perorangan","success","File Ujian Sedang Diproses");
+       
         break;
         case 'countdown':
           $id_ujian = $data[2];

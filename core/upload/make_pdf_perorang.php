@@ -12,9 +12,8 @@ require_once __DIR__ . '/../../config/application.php';
       $master_name="";
       $kd_paket;
       $peserta = array();
-        // $id = $argv[1];
-        $id_ruangan = $argv[2];
-        $id_peserta = $argv[3];
+
+        $id_peserta = $argv[1];
         $data_ujian  = $ujian->getData('ujian',0,"status_ujian=3 ORDER BY id_ujian desc LIMIT 1");
         $id = $data_ujian['id_ujian'];
         // echo $idujian;
