@@ -19,6 +19,10 @@ else {
     include ('view/include/sidebar.php');
     if ($_SESSION['level'] == 1) {  
       switch ($data[1]) {
+        case 'pdf_perorang':
+        $id_peserta = $data[2];
+        exec("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id' '$id_ruangan' '$id_peserta' >$base_path"."log/pdf_perorang.txt &"); 
+        break;
         case 'countdown':
           $id_ujian = $data[2];
           $detil_ujian = explode("+", $data[3]);
@@ -43,6 +47,7 @@ else {
           include ('view/content/peserta-add.php');
         break;
         case 'ujian':
+          // $pengguna->activity_log($_SESSION['username'], "Membuka Halaman Ujian");
           include ('view/content/ujian.php');
         break;
         case 'penjelasan':
