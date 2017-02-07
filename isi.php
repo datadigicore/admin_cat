@@ -25,7 +25,7 @@ else {
         // echo $ruangan; 
         exec("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id_peserta' >$base_path"."log/pdf_perorang$id_peserta.txt &");
         echo("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id_peserta' >$base_path"."log/pdf_perorangid_peserta.txt &");
-        exit();
+        //exit();
         $_POST['ruang']=$ruang;
         $utility->load("content/file-perorangan","success","File Ujian Sedang Diproses");
        
