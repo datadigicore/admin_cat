@@ -170,7 +170,9 @@ switch ($process) {
       })
     );
     $where = "id_kategori = $id";
+    
     $datatable->get_table($table, $primaryKey, $columns, $where);
+exit();
   break;
   case 'view':
     ini_set('memory_limit', '-1');

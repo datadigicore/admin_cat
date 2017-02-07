@@ -101,7 +101,7 @@ require_once __DIR__ . '/../../config/application.php';
                 $nomor = $no+1;
                 $content2=str_replace("no".$nomor, $soalSort[$no]['opt'], $content2);
             }
-            $nama_lengkap = str_replace(" ", "_", $user['nama']);
+            $nama_lengkap = str_replace(" ", "_", $user['nrp']);
             
             $fp = fopen($save_path."tex/".$ruangan."-".$nama_lengkap."_".$nama_master.'.tex', 'w');
             fwrite($fp, $content2);
