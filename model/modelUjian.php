@@ -227,7 +227,7 @@
         $dataArray =  array();
         if ($id) $cond = "WHERE {$id}"; else $cond = "";
         $sql = "SELECT * FROM {$table} {$cond}";
-        // print_r($sql);
+        print_r($sql);
         $result = $this->query($sql);
         if($all==1){
           while($data_arr = mysqli_fetch_assoc($result)){

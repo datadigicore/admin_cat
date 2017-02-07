@@ -14,9 +14,9 @@ require_once __DIR__ . '/../../config/application.php';
       $peserta = array();
 
         $id_peserta = $argv[1];
-        $data_ujian  = $ujian->getData('ujian',0,"status_ujian=3 ORDER BY id_ujian desc LIMIT 1");
+        $data_ujian  = $ujian->getData('ujian',0,"status_ujian>=2 ORDER BY id_ujian desc LIMIT 1");
         $id = $data_ujian['id_ujian'];
-        // echo $idujian;
+        echo "===$id";
         // exit;
         $ruang = str_replace("/", "_", $id_ruangan);
         $ruang= str_replace("*", "", $ruang);
