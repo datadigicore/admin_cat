@@ -41,7 +41,11 @@
 <script>
   $(function () {
     var table = $("#table").DataTable({
-      dom: 'Bfrtip',
+      aLengthMenu: [
+          [10, 25, 50, 100, -1],
+          [10, 25, 50, 100, "All"]
+      ],
+      dom: 'lBfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
