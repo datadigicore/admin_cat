@@ -136,7 +136,7 @@ case 'download-ruangan':
     $nama=str_replace(" ", "_", $_POST['nama']);
     $substr_ruangan = str_replace("/","_",$ruangan);
 
-    $op = shell_exec( "ls ".$ujian_path."logs/hasil/ | grep  '$substr_ruangan-$nama.*\.pdf$'" );
+    $op = shell_exec( "ls ".$ujian_path."logs/hasil/ | grep  '$substr_ruangan.*\.pdf$'" );
     // echo "ls ".$ujian_path."logs/hasil/ | grep '$substr_ruangan-$nama.*\.pdf$'";
     $file = $ujian_path."logs/hasil/".trim($op," \t\n\r\0\x0B");
     // echo $file;

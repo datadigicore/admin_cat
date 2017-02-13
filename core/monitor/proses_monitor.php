@@ -230,10 +230,11 @@ switch ($process) {
         <a href="'.$url_rewrite.'penjelasan/'.$row[1].'" class="btn btn-success" btn-block role="button">Tampilkan Soal</a>
       </form></div></div>';
       } 
-      return '<div class="text-center"><div class="btn-group" role="group" aria-label="Basic example"><button id="create" class="btn btn-primary" value="'.$d.'" style="display:none"> Buat PDF</button><form method="post" action="../process/hasil/download-perorangan" id="download-perorangan-'.$row[1].'" name="download-perorangan"><input type="hidden" name="nama" value="'.$row[0].'"><button id="download" class="btn btn-primary btn-block" name="ruang" value="'.$row[2].'"> Download PDF</button><div></div>'.$tampil_soal;
+      return '<div class="text-center"><div class="btn-group" role="group" aria-label="Basic example"><button id="create" class="btn btn-primary" value="'.$d.'" style="display:none"> Buat PDF</button><form method="post" action="../process/hasil/download-perorangan" id="download-perorangan-'.$row[1].'" name="download-perorangan"><input type="hidden" name="nama" value="'.$row[0].'"><button id="download" class="btn btn-primary btn-block" name="ruang" value="'.$row[5].'"> Download PDF</button><div></div>'.$tampil_soal;
         
       }),
-      array( 'db' => 'master_peserta.id_peserta',  'dt' => 4, 'field' => 'id_peserta' )
+      array( 'db' => 'master_peserta.id_peserta',  'dt' => 4, 'field' => 'id_peserta' ),
+      array( 'db' => 'master_peserta.nrp',  'dt' => 4, 'field' => 'nrp' )
     );
     $join = "FROM {$table} inner join generated_soal on master_peserta.id_peserta = generated_soal.id_peserta inner join ujian on generated_soal.id_ujian = ujian.id_ujian";
     $where = "id_ruangan = '$ruang' and (ujian.status_ujian=3 or ujian.status_ujian=2)";

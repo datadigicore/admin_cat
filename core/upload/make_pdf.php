@@ -30,16 +30,16 @@ require_once __DIR__ . '/../../config/application.php';
                 sleep(3);
             }
             unset($soalSort);
-            $getSoal = $ujian->getData('master_soal',1,"id_soal IN ({$value['soal']})");
+            $getSoal = $ujian->getDataSoal('master_soal',1,"id_soal IN ({$value['soal']})");
             $user = $ujian->getData('master_peserta',0,"id_peserta = {$value['id_peserta']}");
 
-            foreach ($getSoal as $k => $val) {
-                $getSoal[$k]['soal'] = html_entity_decode(htmlspecialchars_decode($val['soal'],ENT_NOQUOTES));
-                $getSoal[$k]['1'] = html_entity_decode(htmlspecialchars_decode($val['1'],ENT_NOQUOTES));
-                $getSoal[$k]['2'] = html_entity_decode(htmlspecialchars_decode($val['2'],ENT_NOQUOTES));
-                $getSoal[$k]['3'] = html_entity_decode(htmlspecialchars_decode($val['3'],ENT_NOQUOTES));
-                $getSoal[$k]['4'] = html_entity_decode(htmlspecialchars_decode($val['4'],ENT_NOQUOTES));
-            }
+            // foreach ($getSoal as $k => $val) {
+            //     $getSoal[$k]['soal'] = html_entity_decode(htmlspecialchars_decode($val['soal'],ENT_NOQUOTES));
+            //     $getSoal[$k]['1'] = html_entity_decode(htmlspecialchars_decode($val['1'],ENT_NOQUOTES));
+            //     $getSoal[$k]['2'] = html_entity_decode(htmlspecialchars_decode($val['2'],ENT_NOQUOTES));
+            //     $getSoal[$k]['3'] = html_entity_decode(htmlspecialchars_decode($val['3'],ENT_NOQUOTES));
+            //     $getSoal[$k]['4'] = html_entity_decode(htmlspecialchars_decode($val['4'],ENT_NOQUOTES));
+            // }
             $opts = unserialize($value['opt']);
             
             $exp = explode(",", $value['soal']);
@@ -53,15 +53,15 @@ require_once __DIR__ . '/../../config/application.php';
             }
             
             $letters = range('A', 'Z');
-            foreach ($soalSort as $k => $val) {
-                $jml_soal++;
-                $opt = explode(",", $opts[$k]);
+            // foreach ($soalSort as $k => $val) {
+            //     $jml_soal++;
+            //     $opt = explode(",", $opts[$k]);
 
-                foreach ($opt as $j => $vals) {
-                   $soalSort[$k]['pilihan'][$j]['full'] = $letters[$j].". ".$val[$vals];
-                   $soalSort[$k]['pilihan'][$j]['opt'] = $letters[$j];
-                }
-            }
+            //     foreach ($opt as $j => $vals) {
+            //        $soalSort[$k]['pilihan'][$j]['full'] = $letters[$j].". ".$val[$vals];
+            //        $soalSort[$k]['pilihan'][$j]['opt'] = $letters[$j];
+            //     }
+            // }
 
             foreach ($soalSort as $k => $val) {
                 $kisi = $ujian->getData('master_kategori',0,"id_master = {$val['kisi']}");
