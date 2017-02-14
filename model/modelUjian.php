@@ -240,6 +240,24 @@
         }
     }
 
+  public function getDataCustom($table,$all,$id=false,$col)
+    {
+        $dataArray =  array();
+        if ($id) $cond = "WHERE {$id}"; else $cond = "";
+        $sql = "SELECT ".$col." FROM {$table} {$cond}";
+        // print_r($sql);
+        $result = $this->query($sql);
+        if($all==1){
+          while($data_arr = mysqli_fetch_assoc($result)){
+            $dataArray[]=$data_arr;
+          }
+          return $dataArray;
+        }
+        else{
+          return mysqli_fetch_assoc($result);
+        }
+    }
+
   public function getDataSoal($table,$all,$id=false)
     {
         $dataArray =  array();

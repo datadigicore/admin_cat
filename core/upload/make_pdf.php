@@ -30,7 +30,7 @@ require_once __DIR__ . '/../../config/application.php';
                 sleep(3);
             }
             unset($soalSort);
-            $getSoal = $ujian->getDataSoal('master_soal',1,"id_soal IN ({$value['soal']})");
+            // $getSoal = $ujian->getDataSoal('master_soal',1,"id_soal IN ({$value['soal']})");
             $user = $ujian->getData('master_peserta',0,"id_peserta = {$value['id_peserta']}");
 
             // foreach ($getSoal as $k => $val) {
@@ -40,19 +40,19 @@ require_once __DIR__ . '/../../config/application.php';
             //     $getSoal[$k]['3'] = html_entity_decode(htmlspecialchars_decode($val['3'],ENT_NOQUOTES));
             //     $getSoal[$k]['4'] = html_entity_decode(htmlspecialchars_decode($val['4'],ENT_NOQUOTES));
             // }
-            $opts = unserialize($value['opt']);
+            // $opts = unserialize($value['opt']);
             
-            $exp = explode(",", $value['soal']);
-            $opt = explode(",", $value['opt']);
-            foreach ($exp as $k => $vals) {
-                foreach ($getSoal as $j => $val) {
-                    if($vals == $val['id_soal']){
-                        $soalSort[$k] = $val;
-                    }
-                }
-            }
+            // $exp = explode(",", $value['soal']);
+            // $opt = explode(",", $value['opt']);
+            // foreach ($exp as $k => $vals) {
+            //     foreach ($getSoal as $j => $val) {
+            //         if($vals == $val['id_soal']){
+            //             $soalSort[$k] = $val;
+            //         }
+            //     }
+            // }
             
-            $letters = range('A', 'Z');
+            // $letters = range('A', 'Z');
             // foreach ($soalSort as $k => $val) {
             //     $jml_soal++;
             //     $opt = explode(",", $opts[$k]);
@@ -63,16 +63,24 @@ require_once __DIR__ . '/../../config/application.php';
             //     }
             // }
 
-            foreach ($soalSort as $k => $val) {
-                $kisi = $ujian->getData('master_kategori',0,"id_master = {$val['kisi']}");
-                $soalSort[$k]['kisi'] = $kisi['nama_master'];
+            // foreach ($soalSort as $k => $val) {
+            //     $kisi = $ujian->getData('master_kategori',0,"id_master = {$val['kisi']}");
+            //     $soalSort[$k]['kisi'] = $kisi['nama_master'];
 
-                $jwb = $ujian->getData('jawaban',0,"id_kategori = {$val['id_kategori']} AND id_soal = {$val['id_soal']} AND id_peserta = {$value['id_peserta']}");
-                $soalSort[$k]['jawaban'] = $jwb['jawaban'];
-                $soalSort[$k]['opt'] = $jwb['opt'];
-                $soalSort[$k]['fulljwb'] = $jwb['opt'].". ".$jwb['jawaban'];
+            //     $jwb = $ujian->getData('jawaban',0,"id_kategori = {$val['id_kategori']} AND id_soal = {$val['id_soal']} AND id_peserta = {$value['id_peserta']}");
+            //     $soalSort[$k]['jawaban'] = $jwb['jawaban'];
+            //     $soalSort[$k]['opt'] = $jwb['opt'];
+            //     $soalSort[$k]['fulljwb'] = $jwb['opt'].". ".$jwb['jawaban'];
 
+            // }
+
+            $jwb = $ujian->getDataCustom('jawaban',1,"id_kategori = {$ujian_data['id_kategori']}  AND id_peserta = {$value['id_peserta']}","opt");
+             // print_r($jwb);
+            $jwban = array();
+            foreach ($jwb as $key => $val_jwb) {
+              $jwban[] = $val_jwb['opt'];
             }
+
             $kd_paket = $value['paket'];
             //$save_path="/srv/www/htdocs/siip/cat.polda/logs/hasil/";
              $save_path="$ujian_path"."logs/hasil/";
@@ -96,7 +104,7 @@ require_once __DIR__ . '/../../config/application.php';
 
             for($no=99; $no>=0; $no--){
                 $nomor = $no+1;
-                $content2=str_replace("no".$nomor, $soalSort[$no]['opt'], $content2);
+                $content2=str_replace("no".$nomor, $jwban[$no], $content2);
             }
             $nama_lengkap = str_replace(" ", "_", $user['nrp']);
             
