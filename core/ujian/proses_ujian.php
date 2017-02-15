@@ -94,6 +94,49 @@ switch ($process) {
     $joinWhere = "ujian.id_kategori = master_kategori.id_master";
     $datatable->get_table_join($table, $key, $column, $tableJoin, $joinWhere, $where);
   break;
+  case 'table-pengulangan':
+    $id_soal = $data[3];
+    $table = "master_peserta";
+    $key   = "id_peserta";
+    $ruangan = $_SESSION['ruangan'];
+    $column = array(
+      array( 'db' => 'pengulangan.id_ulang', 'dt' => 0, 'field' => 'id_ulang' ),
+      array( 'db' => 'master_peserta.id_peserta', 'dt' => 1, 'field' => 'id_peserta' ),
+      array( 'db' => 'pengulangan.id_ujian', 'dt' => 2, 'field' => 'id_ujian' ),
+      array( 'db' => 'master_peserta.no_peserta', 'dt' => 3, 'field' => 'no_peserta' ),
+      array( 'db' => 'pengulangan.id_soal', 'dt' => 4, 'field' => 'id_soal' ),
+      array( 'db' => 'master_peserta.nama', 'dt' => 5, 'field' => 'nama' ),
+      array( 'db' => 'pengulangan.keterangan', 'dt' => 6, 'field' => 'keterangan' )
+      );
+    $join = "FROM {$table} LEFT JOIN pengulangan ON pengulangan.id_peserta = master_peserta.id_peserta where pengulangan.id_soal={$id_soal} and master_peserta.id_ruangan='$ruangan' ";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break;
+  case 'table-ujian-pengulangan':
+  $sql = "SELECT master_kategori.nama_master, ujian.waktu_ujian FROM pengulangan left join ujian on pengulangan.id_ujian=ujian.id_ujian left join master_kategori on ujian.id_kategori = master_kategori.id_master group by pengulangan.id_ujian LIMIT 0, 30 ";
+    $table = "pengulangan";
+    $key   = "id_ulang";
+    $ruangan = $_SESSION['ruangan'];
+    $column = array(
+      array( 'db' => 'pengulangan.id_ujian', 'dt' => 0, 'field' => 'id_ujian' ),
+      array( 'db' => 'pengulangan.ruangan', 'dt' => 1, 'field' => 'ruangan' ),
+      array( 'db' => 'master_kategori.nama_master', 'dt' => 2, 'field' => 'nama_master' ),
+      array( 'db' => 'ujian.waktu_ujian', 'dt' => 3, 'field' => 'waktu_ujian' ),
+      array( 'db' => 'pengulangan.status', 'dt' => 4, 'field' => 'status',  'formatter' => function($d,$row){
+          if($d==0){
+            return '<div class="text-center"><button id="revisi" class="btn btn-flat btn-success btn-xs"><i class="fa fa-undo"></i> &nbsp;&nbsp;Mulai Ujian Ulang&nbsp;&nbsp;&nbsp;</button></div>';
+          }else{
+            return 'Ujian Sedang Berlangsung';
+          }
+
+          }) );
+    $join = "FROM {$table} left join ujian on pengulangan.id_ujian=ujian.id_ujian left join master_kategori on ujian.id_kategori = master_kategori.id_master 
+      where pengulangan.ruangan= '$ruangan'
+      group by pengulangan.id_ujian, pengulangan.ruangan ";
+    $datatable->get_table_exjoin($table, $key, $column, $join, $where);
+  break;
+  case 'add_pengulangan':
+    $ujian->add_pengulangan($_POST);
+  break;
   case 'add':
     $ujian->insertUjian($data);
     $det_ujian=implode(", ", $data);

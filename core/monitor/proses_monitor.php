@@ -401,6 +401,10 @@ break;
     $pengguna->activity_log($_SESSION['username'], "Melakukan Revisi pada peserta ".$data['id']." dengan alasan ".$data['alasan']." dan tambahan waktu ".$data['newtambahwaktu']." menit");
     $utility->load("content/monitor","success","Ujian Peserta Berhasil di Revisi");
   break;
+  case 'mulai_ujian_ulang':
+    $pengguna->mulai_ujian_ulang($_POST);
+    $utility->load("content/ujian_pengulangan","success","Ujian Peserta yang Gagal Diulang Kembali");
+  break;
   default:
     $utility->location_goto(".");
   break;

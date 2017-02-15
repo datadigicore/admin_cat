@@ -3,6 +3,66 @@
 
   class modelUjian extends mysql_db {
 
+    public function add_pengulangan($data){
+      $keterangan = $data['keterangan'];
+      $id_soal = $data['id_soal'];
+      $id_peserta = $data['id_peserta'];
+      $sql_peserta = "SELECT no_peserta, nrp, nama, id_ruangan from master_peserta where id_peserta='$id_peserta' ";
+      $sql_ujian = "SELECT * from ujian where status='1' ";
+
+      $sql_peserta_result = $this->query($sql_peserta);
+      $sql_ujian_result = $this->query($sql_ujian);
+
+      $data_peserta = $this->fetch_array($sql_peserta_result);
+      $data_ujian = $this->fetch_array($sql_ujian_result);
+
+      $id_kategori=$data_ujian['id_kategori'];
+      $id_ujian=$data_ujian['id_ujian'];
+      $nm_kategori="";
+      $nama_peserta= $data_peserta['nama'];
+      $ruangan= $data_peserta['id_ruangan'];
+      $no_peserta= $data_peserta['no_peserta'];
+      $nrp= $data_peserta['nrp'];
+      $sql_cek = "SELECT id_ulang from pengulangan where id_soal='$id_soal' and id_peserta='$id_peserta' ";
+      $cek_exists=$this->query($sql_cek);
+      // print_r($cek_exists);
+      // exit;
+      if($this->num_rows($cek_exists)>0){
+        echo json_encode(array("pesan"=>"Data peserta '$nama_peserta' Telah Dimasukkan")); 
+        exit;
+      }else{
+
+        $sql = "INSERT into pengulangan
+              SET
+            id_kategori  = '$id_kategori',
+            nm_kategori  = '$nm_kategori',
+            id_soal  = '$id_soal',
+            id_peserta  = '$id_peserta',
+            id_ujian  = '$id_ujian',
+            nama_peserta  = '$nama_peserta',
+            no_peserta  = '$no_peserta',
+            nrp  = '$nrp',
+            ruangan = '$ruangan',
+            keterangan  = '$keterangan'  ";
+            return $this->query($sql);
+      }
+    }
+
+    public function get_data_peserta($ruang){
+      $sql = "SELECT id_peserta, nama, no_peserta, nrp FROM master_peserta where id_ruangan='$ruang' ";
+      $result = $this->query($sql);
+      // $data = $this->fetch_array($result);
+      return $result;
+
+    }
+
+    public function get_list_soal($data){
+      $sql = "SELECT id_soal FROM paket_soal where status=1 LIMIT 1 ";
+      $result = $this->query($sql);
+      $data = $this->fetch_array($result);
+      return $data['id_soal'];
+    }
+
     public function get_countdown($id_ujian){
         $sql = "SELECT id_ujian, TIME_TO_SEC(waktu_ujian)+(lama_ujian*60)-time_to_sec(NOW())  selisih FROM ujian where id_ujian='$id_ujian' and status_ujian=2 ";
         $result = $this->query($sql);

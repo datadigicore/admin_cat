@@ -22,6 +22,8 @@
       <?php else : ?>
         <li class="active"><a href="<?php echo $url_rewrite;?>content/"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li><a href="<?php echo $url_rewrite;?>content/monitor"><i class="fa fa-desktop"></i> <span>Monitoring Peserta</span></a></li>
+        <li><a href="<?php echo $url_rewrite;?>content/data_pengulangan"><i class="fa fa-pencil-square"></i> <span>Remidial Soal</span></a></li>
+        <li><a href="<?php echo $url_rewrite;?>content/ujian_pengulangan"><i class="fa fa-unlock"></i> <span>Ujian Pengulangan</span></a></li>
         <li><a href="<?php echo $url_rewrite;?>content/file-ruangan"><i class="fa fa-file-text-o"></i> <span>Manage PDF</span></a></li>
       <?php endif ?>
     </ul>

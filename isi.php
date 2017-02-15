@@ -41,6 +41,9 @@ else {
           $count = $ujian->get_countdown($id_ujian);
           include ('view/content/admin_countdown.php');
         break;
+        case 'data_pengulangan':
+          include ('view/content/data_pengulangan.php');
+        break;
         case 'log':
           include ('view/content/log.php');
         break;
@@ -151,6 +154,9 @@ else {
         case 'user':
           include ('view/content/pengguna-lokasi.php');
         break;
+        case 'data_pengulangan':
+          include ('view/content/data_pengulangan.php');
+        break;
         case 'monitor':
           include ('view/content/monitor.php');
         break;
@@ -177,6 +183,12 @@ else {
       switch ($data[1]) {
         case 'table':
           include ('view/content/table.php');
+        break;
+        case 'data_pengulangan':
+          include ('view/content/data_pengulangan.php');
+        break;
+        case 'ujian_pengulangan':
+          include ('view/content/ujian_pengulangan.php');
         break;
         case 'monitor':
           include ('view/content/monitor.php');

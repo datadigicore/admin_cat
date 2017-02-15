@@ -6,6 +6,8 @@ require_once __DIR__ . '/../../config/application.php';
 
 
       global $CONFIG;
+      $address="127.0.0.1";
+      $port="12345";
       $ruang_data = array();
       $pdftk_file="";
       $command_pdflatex="";
@@ -73,14 +75,25 @@ require_once __DIR__ . '/../../config/application.php';
             //     $soalSort[$k]['fulljwb'] = $jwb['opt'].". ".$jwb['jawaban'];
 
             // }
-
+            $now = strtoupper($ujian->changeDate($value['waktu_mulai']));
             $jwb = $ujian->getDataCustom('jawaban',1,"id_kategori = {$ujian_data['id_kategori']}  AND id_peserta = {$value['id_peserta']}","opt");
              // print_r($jwb);
             $jwban = array();
+            $msg_jwb='';
             foreach ($jwb as $key => $val_jwb) {
               $jwban[] = $val_jwb['opt'];
+              // if($msg_jwb==''){
+              //   $msg_jwb.='"'.$val_jwb['opt'].'"';
+              // }
+              // else{
+                $msg_jwb.=',"'.$val_jwb['opt'].'"';
+              // }
             }
-
+            $msg = '["'.$kategori['nama_master'].'","'.$value['paket'].'","'.$now.'","'.$user['no_peserta'].'","'.$user['nama'].'","'.$user['jenkel'].'","'.$value['nilai'].'"'.$msg_jwb.']';
+            // $sock=socket_create(AF_INET,SOCK_STREAM,0) or die("Cannot create a socket");
+            // socket_connect($sock,$address,$port) or die("Could not connect to the socket");
+            // socket_write($sock,$msg);
+            // socket_close($sock);
             $kd_paket = $value['paket'];
             //$save_path="/srv/www/htdocs/siip/cat.polda/logs/hasil/";
              $save_path="$ujian_path"."logs/hasil/";
