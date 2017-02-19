@@ -79,19 +79,6 @@
         } 
       }
       echo json_encode($tanda_soal_peserta);
-        $sql = "INSERT into pengulangan
-              SET
-            id_kategori  = '$id_kategori',
-            nm_kategori  = '$nm_kategori',
-            id_soal  = '$id_soal',
-            id_peserta  = '$id_peserta',
-            id_ujian  = '$id_ujian',
-            nama_peserta  = '$nama_peserta',
-            no_peserta  = '$no_peserta',
-            nrp  = '$nrp',
-            ruangan = '$ruangan',
-            keterangan  = '$keterangan'  ";
-            return $this->query($sql);
       }
     
 
