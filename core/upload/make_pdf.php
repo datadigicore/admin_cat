@@ -30,49 +30,42 @@ require_once __DIR__ . '/../../config/application.php';
                 sleep(3);
             }
             unset($soalSort);
-            $getSoal = $ujian->getData('master_soal',1,"id_soal IN ({$value['soal']})");
             $user = $ujian->getData('master_peserta',0,"id_peserta = {$value['id_peserta']}");
-
-            foreach ($getSoal as $k => $val) {
-                $getSoal[$k]['soal'] = html_entity_decode(htmlspecialchars_decode($val['soal'],ENT_NOQUOTES));
-                $getSoal[$k]['1'] = html_entity_decode(htmlspecialchars_decode($val['1'],ENT_NOQUOTES));
-                $getSoal[$k]['2'] = html_entity_decode(htmlspecialchars_decode($val['2'],ENT_NOQUOTES));
-                $getSoal[$k]['3'] = html_entity_decode(htmlspecialchars_decode($val['3'],ENT_NOQUOTES));
-                $getSoal[$k]['4'] = html_entity_decode(htmlspecialchars_decode($val['4'],ENT_NOQUOTES));
+            $now = strtoupper($ujian->changeDate($value['waktu_mulai']));
+            $jwb = $ujian->getDataCustom('jawaban',1,"id_kategori = {$ujian_data['id_kategori']}  AND id_peserta = {$value['id_peserta']}","opt");
+             // print_r($jwb);
+            $jwban = array();
+            $msg_jwb='';
+            foreach ($jwb as $key => $val_jwb) {
+              $jwban[] = $val_jwb['opt'];
+              // if($msg_jwb==''){
+              //   $msg_jwb.='"'.$val_jwb['opt'].'"';
+              // }
+              // else{
+                $msg_jwb.=',"'.$val_jwb['opt'].'"';
+              // }
             }
-            $opts = unserialize($value['opt']);
-            
-            $exp = explode(",", $value['soal']);
-            $opt = explode(",", $value['opt']);
-            foreach ($exp as $k => $vals) {
-                foreach ($getSoal as $j => $val) {
-                    if($vals == $val['id_soal']){
-                        $soalSort[$k] = $val;
-                    }
-                }
-            }
-            
-            $letters = range('A', 'Z');
-            foreach ($soalSort as $k => $val) {
-                $jml_soal++;
-                $opt = explode(",", $opts[$k]);
+            // $msg = '["'.'cetak_1lbr'.'","'.$user['id_ruangan'].'","'.$user['nrp'].'","'.$kategori['nama_master'].'","'.$value['paket'].'","'.$now.'","'.$user['no_peserta'].'","'.$user['nama'].'","'.$user['jenkel'].'","'.$value['nilai'].'"'.$msg_jwb.']';
+            $preMsg = array("cetak_1lbr",
+                            "$user[id_ruangan]",
+                            "$user[nrp]",
+                            "$kategori[nama_master]",
+                            "$value[paket]",
+                            "$now",
+                            "$user[no_peserta]",
+                            "$user[nama]",
+                            "$user[jenkel]",
+                            "$value[nilai]",
+                             $msg_jwb
+                            );
+            $msg = json_encode($preMsg);
+            echo $msg;
 
-                foreach ($opt as $j => $vals) {
-                   $soalSort[$k]['pilihan'][$j]['full'] = $letters[$j].". ".$val[$vals];
-                   $soalSort[$k]['pilihan'][$j]['opt'] = $letters[$j];
-                }
-            }
+            // $sock=socket_create(AF_INET,SOCK_STREAM,0) or die("Cannot create a socket");
+            // socket_connect($sock,$address,$port) or die("Could not connect to the socket");
+            // socket_write($sock,$msg);
+            // socket_close($sock);
 
-            foreach ($soalSort as $k => $val) {
-                $kisi = $ujian->getData('master_kategori',0,"id_master = {$val['kisi']}");
-                $soalSort[$k]['kisi'] = $kisi['nama_master'];
-
-                $jwb = $ujian->getData('jawaban',0,"id_kategori = {$val['id_kategori']} AND id_soal = {$val['id_soal']} AND id_peserta = {$value['id_peserta']}");
-                $soalSort[$k]['jawaban'] = $jwb['jawaban'];
-                $soalSort[$k]['opt'] = $jwb['opt'];
-                $soalSort[$k]['fulljwb'] = $jwb['opt'].". ".$jwb['jawaban'];
-
-            }
             $kd_paket = $value['paket'];
             //$save_path="/srv/www/htdocs/siip/cat.polda/logs/hasil/";
              $save_path="$ujian_path"."logs/hasil/";
@@ -92,11 +85,10 @@ require_once __DIR__ . '/../../config/application.php';
             $content2=str_replace("a.paket", $kd_paket, $content2);
             $content2=str_replace("a.tglujian", $now, $content2);
             $content2=str_replace("a.mataujian", $kategori['nama_master'], $content2);
-            // $content2=str_replace("a.paket", $kategori['nama_master'], $content2);
 
             for($no=99; $no>=0; $no--){
                 $nomor = $no+1;
-                $content2=str_replace("no".$nomor, $soalSort[$no]['opt'], $content2);
+                $content2=str_replace("no".$nomor, $jwban[$no], $content2);
             }
             $nama_lengkap = str_replace(" ", "_", $user['nrp']);
             
@@ -111,9 +103,9 @@ require_once __DIR__ . '/../../config/application.php';
             else{
                 $command_pdflatex.= " && pdflatex -output-directory ".$save_path." core/upload/tex/".$ruangan."_".$nama_lengkap."_".$nama_master.".tex";
             }
-            // exec("pdflatex -output-directory ".$save_path." core/upload/tex/".$ruangan."_".$nama_lengkap."_".$nama_master.".tex");
+            exec("pdflatex -output-directory ".$save_path." core/upload/tex/".$ruangan."_".$nama_lengkap."_".$nama_master.".tex");
 
-            // echo "pdflatex -output-directory core/upload/pdf core/upload/tex/".$ruangan."_".$nama_lengkap."_".$nama_master.".tex";
+            echo "pdflatex -output-directory core/upload/pdf core/upload/tex/".$ruangan."_".$nama_lengkap."_".$nama_master.".tex";
 
             $time++;
 
@@ -130,8 +122,8 @@ require_once __DIR__ . '/../../config/application.php';
                 $status= system("/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &");
                 echo "/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &";
             }
-            // $status= system("/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &");
-            // echo $status;
-            // echo "/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &";
+            $status= system("/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &");
+            echo $status;
+            echo "/usr/bin/pdftk {$pdftk_file} cat output ".$filename." > ".$log_txt." &";
             $ujian->update_data(" status_pdf=2 "," ujian "," id_ujian='$id' ");
 ?> 

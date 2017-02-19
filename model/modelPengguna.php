@@ -15,6 +15,32 @@
       return $result;
     }
 
+    public function mulai_ujian_ulang($data){
+      $idruang = $data['idruang'];
+      $idujian = $data['idujian'];
+      $tambahwaktu = $data['tambahwaktu'];
+      $sql     = "SELECT id_peserta from pengulangan where ruangan='$idruang' and id_ujian='$idujian' group by id_peserta ";
+      print_r($sql);
+      $id_peserta = "";
+      $result  = $this->query($sql);
+      foreach ($result as $key => $value) {
+        if($id_peserta==""){
+          $id_peserta.=$value['id_peserta'];
+        }
+        else{
+          $id_peserta.=",".$value['id_peserta'];
+        }
+      }
+
+      $sql = "UPDATE generated_soal set mengulang=1, status=2, tambahan_waktu=tambahan_waktu + FLOOR( TIME_TO_SEC( TIMEDIFF( NOW( ) , waktu_mulai ) ) /60 ) - durasi_pengerjaan - tambahan_waktu + $tambahwaktu where id_peserta in ($id_peserta) ";
+      // print_r($sql);
+      $this->query($sql);
+
+      $sql = "UPDATE pengulangan set status=1 where ruangan='$idruang' ";
+      $this->query($sql);
+      // print_r($sql);
+    }
+
     public function activity_log($username, $activity_desc){
       $query = " INSERT INTO activity_log SET 
                   user_name ='$username',

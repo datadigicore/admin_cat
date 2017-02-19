@@ -133,28 +133,22 @@ case 'download-ruangan':
 
   case 'download-perorangan':
     $ruangan=$_POST['ruang'];
-    $nama=str_replace(" ", "_", $_POST['nama']);
+    $nrp=str_replace(" ", "_", $_POST['nrp']);
     $substr_ruangan = str_replace("/","_",$ruangan);
-
-    $op = shell_exec( "ls ".$ujian_path."logs/hasil/ | grep  '$substr_ruangan-$nama.*\.pdf$'" );
+    $ruang_dan_nrp = $substr_ruangan."-".$nrp; 
+    $op = shell_exec( "ls ".$ujian_path."logs/hasil/ | grep  '$ruang_dan_nrp.*\.pdf$'" );
     // echo "ls ".$ujian_path."logs/hasil/ | grep '$substr_ruangan-$nama.*\.pdf$'";
     $file = $ujian_path."logs/hasil/".trim($op," \t\n\r\0\x0B");
     // echo $file;
     // exit;
     $nama_file=explode("/",$file);
     $file2=end($nama_file);
+    echo $file2;
+    // exit;
     if (file_exists($file) && is_file($file)) {
-    // header('Content-Description: File Transfer');
-    // header('Content-Type: application/octet-stream');
-    // header('Content-Disposition: attachment; filename="'.basename($file).'"');
-    // header('Expires: 0');
-    // header('Cache-Control: must-revalidate');
-    // header('Pragma: public');
-    // header('Content-Length: ' . filesize($file));
-    // readfile($file);
      $namafile_web="$domain"."/logs/hasil/$file2";
-    echo "<script>window.location.href='$namafile_web';</script>";
-    exit;
+      echo "<script>window.location.href='$namafile_web';</script>";
+      exit;
     }else{
       $utility->load("content/file-perorangan","warning","File tidak tersedia",$ruangan);
     }

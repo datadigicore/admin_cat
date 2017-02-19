@@ -24,7 +24,7 @@ else {
         $ruang = str_replace("_", "/", $data[3]);
         // echo $ruangan; 
         exec("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id_peserta' >$base_path"."log/pdf_perorang$id_peserta.txt &");
-        echo("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id_peserta' >$base_path"."log/pdf_perorangid_peserta.txt &");
+        // echo("php -f ".$base_path."core/upload/make_pdf_perorang.php '$id_peserta' >$base_path"."log/pdf_perorangid_peserta.txt &");
         //exit();
         $_POST['ruang']=$ruang;
         $utility->load("content/file-perorangan","success","File Ujian Sedang Diproses");
@@ -40,6 +40,9 @@ else {
           // exit;
           $count = $ujian->get_countdown($id_ujian);
           include ('view/content/admin_countdown.php');
+        break;
+        case 'data_pengulangan':
+          include ('view/content/data_pengulangan.php');
         break;
         case 'log':
           include ('view/content/log.php');
@@ -151,6 +154,9 @@ else {
         case 'user':
           include ('view/content/pengguna-lokasi.php');
         break;
+        case 'data_pengulangan':
+          include ('view/content/data_pengulangan.php');
+        break;
         case 'monitor':
           include ('view/content/monitor.php');
         break;
@@ -177,6 +183,19 @@ else {
       switch ($data[1]) {
         case 'table':
           include ('view/content/table.php');
+        break;
+        case 'ujian_per_ruang':
+          // $pengguna->activity_log($_SESSION['username'], "Membuka Halaman Ujian");
+          include ('view/content/ujian_per_ruang.php');
+        break;
+        case 'data_pengulangan':
+          include ('view/content/data_pengulangan.php');
+        break;
+        case 'ujian_pengulangan':
+          include ('view/content/ujian_pengulangan.php');
+        break;
+        case 'rekapitulasi_pengulangan':
+          include ('view/content/rekapitulasi_pengulangan.php');
         break;
         case 'monitor':
           include ('view/content/monitor.php');

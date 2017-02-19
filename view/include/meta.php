@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="<?php echo $url_rewrite;?>static/plugins/iCheck/flat/blue.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="<?php echo $url_rewrite;?>static/plugins/morris/morris.css">
+  <link rel="stylesheet" href="<?php echo $url_rewrite;?>static/plugins/select2/select2.css">
   <!-- jvectormap -->
   <link rel="stylesheet" href="<?php echo $url_rewrite;?>static/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Date Picker -->

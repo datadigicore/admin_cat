@@ -3,6 +3,91 @@
 
   class modelUjian extends mysql_db {
 
+    public function add_pengulangan($data){
+      $keterangan = $data['keterangan'];
+      $id_soal = $data['id_soal'];
+      $id_peserta = $data['id_peserta'];
+      $sql_peserta = "SELECT no_peserta, nrp, nama, id_ruangan from master_peserta where id_peserta='$id_peserta' ";
+      $sql_ujian = "SELECT * from ujian where status='1' ";
+
+      $sql_peserta_result = $this->query($sql_peserta);
+      $sql_ujian_result = $this->query($sql_ujian);
+
+      $data_peserta = $this->fetch_array($sql_peserta_result);
+      $data_ujian = $this->fetch_array($sql_ujian_result);
+
+      $id_kategori=$data_ujian['id_kategori'];
+      $id_ujian=$data_ujian['id_ujian'];
+      $nm_kategori="";
+      $nama_peserta= $data_peserta['nama'];
+      $ruangan= $data_peserta['id_ruangan'];
+      $no_peserta= $data_peserta['no_peserta'];
+      $nrp= $data_peserta['nrp'];
+      $sql_cek = "SELECT id_ulang from pengulangan where id_soal='$id_soal' and id_peserta='$id_peserta' ";
+      $cek_exists=$this->query($sql_cek);
+      // print_r($cek_exists);
+      // exit;
+      if($this->num_rows($cek_exists)>0){
+        echo json_encode(array("pesan"=>"Data peserta '$nama_peserta' Telah Dimasukkan")); 
+        exit;
+      }else{
+        $sql = "INSERT into pengulangan
+                SET
+                id_kategori   = '$id_kategori',
+                nm_kategori   = '$nm_kategori',
+                id_soal       = '$id_soal',
+                id_peserta    = '$id_peserta',
+                id_ujian      = '$id_ujian',
+                nama_peserta  = '$nama_peserta',
+                no_peserta    = '$no_peserta',
+                nrp           = '$nrp',
+                ruangan       = '$ruangan',
+              keterangan    = '$keterangan'  ";
+            return $this->query($sql);
+      }
+    }
+    public function hapus_pengulangan($data){
+      $id = $data['id_peserta'];
+      $this->query("DELETE FROM pengulangan 
+                    WHERE id_peserta='$id' ");
+    }
+
+    public function get_data_peserta($ruang){
+      $sql = "SELECT id_peserta, nama, no_peserta, nrp 
+              FROM master_peserta 
+              where id_ruangan='$ruang' ";
+      $result = $this->query($sql);
+      return $result;
+    }
+
+    public function peserta_mengulang_soal($noSoal){
+      $data_peserta      = $this->get_data_peserta($_SESSION['ruangan']);
+      $sql               = "SELECT id_peserta 
+                            FROM pengulangan
+                            WHERE id_soal='$noSoal' ";
+      // print_r($sql);
+      $peserta_per_soal = $this->query($sql);
+      $tanda_soal_peserta = "";
+      // echo "<pre>";
+
+      foreach ($peserta_per_soal as $key_soal => $soal) {
+        if($tanda_soal_peserta==""){
+          $tanda_soal_peserta .= $soal['id_peserta'];
+        }
+        else{
+          $tanda_soal_peserta .= ",".$soal['id_peserta'];
+        } 
+      }
+      echo json_encode($tanda_soal_peserta);
+    }
+
+    public function get_list_soal($data){
+      $sql = "SELECT id_soal FROM paket_soal where status=1 LIMIT 1 ";
+      $result = $this->query($sql);
+      $data = $this->fetch_array($result);
+      return $data['id_soal'];
+    }
+
     public function get_countdown($id_ujian){
         $sql = "SELECT id_ujian, TIME_TO_SEC(waktu_ujian)+(lama_ujian*60)-time_to_sec(NOW())  selisih FROM ujian where id_ujian='$id_ujian' and status_ujian=2 ";
         $result = $this->query($sql);
@@ -227,7 +312,43 @@
         $dataArray =  array();
         if ($id) $cond = "WHERE {$id}"; else $cond = "";
         $sql = "SELECT * FROM {$table} {$cond}";
-        print_r($sql);
+        // print_r($sql);
+        $result = $this->query($sql);
+        if($all==1){
+          while($data_arr = mysqli_fetch_assoc($result)){
+            $dataArray[]=$data_arr;
+          }
+          return $dataArray;
+        }
+        else{
+          return mysqli_fetch_assoc($result);
+        }
+    }
+
+  public function getDataCustom($table,$all,$id=false,$col)
+    {
+        $dataArray =  array();
+        if ($id) $cond = "WHERE {$id}"; else $cond = "";
+        $sql = "SELECT ".$col." FROM {$table} {$cond}";
+        // print_r($sql);
+        $result = $this->query($sql);
+        if($all==1){
+          while($data_arr = mysqli_fetch_assoc($result)){
+            $dataArray[]=$data_arr;
+          }
+          return $dataArray;
+        }
+        else{
+          return mysqli_fetch_assoc($result);
+        }
+    }
+
+  public function getDataSoal($table,$all,$id=false)
+    {
+        $dataArray =  array();
+        if ($id) $cond = "WHERE {$id}"; else $cond = "";
+        $sql = "SELECT id_soal, kisi, id_kategori FROM {$table} {$cond}";
+        // print_r($sql);
         $result = $this->query($sql);
         if($all==1){
           while($data_arr = mysqli_fetch_assoc($result)){
@@ -250,7 +371,31 @@
         jumlah_peserta = '$data[jmlpeserta]'
       ";
       $result = $this->query($query);
-      return $result;
+      $idujian = $this->insert_id($result);
+      if($data['mekanisme']==1){
+        $dt_ruang = array();
+        $sql    = "SELECT id_ruangan, count(id_ruangan) jmlpeserta from master_peserta group by id_ruangan";
+        $result_sql = $this->query($sql);
+        // print_r($data);
+        foreach ($result_sql as $value) {
+          $dt_ruang[$value['id_ruangan']]['id_ruangan'] = $value['id_ruangan'];
+          $dt_ruang[$value['id_ruangan']]['jmlpeserta'] = $value['jmlpeserta'];
+          $query           = "INSERT INTO ujian_per_ruang SET
+            id_ujian       = '$idujian',
+            id_kategori    = '$data[kategori]',
+            id_ruangan     = '$value[id_ruangan]',
+            lama_ujian     = '$data[lamaujian]',
+            jumlah_soal    = '$data[jmlsoal]',
+            pilihan_paket  = '$data[jmlpaket]',
+            waktu_ujian    = '$data[tanggal]',
+            jumlah_peserta = '$value[jmlpeserta]'
+          ";
+          $result = $this->query($query);
+
+        }
+        // print_r($dt_ruang);
+      }
+      // return $result;
     }
 
     public function updateUjian($data) {
