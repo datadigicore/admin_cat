@@ -20,7 +20,6 @@
       $idujian = $data['idujian'];
       $tambahwaktu = $data['tambahwaktu'];
       $sql     = "SELECT id_peserta from pengulangan where ruangan='$idruang' and id_ujian='$idujian' group by id_peserta ";
-      print_r($sql);
       $id_peserta = "";
       $result  = $this->query($sql);
       foreach ($result as $key => $value) {
@@ -31,11 +30,10 @@
           $id_peserta.=",".$value['id_peserta'];
         }
       }
-
       $sql = "UPDATE generated_soal set mengulang=1, status=2, tambahan_waktu=tambahan_waktu + FLOOR( TIME_TO_SEC( TIMEDIFF( NOW( ) , waktu_mulai ) ) /60 ) - durasi_pengerjaan - tambahan_waktu + $tambahwaktu where id_peserta in ($id_peserta) ";
       // print_r($sql);
       $this->query($sql);
-
+      $sql = "UPDATE generated_soal set mengulang=1, status=5, tambahan_waktu=$tambahwaktu where id_peserta in ($id_peserta) ";
       $sql = "UPDATE pengulangan set status=1 where ruangan='$idruang' ";
       $this->query($sql);
       // print_r($sql);

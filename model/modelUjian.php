@@ -79,7 +79,27 @@
         } 
       }
       echo json_encode($tanda_soal_peserta);
-    }
+        $sql = "INSERT into pengulangan
+              SET
+            id_kategori  = '$id_kategori',
+            nm_kategori  = '$nm_kategori',
+            id_soal  = '$id_soal',
+            id_peserta  = '$id_peserta',
+            id_ujian  = '$id_ujian',
+            nama_peserta  = '$nama_peserta',
+            no_peserta  = '$no_peserta',
+            nrp  = '$nrp',
+            ruangan = '$ruangan',
+            keterangan  = '$keterangan'  ";
+            return $this->query($sql);
+      }
+    
+
+    // public function get_data_peserta($ruang){
+    //   $sql = "SELECT id_peserta, nama, no_peserta, nrp FROM master_peserta where id_ruangan='$ruang' ";
+    //   $result = $this->query($sql);
+    //   return $result;
+    // }
 
     public function get_list_soal($data){
       $sql = "SELECT id_soal FROM paket_soal where status=1 LIMIT 1 ";

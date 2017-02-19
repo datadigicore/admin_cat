@@ -8,14 +8,10 @@
       <li><i class="fa fa-group"></i> Data Pengulangan Soal</li>
     </ol>
   </section>
-  <section class="content">
-
+  <section class="content">          
     <div class="row">
       <div class="col-xs-12">
         <div class="box">
-          <div class="box-header with-border">
-            <h3 class="box-title" style="margin-top:6px;">Form Tambah Data Pengulangan Soal Listening</h3>
-          </div>
           <?php $peserta = $ujian->get_data_peserta($_SESSION['ruangan']); ?>
           <?php $hasil = explode(",",$ujian->get_list_soal("s")); $no=1; ?>
           <div class="box-body">
@@ -57,7 +53,10 @@
     var e = document.getElementById("select_soal");
     var strUser = e.options[e.selectedIndex].value;
     var nomor_soal = $("#select_soal option:selected").text();
-    // alert(strUser);
+    $(".select2").select2();
+    $("#select_soal").select2({
+          placeholder: "-- Pilih Soal --",
+    });
     function tagSoal(soal){
        $('.peserta').removeClass('btn-primary');
        $('.peserta').removeClass('btn-danger');
@@ -108,15 +107,16 @@
       });
     });
 
- $("#select_soal").change(function () {
-        id_soal = this.value;
-        $("#table").DataTable().destroy();
-        $("#table tbody").empty();
-        var nomor_soal = $("#select_soal option:selected").text();
-        $("#judul").html("DAFTAR PESERTA YANG MENGULANG SOAL NOMOR "+nomor_soal);
-        tagSoal(id_soal);
+   $("#select_soal").change(function () {
+          id_soal = this.value;
+          $("#table").DataTable().destroy();
+          $("#table tbody").empty();
+          var nomor_soal = $("#select_soal option:selected").text();
+          $("#judul").html("DAFTAR PESERTA YANG MENGULANG SOAL NOMOR "+nomor_soal);
+          tagSoal(id_soal);
 
-        
-    });
+          
+   });
+
   });
 </script>
